@@ -7,9 +7,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class HelloCPlugin extends CordovaPlugin {
+public class tgvoiplugin extends CordovaPlugin {
 
-    protected static final String TAG = "HelloCPlugin";
+    protected static final String TAG = "tgvoiplugin";
     protected CallbackContext context;
 
     @Override
