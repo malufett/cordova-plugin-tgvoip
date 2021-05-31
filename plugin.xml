@@ -2,10 +2,10 @@
 <plugin
         xmlns="http://www.phonegap.com/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="cordova-plugin-hello-c"
-        version="1.1.1">
+        id="cordova-plugin-tgvoip"
+        version="1.0.0">
 
-  <name>Hello</name>
+  <name>Telegram VOIP Client</name>
 
   <engines>
     <engine name="cordova" version=">=3.4.0"/>
