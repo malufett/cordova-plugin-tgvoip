@@ -2,32 +2,32 @@
 <plugin
         xmlns="http://www.phonegap.com/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="cordova-plugin-tgvoip"
-        version="1.0.0">
+        id="cordova-plugin-hello-c"
+        version="1.1.1">
 
-  <name>Telegram VOIP Client</name>
+  <name>Hello</name>
 
   <engines>
     <engine name="cordova" version=">=3.4.0"/>
   </engines>
 
-  <asset src="www/main.js" target="js/main.js"/>
+  <asset src="www/helloc.js" target="js/helloc.js"/>
 
-  <js-module src="www/main.js" name="tgvoip">
-    <clobbers target="tgvoip" />
+  <js-module src="www/helloc.js" name="helloc">
+    <clobbers target="helloc" />
   </js-module>
 
   <platform name="android">
 
     <config-file parent="/*" target="res/xml/config.xml">
-      <feature name="TGVOIPPlugin">
-        <param name="android-package" value="com.tgvoip.TGVOIPPlugin"/>
+      <feature name="HelloCPlugin">
+        <param name="android-package" value="com.example.HelloCPlugin"/>
       </feature>
     </config-file>
 
     <!-- Java plugin API -->
-    <source-file src="src/android/TGVOIPJni.java" target-dir="app/src/main/java/com/tgvoip/"/>
-    <source-file src="src/android/TGVOIPplugin.java" target-dir="app/src/main/java/com/tgvoip/" />
+    <source-file src="src/android/HelloCPlugin.java" target-dir="app/src/main/java/com/example/"/>
+    <source-file src="src/android/HelloCJni.java" target-dir="app/src/main/java/com/example/" />
 
   <!-- PRODUCTION - comment out source files below for debugging -->
 
