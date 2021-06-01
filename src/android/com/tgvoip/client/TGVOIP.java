@@ -13,7 +13,7 @@ public class TGVOIP extends CordovaPlugin {
 
         if (action.equals("greet")) {
 
-            String jniString = HelloJni.stringFromJNI();
+            String jniString = TGVOIPJni.stringFromJNI();
             String name = data.getString(0);
             String message = "Hello, " + name + ". JNI says: " + jniString;
             callbackContext.success(message);
