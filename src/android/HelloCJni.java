@@ -7,7 +7,8 @@ public class HelloCJni {
     public static native String getArch();
     public static native int calculate(int x, int y);
     public static native int crash();
-
+    public static native Object getTrafficStats(Object obj);
+    
     // load library
     static {
         System.loadLibrary("helloc");

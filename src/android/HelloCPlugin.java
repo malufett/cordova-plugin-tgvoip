@@ -28,7 +28,10 @@ public class HelloCPlugin extends CordovaPlugin {
                 String jniOutput = HelloCJni.getArch();
                 String output = "Android " + jniOutput;
                 callbackContext.success(output);
-
+            } else if (action.equals("getTrafficStats")) {
+                JSONObject obj = data.getJSONObject(0);
+                JSONObject jniOutput = HelloCJni.getTrafficStats(obj);                
+                callbackContext.success(jniOutput);
             } else if (action.equals("calculate")) {
                 int x = data.getInt(0);
                 int y = data.getInt(1);

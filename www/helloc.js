@@ -12,5 +12,8 @@ module.exports = {
     },
     causeCrash: function (successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "HelloCPlugin", "causeCrash", []);
+    },
+    getTrafficStats: function (successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "HelloCPlugin", "getTrafficStats", []);
     }
 };

@@ -1,6 +1,10 @@
 # Android Makefile
 
-APP_PLATFORM := android-21
+APP_PLATFORM := android-16
+NDK_TOOLCHAIN_VERSION := clang
+APP_STL := c++_static
+
+#APP_PLATFORM := android-21
 APP_ABI := armeabi-v7a arm64-v8a x86 x86_64
 
 PATH_SEP := /
@@ -45,10 +49,11 @@ LOCAL_SRC_FILES := $(SRC_LIST:$(LOCAL_PATH)/%=%)
 
 LOCAL_CFLAGS += -std=c99
 LOCAL_CPPFLAGS := -fblocks
-TARGET_PLATFORM := android-27
+# TARGET_PLATFORM := android-27
+TARGET_PLATFORM := android-16
 LOCAL_DISABLE_FATAL_LINKER_WARNINGS := true
-LOCAL_LDLIBS += -Wl,--no-warn-shared-textrel
-LOCAL_LDFLAGS += -fuse-ld=gold
+# LOCAL_LDLIBS += -Wl,--no-warn-shared-textrel
+# LOCAL_LDFLAGS += -fuse-ld=gold
 
 include $(BUILD_SHARED_LIBRARY)
 

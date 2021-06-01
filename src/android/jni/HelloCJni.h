@@ -5,39 +5,88 @@
 #ifndef _Included_com_example_HelloCJni
 #define _Included_com_example_HelloCJni
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
+#undef org_parler_messenger_voip_Instance_NET_TYPE_UNKNOWN
+#define org_parler_messenger_voip_Instance_NET_TYPE_UNKNOWN 0L
+#undef org_parler_messenger_voip_Instance_NET_TYPE_GPRS
+#define org_parler_messenger_voip_Instance_NET_TYPE_GPRS 1L
+#undef org_parler_messenger_voip_Instance_NET_TYPE_EDGE
+#define org_parler_messenger_voip_Instance_NET_TYPE_EDGE 2L
+#undef org_parler_messenger_voip_Instance_NET_TYPE_3G
+#define org_parler_messenger_voip_Instance_NET_TYPE_3G 3L
+#undef org_parler_messenger_voip_Instance_NET_TYPE_HSPA
+#define org_parler_messenger_voip_Instance_NET_TYPE_HSPA 4L
+#undef org_parler_messenger_voip_Instance_NET_TYPE_LTE
+#define org_parler_messenger_voip_Instance_NET_TYPE_LTE 5L
+#undef org_parler_messenger_voip_Instance_NET_TYPE_WIFI
+#define org_parler_messenger_voip_Instance_NET_TYPE_WIFI 6L
+#undef org_parler_messenger_voip_Instance_NET_TYPE_ETHERNET
+#define org_parler_messenger_voip_Instance_NET_TYPE_ETHERNET 7L
+#undef org_parler_messenger_voip_Instance_NET_TYPE_OTHER_HIGH_SPEED
+#define org_parler_messenger_voip_Instance_NET_TYPE_OTHER_HIGH_SPEED 8L
+#undef org_parler_messenger_voip_Instance_NET_TYPE_OTHER_LOW_SPEED
+#define org_parler_messenger_voip_Instance_NET_TYPE_OTHER_LOW_SPEED 9L
+#undef org_parler_messenger_voip_Instance_NET_TYPE_DIALUP
+#define org_parler_messenger_voip_Instance_NET_TYPE_DIALUP 10L
+#undef org_parler_messenger_voip_Instance_NET_TYPE_OTHER_MOBILE
+#define org_parler_messenger_voip_Instance_NET_TYPE_OTHER_MOBILE 11L
+#undef org_parler_messenger_voip_Instance_ENDPOINT_TYPE_INET
+#define org_parler_messenger_voip_Instance_ENDPOINT_TYPE_INET 0L
+#undef org_parler_messenger_voip_Instance_ENDPOINT_TYPE_LAN
+#define org_parler_messenger_voip_Instance_ENDPOINT_TYPE_LAN 1L
+#undef org_parler_messenger_voip_Instance_ENDPOINT_TYPE_UDP_RELAY
+#define org_parler_messenger_voip_Instance_ENDPOINT_TYPE_UDP_RELAY 2L
+#undef org_parler_messenger_voip_Instance_ENDPOINT_TYPE_TCP_RELAY
+#define org_parler_messenger_voip_Instance_ENDPOINT_TYPE_TCP_RELAY 3L
+#undef org_parler_messenger_voip_Instance_STATE_WAIT_INIT
+#define org_parler_messenger_voip_Instance_STATE_WAIT_INIT 1L
+#undef org_parler_messenger_voip_Instance_STATE_WAIT_INIT_ACK
+#define org_parler_messenger_voip_Instance_STATE_WAIT_INIT_ACK 2L
+#undef org_parler_messenger_voip_Instance_STATE_ESTABLISHED
+#define org_parler_messenger_voip_Instance_STATE_ESTABLISHED 3L
+#undef org_parler_messenger_voip_Instance_STATE_FAILED
+#define org_parler_messenger_voip_Instance_STATE_FAILED 4L
+#undef org_parler_messenger_voip_Instance_STATE_RECONNECTING
+#define org_parler_messenger_voip_Instance_STATE_RECONNECTING 5L
+#undef org_parler_messenger_voip_Instance_DATA_SAVING_NEVER
+#define org_parler_messenger_voip_Instance_DATA_SAVING_NEVER 0L
+#undef org_parler_messenger_voip_Instance_DATA_SAVING_MOBILE
+#define org_parler_messenger_voip_Instance_DATA_SAVING_MOBILE 1L
+#undef org_parler_messenger_voip_Instance_DATA_SAVING_ALWAYS
+#define org_parler_messenger_voip_Instance_DATA_SAVING_ALWAYS 2L
+#undef org_parler_messenger_voip_Instance_DATA_SAVING_ROAMING
+#define org_parler_messenger_voip_Instance_DATA_SAVING_ROAMING 3L
+#undef org_parler_messenger_voip_Instance_PEER_CAP_GROUP_CALLS
+#define org_parler_messenger_voip_Instance_PEER_CAP_GROUP_CALLS 1L
 
-/*
+    /*
  * Class:     com_example_HelloCJni
  * Method:    getArch
  * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_example_HelloCJni_getArch (JNIEnv *, jclass);
-/*
+    JNIEXPORT jstring JNICALL Java_com_example_HelloCJni_getArch(JNIEnv *, jclass);
+    /*
  * Class:     com_example_HelloCJni
  * Method:    hello
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_example_HelloCJni_hello (JNIEnv *, jclass, jstring);
+    JNIEXPORT jstring JNICALL Java_com_example_HelloCJni_hello(JNIEnv *, jclass, jstring);
 
-
-
-/*
+    /*
  * Class:     com_example_HelloCJni
  * Method:    calculate
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_example_HelloCJni_calculate (JNIEnv *, jclass, jint, jint);
+    JNIEXPORT jstring JNICALL Java_com_example_HelloCJni_calculate(JNIEnv *, jclass, jint, jint);
 
-
-/*
+    /*
  * Class:     com_example_HelloCJni
  * Method:    crash
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_example_HelloCJni_crash( JNIEnv* env, jclass thiz);
-
+    JNIEXPORT jstring JNICALL Java_com_example_HelloCJni_crash(JNIEnv *env, jclass thiz);
 
 #ifdef __cplusplus
 }

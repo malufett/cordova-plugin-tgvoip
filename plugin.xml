@@ -59,7 +59,7 @@
     <source-file src="src/android/jni/Android.mk" target-dir="app/src/main/java/c/android/jni/"/>
 
     <!-- C source files -->
-    <source-file src="src/android/jni/HelloCJni.c" target-dir="app/src/main/java/c/android/jni/"/>
+    <source-file src="src/android/jni/HelloCJni.cpp" target-dir="app/src/main/java/c/android/jni/"/>
 
     <source-file src="src/common/hello.h" target-dir="app/src/main/java/c/common/"/>
     <source-file src="src/common/hello.c" target-dir="app/src/main/java/c/common/"/>
