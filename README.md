@@ -9,5 +9,5 @@ For Android it utilizes the Android NDK to compile architecture-specific librari
 
 For iOS it uses the pure C source code in place alongside the Objective-C plugin wrapper, as well as an example cross-platform library compiled as a static library for iOS.
 
-Template from: (https://github.com/dpa99c/cordova-plugin-hello-c-test)
+Template from: (https://github.com/clement360/Cordova-Hello-JNI-Plugin)
 
