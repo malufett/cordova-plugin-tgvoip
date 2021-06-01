@@ -1,4 +1,4 @@
-package com.example;
+package com.tgvoip;
 
 import org.apache.cordova.*;
 import org.json.JSONArray;
@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class tgvoiplugin extends CordovaPlugin {
+public class TGVOIPplugin extends CordovaPlugin {
 
     protected static final String TAG = "tgvoiplugin";
     protected CallbackContext context;
@@ -32,7 +32,7 @@ public class tgvoiplugin extends CordovaPlugin {
             } else if (action.equals("calculate")) {
                 int x = data.getInt(0);
                 int y = data.getInt(1);
-                int jniOutput = HelloCJni.calculate(x,y);
+                int jniOutput = HelloCJni.calculate(x, y);
                 callbackContext.success(jniOutput);
             } else if (action.equals("causeCrash")) {
                 cordova.getThreadPool().execute(new Runnable() {
@@ -41,8 +41,7 @@ public class tgvoiplugin extends CordovaPlugin {
                         callbackContext.success(jniOutput); // should not reach here
                     }
                 });
-            }
-            else {
+            } else {
                 handleError("Invalid action");
                 result = false;
             }
@@ -53,10 +52,9 @@ public class tgvoiplugin extends CordovaPlugin {
         return result;
     }
 
-
     /**
-     * Handles an error while executing a plugin API method.
-     * Calls the registered Javascript plugin error handler callback.
+     * Handles an error while executing a plugin API method. Calls the registered
+     * Javascript plugin error handler callback.
      *
      * @param errorMsg Error message to pass to the JS error handler
      */
