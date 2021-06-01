@@ -20,24 +20,24 @@ public class TGVOIPplugin extends CordovaPlugin {
             if (action.equals("hello")) {
 
                 String input = data.getString(0);
-                String jniOutput = HelloCJni.hello(input);
+                String jniOutput = TGVOIPJni.hello(input);
                 String output = "Android says: " + jniOutput;
                 callbackContext.success(output);
 
             } else if (action.equals("getArch")) {
-                String jniOutput = HelloCJni.getArch();
+                String jniOutput = TGVOIPJni.getArch();
                 String output = "Android " + jniOutput;
                 callbackContext.success(output);
 
             } else if (action.equals("calculate")) {
                 int x = data.getInt(0);
                 int y = data.getInt(1);
-                int jniOutput = HelloCJni.calculate(x, y);
+                int jniOutput = TGVOIPJni .calculate(x, y);
                 callbackContext.success(jniOutput);
             } else if (action.equals("causeCrash")) {
                 cordova.getThreadPool().execute(new Runnable() {
                     public void run() {
-                        int jniOutput = HelloCJni.crash();
+                        int jniOutput = TGVOIPJni.crash();
                         callbackContext.success(jniOutput); // should not reach here
                     }
                 });

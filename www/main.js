@@ -2,15 +2,15 @@
 
 module.exports = {
     getArch: function (successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "HelloCPlugin", "getArch", []);
+        cordova.exec(successCallback, errorCallback, "TGVOIPPlugin", "getArch", []);
     },
     hello: function (input, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "HelloCPlugin", "hello", [input]);
+        cordova.exec(successCallback, errorCallback, "TGVOIPPlugin", "hello", [input]);
     },
     calculate: function (x, y, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "HelloCPlugin", "calculate", [x, y]);
+        cordova.exec(successCallback, errorCallback, "TGVOIPPlugin", "calculate", [x, y]);
     },
     causeCrash: function (successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "HelloCPlugin", "causeCrash", []);
+        cordova.exec(successCallback, errorCallback, "TGVOIPPlugin", "causeCrash", []);
     }
 };
