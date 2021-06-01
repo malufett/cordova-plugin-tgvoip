@@ -88,6 +88,8 @@ extern "C"
  */
     JNIEXPORT jstring JNICALL Java_com_example_HelloCJni_crash(JNIEnv *env, jclass thiz);
 
+    JNIEXPORT jobject JNICALL Java_com_example_HelloCJni_getTrafficStats(JNIEnv *env, jclass, jobject);
+
 #ifdef __cplusplus
 }
 #endif
