@@ -2,55 +2,61 @@
 <plugin
         xmlns="http://www.phonegap.com/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="cordova-plugin-hello-c"
-        version="1.1.1">
+        id="cordova-tgvoip-plugin"
+        version="0.0.1">
 
-  <name>Hello</name>
+  <name>TGVoip Plugin</name>
 
   <engines>
     <engine name="cordova" version=">=3.4.0"/>
   </engines>
 
-  <asset src="www/helloc.js" target="js/helloc.js"/>
+  <asset src="www/main.js" target="js/main.js"/>
 
-  <js-module src="www/helloc.js" name="helloc">
-    <clobbers target="helloc" />
+  <js-module src="www/main.js" name="main">
+    <clobbers target="tgvoip" />
   </js-module>
 
   <platform name="android">
 
     <config-file parent="/*" target="res/xml/config.xml">
-      <feature name="HelloCPlugin">
-        <param name="android-package" value="com.example.HelloCPlugin"/>
+      <feature name="TGVoipPlugin">
+        <param name="android-package" value="org.tgvoip.TGVoipPlugin"/>
       </feature>
     </config-file>
 
     <!-- Java plugin API -->
-    <source-file src="src/android/HelloCPlugin.java" target-dir="app/src/main/java/com/example/"/>
-    <source-file src="src/android/HelloCJni.java" target-dir="app/src/main/java/com/example/" />
+    <source-file src="src/android/TGVoipPlugin.java" target-dir="app/src/main/java/org/tgvoip/"/>
+    <source-file src="src/android/NativeContext.java" target-dir="app/src/main/java/org/tgvoip/" />
+    <source-file src="src/android/Instance.java" target-dir="app/src/main/java/org/tgvoip/" />
+    <source-file src="src/android/messenger/ApplicationLoader.java" target-dir="app/src/main/java/org/tgvoip/messenger/" />
+    <source-file src="src/android/messenger/BuildVars.java" target-dir="app/src/main/java/org/tgvoip/messenger/" />
+    <source-file src="src/android/messenger/FileLog.java" target-dir="app/src/main/java/org/tgvoip/messenger/" />
+    <source-file src="src/android/messenger/time/FastDateFormat.java" target-dir="app/src/main/java/org/tgvoip/messenger/time/" />
+    <source-file src="src/android/tgnet/SerializedData.java" target-dir="app/src/main/java/org/tgvoip/tgnet/" />
+    <source-file src="src/android/webrtc/ContextUtils.java" target-dir="app/src/main/java/org/tgvoip/webrtc/" />
+    <source-file src="src/android/webrtc/VideoSink.java" target-dir="app/src/main/java/org/tgvoip/webrtc/" />
 
   <!-- PRODUCTION - comment out source files below for debugging -->
 
     <!-- Compiled C libraries - release binaries - device -->
-    <source-file src="src/android/libs/arm64-v8a/libhelloc.so" target-dir="app/src/main/jniLibs/arm64-v8a/" />
-    <source-file src="src/android/libs/armeabi-v7a/libhelloc.so" target-dir="app/src/main/jniLibs/armeabi-v7a/" />
+    <source-file src="src/android/libs/arm64-v8a/libtgvoip.so" target-dir="app/src/main/jniLibs/arm64-v8a/" />
+    <source-file src="src/android/libs/armeabi-v7a/libtgvoip.so" target-dir="app/src/main/jniLibs/armeabi-v7a/" />
 
     <!-- Compiled C libraries - release binaries - emulator -->
-    <source-file src="src/android/libs/x86/libhelloc.so" target-dir="app/src/main/jniLibs/x86/" />
-    <source-file src="src/android/libs/x86_64/libhelloc.so" target-dir="app/src/main/jniLibs/x86_64/" />
+    <source-file src="src/android/libs/x86/libtgvoip.so" target-dir="app/src/main/jniLibs/x86/" />
+    <source-file src="src/android/libs/x86_64/libtgvoip.so" target-dir="app/src/main/jniLibs/x86_64/" />
 
     <!-- Compiled C libraries - debug binaries - device -->
-    <source-file src="src/android/obj/local/armeabi-v7a/libhelloc.so" target-dir="app/obj/local/armeabi-v7a/" />
-    <source-file src="src/android/obj/local/arm64-v8a/libhelloc.so" target-dir="app/obj/local/arm64-v8a/" />
+    <source-file src="src/android/obj/local/armeabi-v7a/libtgvoip.so" target-dir="app/obj/local/armeabi-v7a/" />
+    <source-file src="src/android/obj/local/arm64-v8a/libtgvoip.so" target-dir="app/obj/local/arm64-v8a/" />
 
     <!-- Compiled C libraries - debug binaries - emulator -->
-    <source-file src="src/android/obj/local/x86/libhelloc.so" target-dir="app/obj/local/x86/" />
-    <source-file src="src/android/obj/local/x86_64/libhelloc.so" target-dir="app/obj/local/x86_64/" />
+    <source-file src="src/android/obj/local/x86/libtgvoip.so" target-dir="app/obj/local/x86/" />
+    <source-file src="src/android/obj/local/x86_64/libtgvoip.so" target-dir="app/obj/local/x86_64/" />
 
   <!-- END PRODUCTION -->
-
-
-
+  
   <!-- DEBUG - these files are not needed for production -->
     <!-- Custom gradle file to setup NDK for debugging -->
     <source-file src="src/android/build-extras.gradle" target-dir="."/>
@@ -59,17 +65,8 @@
     <source-file src="src/android/jni/Android.mk" target-dir="app/src/main/java/c/android/jni/"/>
 
     <!-- C source files -->
-    <source-file src="src/android/jni/HelloCJni.cpp" target-dir="app/src/main/java/c/android/jni/"/>
-
-    <source-file src="src/common/hello.h" target-dir="app/src/main/java/c/common/"/>
-    <source-file src="src/common/hello.c" target-dir="app/src/main/java/c/common/"/>
-
-    <source-file src="src/common/mylib/mylib.h" target-dir="app/src/main/java/c/common/mylib"/>
-    <source-file src="src/common/mylib/mylib.c" target-dir="app/src/main/java/c/common/mylib"/>
-    <source-file src="src/common/mylib/mycomponent.h" target-dir="app/src/main/java/c/common/mylib"/>
-    <source-file src="src/common/mylib/mycomponent.c" target-dir="app/src/main/java/c/common/mylib"/>
-    <source-file src="src/common/mylib/parts/mypart.h" target-dir="app/src/main/java/c/common/mylib/parts"/>
-    <source-file src="src/common/mylib/parts/mypart.c" target-dir="app/src/main/java/c/common/mylib/parts"/>
+    <source-file src="src/android/jni/tg_voip_jini.cpp" target-dir="app/src/main/java/c/android/jni/"/>
+    <source-file src="src/android/jni/instance.cpp" target-dir="app/src/main/java/c/android/jni/"/>
   <!-- END DEBUG -->
 
   </platform>
