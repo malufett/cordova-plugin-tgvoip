@@ -195,6 +195,6 @@ public class NativeInstance {
 
         // load library
     static {
-        System.loadLibrary("tgvoip");
+        System.loadLibrary("tmessages.35");
     }
 }
