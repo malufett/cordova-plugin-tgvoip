@@ -131,6 +131,8 @@ public class TGVoipPlugin extends CordovaPlugin {
         context = callbackContext;
         boolean result = true;
         boolean forceTcp = false;
+        
+        Log.e(TAG, "Calling Action:" + action);
         try {
             // privateCall = new TLRPC.PhoneCall.TLdeserialize(,0x8742ae7f, true);
             if (action.equals("test")) {

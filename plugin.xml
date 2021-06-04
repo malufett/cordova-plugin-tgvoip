@@ -21,7 +21,7 @@
 
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="TGVoipPlugin">
-        <param name="android-package" value="org.parler.messenger.voip.TGVoipPlugin"/>
+        <param name="android-package" value="org.parler.TGVoipPlugin"/>
       </feature>
     </config-file>
 
