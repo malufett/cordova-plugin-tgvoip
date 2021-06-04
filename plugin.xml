@@ -44,9 +44,9 @@
     <source-file src="src/android/parler/tgnet/SerializedData.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
     <source-file src="src/android/parler/tgnet/TLRPC.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
 
-    <!-- org.parler.webrtc -->
-    <source-file src="src/android/parler/webrtc/ContextUtils.java" target-dir="app/src/main/java/org/parler/webrtc/"/>
-    <source-file src="src/android/parler/webrtc/VideoSink.java" target-dir="app/src/main/java/org/parler/webrtc/"/>
+    <!-- org.webrtc -->
+    <source-file src="src/android/webrtc/ContextUtils.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/VideoSink.java" target-dir="app/src/main/java/org/webrtc/"/>
   <!-- PRODUCTION - comment out source files below for debugging -->
 
     <!-- Compiled C libraries - release binaries - device -->
