@@ -368,14 +368,21 @@ public class Utilities {
     public static int bytesToInt(byte[] bytes) {
         return (((int) bytes[3] & 0xFF) << 24) + (((int) bytes[2] & 0xFF) << 16) + (((int) bytes[1] & 0xFF) << 8) + ((int) bytes[0] & 0xFF);
     }
+    public static byte[] getStringBytes(String src) {
+        try {
+            return src.getBytes("UTF-8");
+        } catch (Exception ignore) {
 
+        }
+        return new byte[0];
+    }
     public static String MD5(String md5) {
         if (md5 == null) {
             return null;
         }
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-            byte[] array = md.digest(AndroidUtilities.getStringBytes(md5));
+            byte[] array = md.digest(Utilities.getStringBytes(md5));
             StringBuilder sb = new StringBuilder();
             for (int a = 0; a < array.length; a++) {
                 sb.append(Integer.toHexString((array[a] & 0xFF) | 0x100).substring(1, 3));

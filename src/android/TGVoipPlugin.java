@@ -8,9 +8,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import org.parler.messenger.voip.Instance;
+import org.parler.messenger.voip.NativeInstance;
 import org.parler.messenger.ApplicationLoader;
 import org.parler.tgnet.TLRPC;
 import org.webrtc.VideoSink;
+import android.telephony.TelephonyManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.content.Context;
 
 
 public class TGVoipPlugin extends CordovaPlugin {
@@ -24,6 +29,7 @@ public class TGVoipPlugin extends CordovaPlugin {
     private ProxyVideoSink localSink;
 	private ProxyVideoSink remoteSink;
     private boolean micMute = false;
+	protected NetworkInfo lastNetInfo;
 
     private int convertDataSavingMode(int mode) {
 		if (mode != Instance.DATA_SAVING_ROAMING) {
@@ -63,8 +69,56 @@ public class TGVoipPlugin extends CordovaPlugin {
 			}
 		}
 	}
+	protected NetworkInfo getActiveNetworkInfo() {
+		return ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+	}
+	protected int getNetworkType() {
+		final NetworkInfo info = lastNetInfo = getActiveNetworkInfo();
+		int type = Instance.NET_TYPE_UNKNOWN;
+		if (info != null) {
+			switch (info.getType()) {
+				case ConnectivityManager.TYPE_MOBILE:
+					switch (info.getSubtype()) {
+						case TelephonyManager.NETWORK_TYPE_GPRS:
+							type = Instance.NET_TYPE_GPRS;
+							break;
+						case TelephonyManager.NETWORK_TYPE_EDGE:
+						case TelephonyManager.NETWORK_TYPE_1xRTT:
+							type = Instance.NET_TYPE_EDGE;
+							break;
+						case TelephonyManager.NETWORK_TYPE_UMTS:
+						case TelephonyManager.NETWORK_TYPE_EVDO_0:
+							type = Instance.NET_TYPE_3G;
+							break;
+						case TelephonyManager.NETWORK_TYPE_HSDPA:
+						case TelephonyManager.NETWORK_TYPE_HSPA:
+						case TelephonyManager.NETWORK_TYPE_HSPAP:
+						case TelephonyManager.NETWORK_TYPE_HSUPA:
+						case TelephonyManager.NETWORK_TYPE_EVDO_A:
+						case TelephonyManager.NETWORK_TYPE_EVDO_B:
+							type = Instance.NET_TYPE_HSPA;
+							break;
+						case TelephonyManager.NETWORK_TYPE_LTE:
+							type = Instance.NET_TYPE_LTE;
+							break;
+						default:
+							type = Instance.NET_TYPE_OTHER_MOBILE;
+							break;
+					}
+					break;
+				case ConnectivityManager.TYPE_WIFI:
+					type = Instance.NET_TYPE_WIFI;
+					break;
+				case ConnectivityManager.TYPE_ETHERNET:
+					type = Instance.NET_TYPE_ETHERNET;
+					break;
+			}
+		}
+		return type;
+	}
 
     TGVoipPlugin(){
+        super();
         localSink = new ProxyVideoSink();
 		remoteSink = new ProxyVideoSink();
     }
@@ -85,7 +139,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 final boolean isOutgoing = false;
 
                 final Instance.Config config = new Instance.Config(initializationTimeout, receiveTimeout, voipDataSaving, true/*privateCall.p2p_allowed*/, true, true, true,
-                    false, serverConfig.enableStunMarking, logFilePath, statisLogFilePath, 32/*privateCall.protocol.max_layer*/);
+                    false, false, logFilePath, statisLogFilePath, 32/*privateCall.protocol.max_layer*/);
 
                 final String persistentStateFilePath = new File(ApplicationLoader.applicationContext.getFilesDir(), "voip_persistent_state.json").getAbsolutePath();
                 final int endpointType = forceTcp ? Instance.ENDPOINT_TYPE_TCP_RELAY : Instance.ENDPOINT_TYPE_UDP_RELAY;

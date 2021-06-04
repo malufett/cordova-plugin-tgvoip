@@ -2,11 +2,11 @@ package org.parler.messenger.voip;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.parler.messenger.AndroidUtilities;
+// import org.parler.messenger.AndroidUtilities;
 import org.parler.messenger.ApplicationLoader;
 import org.parler.messenger.BuildVars;
 import org.parler.messenger.FileLog;
-import org.parler.messenger.SharedConfig;
+// import org.parler.messenger.SharedConfig;
 import org.webrtc.ContextUtils;
 import org.webrtc.VideoSink;
 
@@ -41,7 +41,8 @@ public class NativeInstance {
         }
         NativeInstance instance = new NativeInstance();
         instance.persistentStateFilePath = path;
-        float aspectRatio = Math.min(AndroidUtilities.displaySize.x, AndroidUtilities.displaySize.y) / (float) Math.max(AndroidUtilities.displaySize.x, AndroidUtilities.displaySize.y);
+        // float aspectRatio = Math.min(AndroidUtilities.displaySize.x, AndroidUtilities.displaySize.y) / (float) Math.max(AndroidUtilities.displaySize.x, AndroidUtilities.displaySize.y);
+        float aspectRatio = Math.min(1080, 2280) / (float) Math.max(1080, 2280);
         instance.nativePtr = makeNativeInstance(version, instance, config, path, endpoints, proxy, networkType, encryptionKey, remoteSink, videoCapturer, aspectRatio);
         return instance;
     }
@@ -52,7 +53,7 @@ public class NativeInstance {
         instance.payloadCallback = payloadCallback;
         instance.audioLevelsCallback = audioLevelsCallback;
         instance.isGroup = true;
-        instance.nativePtr = makeGroupNativeInstance(instance, SharedConfig.disableVoiceAudioEffects);
+        instance.nativePtr = makeGroupNativeInstance(instance, false/*SharedConfig.disableVoiceAudioEffects*/);
         return instance;
     }
 
@@ -107,7 +108,7 @@ public class NativeInstance {
     //group calls
     private void onNetworkStateUpdated(boolean connected) {
         if (onStateUpdatedListener != null) {
-            AndroidUtilities.runOnUIThread(() -> onStateUpdatedListener.onStateUpdated(connected ? 1 : 0));
+            // AndroidUtilities.runOnUIThread(() -> onStateUpdatedListener.onStateUpdated(connected ? 1 : 0));
         }
     }
 
@@ -115,7 +116,7 @@ public class NativeInstance {
         if (uids.length == 0) {
             return;
         }
-        AndroidUtilities.runOnUIThread(() -> audioLevelsCallback.run(uids, levels, voice));
+        // AndroidUtilities.runOnUIThread(() -> audioLevelsCallback.run(uids, levels, voice));
     }
 
     private void onEmitJoinPayload(String ufrag, String pwd, Instance.Fingerprint[] fingerprints, int ssrc) {
@@ -133,7 +134,7 @@ public class NativeInstance {
             }
             json.put("fingerprints", array);
             json.put("ssrc", ssrc);
-            AndroidUtilities.runOnUIThread(() -> payloadCallback.run(ssrc, json.toString()));
+            // AndroidUtilities.runOnUIThread(() -> payloadCallback.run(ssrc, json.toString()));
         } catch (Exception e) {
             FileLog.e(e);
         }
