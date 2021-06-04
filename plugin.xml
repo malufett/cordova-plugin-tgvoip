@@ -42,7 +42,9 @@
     <!-- org.parler.tgnet -->
     <source-file src="src/android/parler/tgnet/AbstractSerializedData.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
     <source-file src="src/android/parler/tgnet/SerializedData.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+    <source-file src="src/android/parler/tgnet/NativeByteBuffer.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
     <source-file src="src/android/parler/tgnet/TLRPC.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+    <source-file src="src/android/parler/tgnet/TLObject.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
 
     <!-- org.webrtc -->
     <source-file src="src/android/webrtc/ContextUtils.java" target-dir="app/src/main/java/org/webrtc/"/>
