@@ -70,7 +70,7 @@ public class TGVoipPlugin extends CordovaPlugin {
 		}
 	}
 	protected NetworkInfo getActiveNetworkInfo() {
-		return ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+		return ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
 	}
 	protected int getNetworkType() {
 		final NetworkInfo info = lastNetInfo = getActiveNetworkInfo();

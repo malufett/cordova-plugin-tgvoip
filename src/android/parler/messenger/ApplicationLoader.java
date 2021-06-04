@@ -13,6 +13,7 @@ import android.content.Context;
 import android.app.Application;
 import android.net.ConnectivityManager;
 import android.os.SystemClock;
+import android.net.NetworkInfo;
 
 public class ApplicationLoader extends Application {
 

@@ -34,7 +34,7 @@
     <source-file src="src/android/parler/messenger/time/FastDateParser.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
     <source-file src="src/android/parler/messenger/time/FastDatePrinter.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
     <source-file src="src/android/parler/messenger/time/FormatCache.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
-    <source-file src="src/android/parler/messenger/time/Sundate.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
+    <source-file src="src/android/parler/messenger/time/SunDate.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
 
     <!-- org.parler.messenger.voip -->
     <source-file src="src/android/parler/messenger/voip/Instance.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
@@ -45,6 +45,7 @@
     <source-file src="src/android/parler/messenger/BuildVars.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/DispatchQueue.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/FileLog.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/NativeLoader.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/Utilities.java" target-dir="app/src/main/java/org/parler/messenger/"/>
 
     <!-- org.parler.tgnet -->
