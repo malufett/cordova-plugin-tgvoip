@@ -104,7 +104,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 tgVoip = Instance.makeInstance("2.4.4", config, persistentStateFilePath, endpoints, proxy, getNetworkType(), encryptionKey, remoteSink, videoCapturer);
                 tgVoip.setMuteMicrophone(micMute);
 
-                callbackContext.success('It works!');
+                callbackContext.success("It works!");
             } else {
                 handleError("Invalid action");
                 result = false;
