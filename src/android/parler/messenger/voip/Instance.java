@@ -1,14 +1,14 @@
-package org.tgvoip;
+package org.parler.messenger.voip;
 
 import android.os.Build;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.tgvoip.messenger.ApplicationLoader;
-import org.tgvoip.messenger.BuildVars;
-import org.tgvoip.messenger.FileLog;
-import org.tgvoip.webrtc.ContextUtils;
-import org.tgvoip.webrtc.VideoSink;
+import org.parler.messenger.ApplicationLoader;
+import org.parler.messenger.BuildVars;
+import org.parler.messenger.FileLog;
+import org.webrtc.ContextUtils;
+import org.webrtc.VideoSink;
 
 import java.util.Arrays;
 import java.util.List;

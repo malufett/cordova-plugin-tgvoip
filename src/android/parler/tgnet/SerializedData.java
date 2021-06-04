@@ -6,10 +6,10 @@
  * Copyright Nikolai Kudashov, 2013-2018.
  */
 
-package org.tgvoip.tgnet;
+package org.parler.tgnet;
 
-import org.tgvoip.messenger.BuildVars;
-import org.tgvoip.messenger.FileLog;
+import org.parler.messenger.BuildVars;
+import org.parler.messenger.FileLog;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

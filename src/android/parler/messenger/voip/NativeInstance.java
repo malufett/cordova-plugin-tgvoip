@@ -1,13 +1,14 @@
-package org.tgvoip;
+package org.parler.messenger.voip;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.tgvoip.messenger.ApplicationLoader;
-import org.tgvoip.messenger.BuildVars;
-import org.tgvoip.messenger.FileLog;
-import org.tgvoip.messenger.SharedConfig;
-import org.tgvoip.webrtc.ContextUtils;
-import org.tgvoip.webrtc.VideoSink;
+import org.parler.messenger.AndroidUtilities;
+import org.parler.messenger.ApplicationLoader;
+import org.parler.messenger.BuildVars;
+import org.parler.messenger.FileLog;
+import org.parler.messenger.SharedConfig;
+import org.webrtc.ContextUtils;
+import org.webrtc.VideoSink;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -34,15 +35,13 @@ public class NativeInstance {
         void run(int[] uids, float[] levels, boolean[] voice);
     }
 
-    public static NativeInstance make(String version, Instance.Config config, String path, Instance.Endpoint[] endpoints, Instance.Proxy proxy, int networkType, Instance.EncryptionKey encryptionKey, VideoSink remoteSink, long videoCapturer,
-    int x, int y) {
+    public static NativeInstance make(String version, Instance.Config config, String path, Instance.Endpoint[] endpoints, Instance.Proxy proxy, int networkType, Instance.EncryptionKey encryptionKey, VideoSink remoteSink, long videoCapturer) {
         if (BuildVars.LOGS_ENABLED) {
             FileLog.d("create new tgvoip instance, version " + version);
         }
         NativeInstance instance = new NativeInstance();
         instance.persistentStateFilePath = path;
-        // float aspectRatio = Math.min(AndroidUtilities.displaySize.x, AndroidUtilities.displaySize.y) / (float) Math.max(AndroidUtilities.displaySize.x, AndroidUtilities.displaySize.y);
-        float aspectRatio = Math.min(x, y) / (float) Math.max(x, y);
+        float aspectRatio = Math.min(AndroidUtilities.displaySize.x, AndroidUtilities.displaySize.y) / (float) Math.max(AndroidUtilities.displaySize.x, AndroidUtilities.displaySize.y);
         instance.nativePtr = makeNativeInstance(version, instance, config, path, endpoints, proxy, networkType, encryptionKey, remoteSink, videoCapturer, aspectRatio);
         return instance;
     }
@@ -108,7 +107,7 @@ public class NativeInstance {
     //group calls
     private void onNetworkStateUpdated(boolean connected) {
         if (onStateUpdatedListener != null) {
-            // AndroidUtilities.runOnUIThread(() -> onStateUpdatedListener.onStateUpdated(connected ? 1 : 0));
+            AndroidUtilities.runOnUIThread(() -> onStateUpdatedListener.onStateUpdated(connected ? 1 : 0));
         }
     }
 
@@ -116,7 +115,7 @@ public class NativeInstance {
         if (uids.length == 0) {
             return;
         }
-        // AndroidUtilities.runOnUIThread(() -> audioLevelsCallback.run(uids, levels, voice));
+        AndroidUtilities.runOnUIThread(() -> audioLevelsCallback.run(uids, levels, voice));
     }
 
     private void onEmitJoinPayload(String ufrag, String pwd, Instance.Fingerprint[] fingerprints, int ssrc) {
@@ -134,7 +133,7 @@ public class NativeInstance {
             }
             json.put("fingerprints", array);
             json.put("ssrc", ssrc);
-            // AndroidUtilities.runOnUIThread(() -> payloadCallback.run(ssrc, json.toString()));
+            AndroidUtilities.runOnUIThread(() -> payloadCallback.run(ssrc, json.toString()));
         } catch (Exception e) {
             FileLog.e(e);
         }
@@ -144,7 +143,7 @@ public class NativeInstance {
     public native void setJoinResponsePayload(String ufrag, String pwd, Instance.Fingerprint[] fingerprints, Instance.Candidate[] candidates);
 
     private Instance.FinalState finalState;
-    private CountDownLatch stopBarrier; 
+    private CountDownLatch stopBarrier;
     private void onStop(Instance.FinalState state) {
         finalState = state;
         if (stopBarrier != null) {
@@ -192,9 +191,4 @@ public class NativeInstance {
     public native void switchCamera(boolean front);
     public native void setVideoState(int videoState);
     public native void onSignalingDataReceive(byte[] data);
-
-        // load library
-    static {
-        System.loadLibrary("tmessages.35");
-    }
 }

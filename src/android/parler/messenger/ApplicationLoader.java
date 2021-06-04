@@ -6,7 +6,7 @@
  * Copyright Nikolai Kudashov, 2013-2018.
  */
 
-package org.tgvoip.messenger;
+package org.parler.messenger;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -32,9 +32,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import org.tgvoip.tgnet.ConnectionsManager;
-import org.tgvoip.tgnet.TLRPC;
-import org.tgvoip.ui.Components.ForegroundDetector;
+import org.parler.tgnet.ConnectionsManager;
+import org.parler.tgnet.TLRPC;
+import org.parler.ui.Components.ForegroundDetector;
 
 import java.io.File;
 

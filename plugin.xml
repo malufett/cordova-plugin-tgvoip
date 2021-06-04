@@ -21,22 +21,32 @@
 
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="TGVoipPlugin">
-        <param name="android-package" value="org.tgvoip.TGVoipPlugin"/>
+        <param name="android-package" value="org.parler.messenger.voip.TGVoipPlugin"/>
       </feature>
     </config-file>
 
     <!-- Java plugin API -->
-    <source-file src="src/android/TGVoipPlugin.java" target-dir="app/src/main/java/org/tgvoip/"/>
-    <source-file src="src/android/NativeContext.java" target-dir="app/src/main/java/org/tgvoip/" />
-    <source-file src="src/android/Instance.java" target-dir="app/src/main/java/org/tgvoip/" />
-    <source-file src="src/android/messenger/ApplicationLoader.java" target-dir="app/src/main/java/org/tgvoip/messenger/" />
-    <source-file src="src/android/messenger/BuildVars.java" target-dir="app/src/main/java/org/tgvoip/messenger/" />
-    <source-file src="src/android/messenger/FileLog.java" target-dir="app/src/main/java/org/tgvoip/messenger/" />
-    <source-file src="src/android/messenger/time/FastDateFormat.java" target-dir="app/src/main/java/org/tgvoip/messenger/time/" />
-    <source-file src="src/android/tgnet/SerializedData.java" target-dir="app/src/main/java/org/tgvoip/tgnet/" />
-    <source-file src="src/android/webrtc/ContextUtils.java" target-dir="app/src/main/java/org/tgvoip/webrtc/" />
-    <source-file src="src/android/webrtc/VideoSink.java" target-dir="app/src/main/java/org/tgvoip/webrtc/" />
+    <!-- org.parler-->
+    <source-file src="src/android/TGVoipPlugin.java" target-dir="app/src/main/java/org/parler/"/>
 
+    <!-- org.parler.messenger -->
+    <source-file src="src/android/parler/messenger/ApplicationLoader.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/BuildVars.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/FileLog.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/Utilities.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+
+    <!-- org.parler.messenger.voip -->
+    <source-file src="src/android/parler/messenger/voip/NativeInstance.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
+    <source-file src="src/android/parler/messenger/voip/Instance.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
+
+    <!-- org.parler.tgnet -->
+    <source-file src="src/android/parler/tgnet/AbstractSerializedData.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+    <source-file src="src/android/parler/tgnet/SerializedData.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+    <source-file src="src/android/parler/tgnet/TLRPC.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+
+    <!-- org.parler.webrtc -->
+    <source-file src="src/android/parler/webrtc/ContextUtils.java" target-dir="app/src/main/java/org/parler/webrtc/"/>
+    <source-file src="src/android/parler/webrtc/VideoSink.java" target-dir="app/src/main/java/org/parler/webrtc/"/>
   <!-- PRODUCTION - comment out source files below for debugging -->
 
     <!-- Compiled C libraries - release binaries - device -->

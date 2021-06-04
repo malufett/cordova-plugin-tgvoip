@@ -6,11 +6,11 @@
  * Copyright Nikolai Kudashov, 2013-2018.
  */
 
-package org.tgvoip.messenger;
+package org.parler.messenger;
 
 import android.util.Log;
 
-import org.tgvoip.messenger.time.FastDateFormat;
+import org.parler.messenger.time.FastDateFormat;
 
 import java.io.File;
 import java.io.FileOutputStream;
