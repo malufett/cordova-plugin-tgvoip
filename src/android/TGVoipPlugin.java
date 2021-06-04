@@ -12,6 +12,7 @@ import org.parler.messenger.voip.NativeInstance;
 import org.parler.messenger.ApplicationLoader;
 import org.parler.tgnet.TLRPC;
 import org.webrtc.VideoSink;
+import org.webrtc.VideoFrame;
 import android.telephony.TelephonyManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -69,52 +70,53 @@ public class TGVoipPlugin extends CordovaPlugin {
 			}
 		}
 	}
-	protected NetworkInfo getActiveNetworkInfo() {
-		return ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
-	}
+	// protected NetworkInfo getActiveNetworkInfo() {
+	// 	return ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+	// }
 	protected int getNetworkType() {
-		final NetworkInfo info = lastNetInfo = getActiveNetworkInfo();
-		int type = Instance.NET_TYPE_UNKNOWN;
-		if (info != null) {
-			switch (info.getType()) {
-				case ConnectivityManager.TYPE_MOBILE:
-					switch (info.getSubtype()) {
-						case TelephonyManager.NETWORK_TYPE_GPRS:
-							type = Instance.NET_TYPE_GPRS;
-							break;
-						case TelephonyManager.NETWORK_TYPE_EDGE:
-						case TelephonyManager.NETWORK_TYPE_1xRTT:
-							type = Instance.NET_TYPE_EDGE;
-							break;
-						case TelephonyManager.NETWORK_TYPE_UMTS:
-						case TelephonyManager.NETWORK_TYPE_EVDO_0:
-							type = Instance.NET_TYPE_3G;
-							break;
-						case TelephonyManager.NETWORK_TYPE_HSDPA:
-						case TelephonyManager.NETWORK_TYPE_HSPA:
-						case TelephonyManager.NETWORK_TYPE_HSPAP:
-						case TelephonyManager.NETWORK_TYPE_HSUPA:
-						case TelephonyManager.NETWORK_TYPE_EVDO_A:
-						case TelephonyManager.NETWORK_TYPE_EVDO_B:
-							type = Instance.NET_TYPE_HSPA;
-							break;
-						case TelephonyManager.NETWORK_TYPE_LTE:
-							type = Instance.NET_TYPE_LTE;
-							break;
-						default:
-							type = Instance.NET_TYPE_OTHER_MOBILE;
-							break;
-					}
-					break;
-				case ConnectivityManager.TYPE_WIFI:
-					type = Instance.NET_TYPE_WIFI;
-					break;
-				case ConnectivityManager.TYPE_ETHERNET:
-					type = Instance.NET_TYPE_ETHERNET;
-					break;
-			}
-		}
-		return type;
+        return Instance.NET_TYPE_WIFI;
+		// final NetworkInfo info = lastNetInfo = getActiveNetworkInfo();
+		// int type = Instance.NET_TYPE_UNKNOWN;
+		// if (info != null) {
+		// 	switch (info.getType()) {
+		// 		case ConnectivityManager.TYPE_MOBILE:
+		// 			switch (info.getSubtype()) {
+		// 				case TelephonyManager.NETWORK_TYPE_GPRS:
+		// 					type = Instance.NET_TYPE_GPRS;
+		// 					break;
+		// 				case TelephonyManager.NETWORK_TYPE_EDGE:
+		// 				case TelephonyManager.NETWORK_TYPE_1xRTT:
+		// 					type = Instance.NET_TYPE_EDGE;
+		// 					break;
+		// 				case TelephonyManager.NETWORK_TYPE_UMTS:
+		// 				case TelephonyManager.NETWORK_TYPE_EVDO_0:
+		// 					type = Instance.NET_TYPE_3G;
+		// 					break;
+		// 				case TelephonyManager.NETWORK_TYPE_HSDPA:
+		// 				case TelephonyManager.NETWORK_TYPE_HSPA:
+		// 				case TelephonyManager.NETWORK_TYPE_HSPAP:
+		// 				case TelephonyManager.NETWORK_TYPE_HSUPA:
+		// 				case TelephonyManager.NETWORK_TYPE_EVDO_A:
+		// 				case TelephonyManager.NETWORK_TYPE_EVDO_B:
+		// 					type = Instance.NET_TYPE_HSPA;
+		// 					break;
+		// 				case TelephonyManager.NETWORK_TYPE_LTE:
+		// 					type = Instance.NET_TYPE_LTE;
+		// 					break;
+		// 				default:
+		// 					type = Instance.NET_TYPE_OTHER_MOBILE;
+		// 					break;
+		// 			}
+		// 			break;
+		// 		case ConnectivityManager.TYPE_WIFI:
+		// 			type = Instance.NET_TYPE_WIFI;
+		// 			break;
+		// 		case ConnectivityManager.TYPE_ETHERNET:
+		// 			type = Instance.NET_TYPE_ETHERNET;
+		// 			break;
+		// 	}
+		// }
+		// return type;
 	}
 
     TGVoipPlugin(){
