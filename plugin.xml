@@ -1,21 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<plugin
-        xmlns="http://www.phonegap.com/ns/plugins/1.0"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        id="cordova-tgvoip-plugin"
-        version="0.0.1">
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-tgvoip-plugin" version="0.0.1">
 
   <name>TGVoip Plugin</name>
 
-  <engines>
-    <engine name="cordova" version=">=3.4.0"/>
-  </engines>
+  <description>An Android Cordova plugin that allows users to access Telegram tgvoip library.</description>
+  <license>MIT</license>
 
-  <asset src="www/main.js" target="js/main.js"/>
+  <keywords>cordova,android,tgvoip,voip,telegram</keywords>
+  <repo>https://github.com/malufett/cordova-plugin-tgvoip.git</repo>
+  <issue>https://github.com/malufett/cordova-plugin-tgvoip/issues</issue>
 
   <js-module src="www/main.js" name="main">
     <clobbers target="tgvoip" />
   </js-module>
+
+  <engines>
+    <engine name="cordova" version=">=3.0.0"/>
+  </engines>
 
   <platform name="android">
 
@@ -64,7 +66,7 @@
 
     <!-- org.parler-->
     <source-file src="src/android/TGVoipPlugin.java" target-dir="app/src/main/java/org/parler/"/>
-  <!-- PRODUCTION - comment out source files below for debugging -->
+    <!-- PRODUCTION - comment out source files below for debugging -->
 
     <!-- Compiled C libraries - release binaries - device -->
     <!-- <source-file src="src/android/libs/arm64-v8a/libtmessages.35.so" target-dir="app/src/main/jniLibs/arm64-v8a/" />
@@ -82,6 +84,6 @@
     <source-file src="src/android/obj/local/x86/libtmessages.35.so" target-dir="app/obj/local/x86/" />
     <source-file src="src/android/obj/local/x86_64/libtmessages.35.so" target-dir="app/obj/local/x86_64/" />
 
-  <!-- END PRODUCTION -->
+    <!-- END PRODUCTION -->
   </platform>
 </plugin>

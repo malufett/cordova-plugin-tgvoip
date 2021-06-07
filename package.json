@@ -25,5 +25,8 @@
     "telegram",
     "tgvoip",
     "voip"
-  ]
+  ],
+  "dependencies": {
+    "cordova-common": "^4.0.2"
+  }
 }
