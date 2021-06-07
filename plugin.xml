@@ -71,12 +71,12 @@
     <!-- PRODUCTION - comment out source files below for debugging -->
 
     <!-- Compiled C libraries - release binaries - device -->
-    <!-- <source-file src="src/android/libs/arm64-v8a/libtmessages.35.so" target-dir="app/src/main/jniLibs/arm64-v8a/" />
-    <source-file src="src/android/libs/armeabi-v7a/libtmessages.35.so" target-dir="app/src/main/jniLibs/armeabi-v7a/" /> -->
+    <source-file src="src/android/obj/local/arm64-v8a/libtmessages.35.so" target-dir="app/src/main/jniLibs/arm64-v8a/" />
+    <source-file src="src/android/obj/local/armeabi-v7a/libtmessages.35.so" target-dir="app/src/main/jniLibs/armeabi-v7a/" />
 
     <!-- Compiled C libraries - release binaries - emulator -->
-    <!-- <source-file src="src/android/libs/x86/libtmessages.35.so" target-dir="app/src/main/jniLibs/x86/" />
-    <source-file src="src/android/libs/x86_64/libtmessages.35.so" target-dir="app/src/main/jniLibs/x86_64/" /> -->
+    <source-file src="src/android/obj/local/x86/libtmessages.35.so" target-dir="app/src/main/jniLibs/x86/" />
+    <source-file src="src/android/obj/local/x86_64/libtmessages.35.so" target-dir="app/src/main/jniLibs/x86_64/" />
 
     <!-- Compiled C libraries - debug binaries - device -->
     <source-file src="src/android/obj/local/armeabi-v7a/libtmessages.35.so" target-dir="app/obj/local/armeabi-v7a/" />
