@@ -32,15 +32,19 @@ public class TGVoipJni {
 	private ProxyVideoSink remoteSink;
     private boolean micMute = false;
 	protected NetworkInfo lastNetInfo;
+	private final static int LIB_VERSION = 35;
+    private final static String LIB_NAME = "tmessages." + LIB_VERSION;
 
     static {
-    	NativeLoader.initNativeLibs();
-		
-        localSink = new ProxyVideoSink();
-		remoteSink = new ProxyVideoSink();
+    	 System.loadLibrary(LIB_NAME);		
     }
 
-	public static void initiateActualEncryptedCall(){
+	TGVoipJni(){		
+        localSink = new ProxyVideoSink();
+		remoteSink = new ProxyVideoSink();
+	}
+
+	public void initiateActualEncryptedCall(){
 		final double initializationTimeout = 30000 / 1000.0;
 		final double receiveTimeout = 10000 / 1000.0;
 		final int voipDataSaving = convertDataSavingMode(Instance.DATA_SAVING_NEVER);
@@ -71,7 +75,7 @@ public class TGVoipJni {
 		tgVoip.setMuteMicrophone(micMute);
 	}
 
-    private static int convertDataSavingMode(int mode) {
+    private int convertDataSavingMode(int mode) {
 		if (mode != Instance.DATA_SAVING_ROAMING) {
 			return mode;
 		}
@@ -112,7 +116,7 @@ public class TGVoipJni {
 	// protected NetworkInfo getActiveNetworkInfo() {
 	// 	return ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
 	// }
-	protected static int getNetworkType() {
+	protected int getNetworkType() {
         return Instance.NET_TYPE_WIFI;
 		// final NetworkInfo info = lastNetInfo = getActiveNetworkInfo();
 		// int type = Instance.NET_TYPE_UNKNOWN;
