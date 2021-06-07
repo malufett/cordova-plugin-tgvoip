@@ -66,6 +66,8 @@
 
     <!-- org.parler-->
     <source-file src="src/android/TGVoipPlugin.java" target-dir="app/src/main/java/org/parler/"/>
+    <source-file src="src/android/TGVoipJni.java" target-dir="app/src/main/java/org/parler/"/>
+
     <!-- PRODUCTION - comment out source files below for debugging -->
 
     <!-- Compiled C libraries - release binaries - device -->

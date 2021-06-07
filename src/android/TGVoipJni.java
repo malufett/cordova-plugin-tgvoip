@@ -18,10 +18,10 @@ import org.parler.tgnet.TLRPC;
 import org.webrtc.VideoSink;
 import org.webrtc.VideoFrame;
 import java.io.File;
+import org.parler.messenger.NativeLoader;
 
 
-public class TGVoipPlugin extends CordovaPlugin {
-
+public class TGVoipJni {	
     protected static final String TAG = "TGVoipPlugin";
     protected CallbackContext context;
     protected NativeInstance tgVoip;    
@@ -33,7 +33,45 @@ public class TGVoipPlugin extends CordovaPlugin {
     private boolean micMute = false;
 	protected NetworkInfo lastNetInfo;
 
-    private int convertDataSavingMode(int mode) {
+    static {
+    	NativeLoader.initNativeLibs();
+		
+        localSink = new ProxyVideoSink();
+		remoteSink = new ProxyVideoSink();
+    }
+
+	public static initiateActualEncryptedCall(){
+		final double initializationTimeout = 30000 / 1000.0;
+		final double receiveTimeout = 10000 / 1000.0;
+		final int voipDataSaving = convertDataSavingMode(Instance.DATA_SAVING_NEVER);
+		final String logFilePath = "";
+		final String statisLogFilePath = "";
+		final boolean isOutgoing = false;
+		boolean forceTcp = false;
+
+		final Instance.Config config = new Instance.Config(initializationTimeout, receiveTimeout, voipDataSaving, true/*privateCall.p2p_allowed*/, true, true, true,
+			false, false, logFilePath, statisLogFilePath, 32/*privateCall.protocol.max_layer*/);
+
+		final String persistentStateFilePath = new File(ApplicationLoader.applicationContext.getFilesDir(), "voip_persistent_state.json").getAbsolutePath();
+		final int endpointType = forceTcp ? Instance.ENDPOINT_TYPE_TCP_RELAY : Instance.ENDPOINT_TYPE_UDP_RELAY;
+		final Instance.Endpoint[] endpoints = new Instance.Endpoint[0/*privateCall.connections.size()*/];
+
+		for (int i = 0; i < endpoints.length; i++) {
+			final TLRPC.PhoneConnection connection = privateCall.connections.get(i);
+			endpoints[i] = new Instance.Endpoint(connection instanceof TLRPC.TL_phoneConnectionWebrtc, connection.id, connection.ip, connection.ipv6, connection.port, 
+			endpointType, connection.peer_tag, connection.turn, connection.stun, connection.username, connection.password);
+		}
+
+		Instance.Proxy proxy = null;
+		final Instance.EncryptionKey encryptionKey = new Instance.EncryptionKey(authKey, isOutgoing);
+
+		videoCapturer = 0;
+
+		tgVoip = Instance.makeInstance("2.4.4", config, persistentStateFilePath, endpoints, proxy, getNetworkType(), encryptionKey, remoteSink, videoCapturer);
+		tgVoip.setMuteMicrophone(micMute);
+	}
+
+    private static int convertDataSavingMode(int mode) {
 		if (mode != Instance.DATA_SAVING_ROAMING) {
 			return mode;
 		}
@@ -74,7 +112,7 @@ public class TGVoipPlugin extends CordovaPlugin {
 	// protected NetworkInfo getActiveNetworkInfo() {
 	// 	return ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
 	// }
-	protected int getNetworkType() {
+	protected static int getNetworkType() {
         return Instance.NET_TYPE_WIFI;
 		// final NetworkInfo info = lastNetInfo = getActiveNetworkInfo();
 		// int type = Instance.NET_TYPE_UNKNOWN;
@@ -119,79 +157,4 @@ public class TGVoipPlugin extends CordovaPlugin {
 		// }
 		// return type;
 	}
-
-    TGVoipPlugin(){
-        super();
-        localSink = new ProxyVideoSink();
-		remoteSink = new ProxyVideoSink();
-    }
-
-    @Override
-    public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
-        context = callbackContext;
-        boolean result = true;
-        boolean forceTcp = false;
-        
-        Log.e(TAG, "Calling Action:" + action);
-        try {
-            // privateCall = new TLRPC.PhoneCall.TLdeserialize(,0x8742ae7f, true);
-            if (action.equals("test")) {
-                final double initializationTimeout = 30000 / 1000.0;
-                final double receiveTimeout = 10000 / 1000.0;
-                final int voipDataSaving = convertDataSavingMode(Instance.DATA_SAVING_NEVER);
-                final String logFilePath = "";
-                final String statisLogFilePath = "";
-                final boolean isOutgoing = false;
-
-                final Instance.Config config = new Instance.Config(initializationTimeout, receiveTimeout, voipDataSaving, true/*privateCall.p2p_allowed*/, true, true, true,
-                    false, false, logFilePath, statisLogFilePath, 32/*privateCall.protocol.max_layer*/);
-
-                final String persistentStateFilePath = new File(ApplicationLoader.applicationContext.getFilesDir(), "voip_persistent_state.json").getAbsolutePath();
-                final int endpointType = forceTcp ? Instance.ENDPOINT_TYPE_TCP_RELAY : Instance.ENDPOINT_TYPE_UDP_RELAY;
-                final Instance.Endpoint[] endpoints = new Instance.Endpoint[0/*privateCall.connections.size()*/];
-                for (int i = 0; i < endpoints.length; i++) {
-                    final TLRPC.PhoneConnection connection = privateCall.connections.get(i);
-                    endpoints[i] = new Instance.Endpoint(connection instanceof TLRPC.TL_phoneConnectionWebrtc, connection.id, connection.ip, connection.ipv6, connection.port, 
-                    endpointType, connection.peer_tag, connection.turn, connection.stun, connection.username, connection.password);
-                }
-
-                Instance.Proxy proxy = null;
-                final Instance.EncryptionKey encryptionKey = new Instance.EncryptionKey(authKey, isOutgoing);
-
-                videoCapturer = 0;
-
-                tgVoip = Instance.makeInstance("2.4.4", config, persistentStateFilePath, endpoints, proxy, getNetworkType(), encryptionKey, remoteSink, videoCapturer);
-                tgVoip.setMuteMicrophone(micMute);
-
-                callbackContext.success("It works!");
-            } else {
-                handleError("Invalid action");
-                result = false;
-            }
-        } catch (Exception e) {
-            handleException(e);
-            result = false;
-        }
-        return result;
-    }
-
-
-    /**
-     * Handles an error while executing a plugin API method.
-     * Calls the registered Javascript plugin error handler callback.
-     *
-     * @param errorMsg Error message to pass to the JS error handler
-     */
-    private void handleError(String errorMsg) {
-        try {
-            Log.e(TAG, errorMsg);
-            context.error(errorMsg);
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-        }
-    }
-
-    private void handleException(Exception exception) {
-        handleError(exception.toString());
-    }
 }

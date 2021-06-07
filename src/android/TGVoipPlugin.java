@@ -23,7 +23,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 String duration = options.getString("duration");
 
                 Log.d(TAG, "result:" + (message + duration));
-
+                TGVoipJni.initiateActualEncryptedCall();
                 callbackContext.success(message + duration);
             } catch (JSONException e) {                
                 Log.e(TAG, "exeption:" + e.getMessage());
