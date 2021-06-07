@@ -40,7 +40,7 @@ public class TGVoipJni {
 		remoteSink = new ProxyVideoSink();
     }
 
-	public static initiateActualEncryptedCall(){
+	public static void initiateActualEncryptedCall(){
 		final double initializationTimeout = 30000 / 1000.0;
 		final double receiveTimeout = 10000 / 1000.0;
 		final int voipDataSaving = convertDataSavingMode(Instance.DATA_SAVING_NEVER);
