@@ -36,7 +36,7 @@ public class TGVoipJni {
     private final static String LIB_NAME = "tmessages." + LIB_VERSION;
 
     static {
-    	 System.loadLibrary(LIB_NAME);		
+		System.loadLibrary(LIB_NAME);		
     }
 
 	TGVoipJni(){		
