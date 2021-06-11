@@ -148,7 +148,7 @@ public class FileLoader extends BaseController {
             return;
         }
         if (schedule) {
-            AndroidUtilities.runOnUIThread(() -> setLoadingVideoInternal(document, player));
+            // AndroidUtilities.runOnUIThread(() -> setLoadingVideoInternal(document, player));
         } else {
             setLoadingVideoInternal(document, player);
         }
@@ -177,7 +177,7 @@ public class FileLoader extends BaseController {
             return;
         }
         if (schedule) {
-            AndroidUtilities.runOnUIThread(() -> removeLoadingVideoInternal(document, player));
+            // AndroidUtilities.runOnUIThread(() -> removeLoadingVideoInternal(document, player));
         } else {
             removeLoadingVideoInternal(document, player);
         }
@@ -648,23 +648,23 @@ public class FileLoader extends BaseController {
             type = MEDIA_DIR_IMAGE;
         } else if (document != null) {
             operation = new FileLoadOperation(document, parentObject);
-            if (MessageObject.isVoiceDocument(document)) {
-                type = MEDIA_DIR_AUDIO;
-            } else if (MessageObject.isVideoDocument(document)) {
-                type = MEDIA_DIR_VIDEO;
-            } else {
-                type = MEDIA_DIR_DOCUMENT;
-            }
+            // if (MessageObject.isVoiceDocument(document)) {
+            //     type = MEDIA_DIR_AUDIO;
+            // } else if (MessageObject.isVideoDocument(document)) {
+            //     type = MEDIA_DIR_VIDEO;
+            // } else {
+            //     type = MEDIA_DIR_DOCUMENT;
+            // }
         } else if (webDocument != null) {
             operation = new FileLoadOperation(currentAccount, webDocument);
             if (webDocument.location != null) {
                 type = MEDIA_DIR_CACHE;
-            } else if (MessageObject.isVoiceWebDocument(webDocument)) {
-                type = MEDIA_DIR_AUDIO;
-            } else if (MessageObject.isVideoWebDocument(webDocument)) {
-                type = MEDIA_DIR_VIDEO;
-            } else if (MessageObject.isImageWebDocument(webDocument)) {
-                type = MEDIA_DIR_IMAGE;
+            // } else if (MessageObject.isVoiceWebDocument(webDocument)) {
+            //     type = MEDIA_DIR_AUDIO;
+            // } else if (MessageObject.isVideoWebDocument(webDocument)) {
+            //     type = MEDIA_DIR_VIDEO;
+            // } else if (MessageObject.isImageWebDocument(webDocument)) {
+            //     type = MEDIA_DIR_IMAGE;
             } else {
                 type = MEDIA_DIR_DOCUMENT;
             }
@@ -672,8 +672,8 @@ public class FileLoader extends BaseController {
         int queueType;
         if (type == MEDIA_DIR_AUDIO) {
             queueType = QUEUE_TYPE_AUDIO;
-        } else if (secureDocument != null || location != null && (imageLocation == null || imageLocation.imageType != IMAGE_TYPE_ANIMATION) || MessageObject.isImageWebDocument(webDocument)) {
-            queueType = QUEUE_TYPE_IMAGE;
+        // } else if (secureDocument != null || location != null && (imageLocation == null || imageLocation.imageType != IMAGE_TYPE_ANIMATION) || MessageObject.isImageWebDocument(webDocument)) {
+        //     queueType = QUEUE_TYPE_IMAGE;
         } else {
             queueType = QUEUE_TYPE_FILE;
         }
@@ -868,10 +868,10 @@ public class FileLoader extends BaseController {
             if (message.action.photo != null) {
                 ArrayList<TLRPC.PhotoSize> sizes = message.action.photo.sizes;
                 if (sizes.size() > 0) {
-                    TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
-                    if (sizeFull != null) {
-                        return getAttachFileName(sizeFull);
-                    }
+                    // TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
+                    // if (sizeFull != null) {
+                    //     return getAttachFileName(sizeFull);
+                    // }
                 }
             }
         } else {
@@ -880,10 +880,10 @@ public class FileLoader extends BaseController {
             } else if (message.media instanceof TLRPC.TL_messageMediaPhoto) {
                 ArrayList<TLRPC.PhotoSize> sizes = message.media.photo.sizes;
                 if (sizes.size() > 0) {
-                    TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
-                    if (sizeFull != null) {
-                        return getAttachFileName(sizeFull);
-                    }
+                    // TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
+                    // if (sizeFull != null) {
+                    //     return getAttachFileName(sizeFull);
+                    // }
                 }
             } else if (message.media instanceof TLRPC.TL_messageMediaWebPage) {
                 if (message.media.webpage.document != null) {
@@ -891,10 +891,10 @@ public class FileLoader extends BaseController {
                 } else if (message.media.webpage.photo != null) {
                     ArrayList<TLRPC.PhotoSize> sizes = message.media.webpage.photo.sizes;
                     if (sizes.size() > 0) {
-                        TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
-                        if (sizeFull != null) {
-                            return getAttachFileName(sizeFull);
-                        }
+                        // TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
+                        // if (sizeFull != null) {
+                        //     return getAttachFileName(sizeFull);
+                        // }
                     }
                 }
             } else if (message.media instanceof TLRPC.TL_messageMediaInvoice) {
@@ -915,10 +915,10 @@ public class FileLoader extends BaseController {
             if (message.action.photo != null) {
                 ArrayList<TLRPC.PhotoSize> sizes = message.action.photo.sizes;
                 if (sizes.size() > 0) {
-                    TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
-                    if (sizeFull != null) {
-                        return getPathToAttach(sizeFull);
-                    }
+                    // TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
+                    // if (sizeFull != null) {
+                    //     return getPathToAttach(sizeFull);
+                    // }
                 }
             }
         } else {
@@ -927,10 +927,10 @@ public class FileLoader extends BaseController {
             } else if (message.media instanceof TLRPC.TL_messageMediaPhoto) {
                 ArrayList<TLRPC.PhotoSize> sizes = message.media.photo.sizes;
                 if (sizes.size() > 0) {
-                    TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
-                    if (sizeFull != null) {
-                        return getPathToAttach(sizeFull, message.media.ttl_seconds != 0);
-                    }
+                    // TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
+                    // if (sizeFull != null) {
+                    //     return getPathToAttach(sizeFull, message.media.ttl_seconds != 0);
+                    // }
                 }
             } else if (message.media instanceof TLRPC.TL_messageMediaWebPage) {
                 if (message.media.webpage.document != null) {
@@ -938,10 +938,10 @@ public class FileLoader extends BaseController {
                 } else if (message.media.webpage.photo != null) {
                     ArrayList<TLRPC.PhotoSize> sizes = message.media.webpage.photo.sizes;
                     if (sizes.size() > 0) {
-                        TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
-                        if (sizeFull != null) {
-                            return getPathToAttach(sizeFull);
-                        }
+                        // TLRPC.PhotoSize sizeFull = getClosestPhotoSizeWithSize(sizes, AndroidUtilities.getPhotoSize());
+                        // if (sizeFull != null) {
+                        //     return getPathToAttach(sizeFull);
+                        // }
                     }
                 }
             } else if (message.media instanceof TLRPC.TL_messageMediaInvoice) {
@@ -969,17 +969,17 @@ public class FileLoader extends BaseController {
                 if (document.key != null) {
                     dir = getDirectory(MEDIA_DIR_CACHE);
                 } else {
-                    if (MessageObject.isVoiceDocument(document)) {
-                        dir = getDirectory(MEDIA_DIR_AUDIO);
-                    } else if (MessageObject.isVideoDocument(document)) {
-                        dir = getDirectory(MEDIA_DIR_VIDEO);
-                    } else {
+                    // if (MessageObject.isVoiceDocument(document)) {
+                    //     dir = getDirectory(MEDIA_DIR_AUDIO);
+                    // } else if (MessageObject.isVideoDocument(document)) {
+                    //     dir = getDirectory(MEDIA_DIR_VIDEO);
+                    // } else {
                         dir = getDirectory(MEDIA_DIR_DOCUMENT);
-                    }
+                    // }
                 }
             } else if (attach instanceof TLRPC.Photo) {
-                TLRPC.PhotoSize photoSize = getClosestPhotoSizeWithSize(((TLRPC.Photo) attach).sizes, AndroidUtilities.getPhotoSize());
-                return getPathToAttach(photoSize, ext, false);
+                // TLRPC.PhotoSize photoSize = getClosestPhotoSizeWithSize(((TLRPC.Photo) attach).sizes, AndroidUtilities.getPhotoSize());
+                // return getPathToAttach(photoSize, ext, false);
             } else if (attach instanceof TLRPC.PhotoSize) {
                 TLRPC.PhotoSize photoSize = (TLRPC.PhotoSize) attach;
                 if (photoSize instanceof TLRPC.TL_photoStrippedSize || photoSize instanceof TLRPC.TL_photoPathSize) {

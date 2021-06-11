@@ -43,18 +43,31 @@
     <source-file src="src/android/parler/messenger/voip/NativeInstance.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
 
     <!-- org.parler.messenger -->
+    <source-file src="src/android/parler/messenger/AccountInstance.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/AnimatedFileDrawableStream.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/ApplicationLoader.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/BaseController.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/BuildVars.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/ChatObject.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/DispatchQueue.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/DocumentObject.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/FileLoader.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/FileLoadOperation.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/FileRefController.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/FileUploadOperation.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/FileLoadOperationStream.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/FileLog.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/ImageLocation.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/NativeLoader.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/NotificationCenter.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/SecureDocument.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/Utilities.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/UserConfig.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/Webfile.java" target-dir="app/src/main/java/org/parler/messenger/"/>
 
     <!-- org.parler.tgnet -->
     <source-file src="src/android/parler/tgnet/AbstractSerializedData.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+    <source-file src="src/android/parler/tgnet/ConnectionsManager.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
     <source-file src="src/android/parler/tgnet/NativeByteBuffer.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
     <source-file src="src/android/parler/tgnet/SerializedData.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
     <source-file src="src/android/parler/tgnet/TLObject.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
