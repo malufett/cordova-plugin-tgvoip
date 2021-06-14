@@ -39,7 +39,10 @@
     <source-file src="src/android/parler/messenger/time/SunDate.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
 
     <!-- org.parler.messenger.voip -->
+    <source-file src="src/android/parler/messenger/voip/AudioRecordJNI.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
+    <source-file src="src/android/parler/messenger/voip/AudioTrackJNI.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
     <source-file src="src/android/parler/messenger/voip/Instance.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
+    <source-file src="src/android/parler/messenger/voip/JNIUtilities.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
     <source-file src="src/android/parler/messenger/voip/NativeInstance.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
 
     <!-- org.parler.messenger -->
