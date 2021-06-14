@@ -37,6 +37,8 @@ public class TGVoipJni {
 
     static {
 		System.loadLibrary(LIB_NAME);		
+		ApplicationLoader app = new ApplicationLoader();
+		app.onCreate();
     }
 
 	TGVoipJni(){		

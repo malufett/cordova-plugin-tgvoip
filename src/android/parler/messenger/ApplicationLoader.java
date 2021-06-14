@@ -43,7 +43,7 @@ public class ApplicationLoader extends Application {
         if (applicationContext == null) {
             applicationContext = getApplicationContext();
         }
-        NativeLoader.initNativeLibs(ApplicationLoader.applicationContext);
+        // NativeLoader.initNativeLibs(ApplicationLoader.applicationContext);
     }
     private static void ensureCurrentNetworkGet(boolean force) {
         if (force || currentNetworkInfo == null) {
