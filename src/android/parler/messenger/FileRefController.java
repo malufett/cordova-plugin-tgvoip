@@ -358,7 +358,7 @@ public class FileRefController extends BaseController {
                 getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, true));
             } else if (chat instanceof TLRPC.TL_channel) {
                 TLRPC.TL_channels_getChannels req = new TLRPC.TL_channels_getChannels();
-                req.id.add(MessagesController.getInputChannel(chat));
+                // req.id.add(MessagesController.getInputChannel(chat));
                 getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, true));
             }
         } else if (parentObject instanceof String) {
@@ -660,13 +660,13 @@ public class FileRefController extends BaseController {
                         }
                         if (result != null) {
                             if (cache) {
-                                getMessagesStorage().replaceMessageIfExists(message, res.users, res.chats, false);
+                                // getMessagesStorage().replaceMessageIfExists(message, res.users, res.chats, false);
                             }
                             break;
                         }
                     }
                     if (result == null) {
-                        getMessagesStorage().replaceMessageIfExists(res.messages.get(0), res.users, res.chats,true);
+                        // getMessagesStorage().replaceMessageIfExists(res.messages.get(0), res.users, res.chats,true);
                         if (BuildVars.DEBUG_VERSION) {
                             FileLog.d("file ref not found in messages, replacing message");
                         }
@@ -683,7 +683,7 @@ public class FileRefController extends BaseController {
                     }
                 }
                 if (result != null && cache) {
-                    getMessagesStorage().putWallpapers(accountWallPapers.wallpapers, 1);
+                    // getMessagesStorage().putWallpapers(accountWallPapers.wallpapers, 1);
                 }
             } else if (response instanceof TLRPC.TL_wallPaper) {
                 TLRPC.TL_wallPaper wallPaper = (TLRPC.TL_wallPaper) response;
@@ -691,7 +691,7 @@ public class FileRefController extends BaseController {
                 if (result != null && cache) {
                     ArrayList<TLRPC.WallPaper> wallpapers = new ArrayList<>();
                     wallpapers.add(wallPaper);
-                    getMessagesStorage().putWallpapers(wallpapers, 0);
+                    // getMessagesStorage().putWallpapers(wallpapers, 0);
                 }
             } else if (response instanceof TLRPC.TL_theme) {
                 TLRPC.TL_theme theme = (TLRPC.TL_theme) response;
@@ -710,7 +710,7 @@ public class FileRefController extends BaseController {
                             if (cache && result != null) {
                                 ArrayList<TLRPC.User> arrayList1 = new ArrayList<>();
                                 arrayList1.add(user);
-                                getMessagesStorage().putUsersAndChats(arrayList1, null, true, true);
+                                // getMessagesStorage().putUsersAndChats(arrayList1, null, true, true);
                                 // AndroidUtilities.runOnUIThread(() -> getMessagesController().putUser(user, false));
                             }
                         } else if (object instanceof TLRPC.Chat) {
@@ -719,7 +719,7 @@ public class FileRefController extends BaseController {
                             if (cache && result != null) {
                                 ArrayList<TLRPC.Chat> arrayList1 = new ArrayList<>();
                                 arrayList1.add(chat);
-                                getMessagesStorage().putUsersAndChats(null, arrayList1, true, true);
+                                // getMessagesStorage().putUsersAndChats(null, arrayList1, true, true);
                                 // AndroidUtilities.runOnUIThread(() -> getMessagesController().putChat(chat, false));
                             }
                         }
@@ -738,7 +738,7 @@ public class FileRefController extends BaseController {
                             if (cache) {
                                 ArrayList<TLRPC.Chat> arrayList1 = new ArrayList<>();
                                 arrayList1.add(chat);
-                                getMessagesStorage().putUsersAndChats(null, arrayList1, true, true);
+                                // getMessagesStorage().putUsersAndChats(null, arrayList1, true, true);
                                 // AndroidUtilities.runOnUIThread(() -> getMessagesController().putChat(chat, false));
                             }
                             break;

@@ -575,7 +575,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
         int height = decoderCreated ? (metaData[2] == 90 || metaData[2] == 270 ? metaData[0] : metaData[1]) : 0;
         if (height == 0) {
             // return AndroidUtilities.dp(100);
-            return (int) Math.ceil(density * value);
+            return (int) Math.ceil(1 * 100);
         } else {
             height *= scaleFactor;
         }
@@ -587,7 +587,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
         int width = decoderCreated ? (metaData[2] == 90 || metaData[2] == 270 ? metaData[1] : metaData[0]) : 0;
         if (width == 0) {
             // return AndroidUtilities.dp(100);
-            return (int) Math.ceil(density * value);
+            return (int) Math.ceil(1 * 100);
         } else {
             width *= scaleFactor;
         }
@@ -704,7 +704,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
         int height = decoderCreated ? (metaData[2] == 90 || metaData[2] == 270 ? metaData[0] : metaData[1]) : 0;
         if (height == 0) {
             // return AndroidUtilities.dp(100);
-            return (int) Math.ceil(density * value);
+            return (int) Math.ceil(1 * 100);
         }
         return height;
     }
@@ -714,7 +714,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
         int width = decoderCreated ? (metaData[2] == 90 || metaData[2] == 270 ? metaData[1] : metaData[0]) : 0;
         if (width == 0) {
             // return AndroidUtilities.dp(100);
-            return (int) Math.ceil(density * value);
+            return (int) Math.ceil(1 * 100);
         }
         return width;
     }

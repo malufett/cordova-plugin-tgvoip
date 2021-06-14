@@ -40,9 +40,9 @@ public class BaseController {
     //     return parentAccountInstance.getNotificationsController();
     // }
 
-    protected final NotificationCenter getNotificationCenter() {
-        return parentAccountInstance.getNotificationCenter();
-    }
+    // protected final NotificationCenter getNotificationCenter() {
+    //     return parentAccountInstance.getNotificationCenter();
+    // }
 
     protected final UserConfig getUserConfig() {
         return parentAccountInstance.getUserConfig();

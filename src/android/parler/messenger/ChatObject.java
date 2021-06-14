@@ -59,7 +59,7 @@ public class ChatObject {
         private Runnable typingUpdateRunnable = () -> {
             typingUpdateRunnableScheduled = false;
             checkOnlineParticipants();
-            currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallTypingsUpdated);
+            // currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallTypingsUpdated);
         };
         private boolean typingUpdateRunnableScheduled;
         private int lastLoadGuid;
@@ -122,7 +122,7 @@ public class ChatObject {
                 }
                 if (response != null) {
                     TLRPC.TL_phone_groupParticipants groupParticipants = (TLRPC.TL_phone_groupParticipants) response;
-                    currentAccount.getMessagesController().putUsers(groupParticipants.users, false);
+                    // currentAccount.getMessagesController().putUsers(groupParticipants.users, false);
                     SparseArray<TLRPC.TL_groupCallParticipant> old = null;
                     if (TextUtils.isEmpty(req.offset)) {
                         if (participants.size() != 0) {
@@ -164,7 +164,7 @@ public class ChatObject {
                         call.participants_count = participants.size();
                     }
                     sortParticipants();
-                    currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
+                    // currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
                 }
             }));
         }
@@ -198,7 +198,7 @@ public class ChatObject {
             }
             if (updated) {
                 sortParticipants();
-                currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
+                // currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
             }
         }
 
@@ -216,36 +216,36 @@ public class ChatObject {
             }
             req.offset = "";
             req.limit = 100;
-            currentAccount.getConnectionsManager().sendRequest(req, (response, error) -> AndroidUtilities.runOnUIThread(() -> {
-                if (!loadingGuids.remove(guid)) {
-                    return;
-                }
-                if (response != null) {
-                    TLRPC.TL_phone_groupParticipants groupParticipants = (TLRPC.TL_phone_groupParticipants) response;
-                    currentAccount.getMessagesController().putUsers(groupParticipants.users, false);
-                    for (int a = 0, N = groupParticipants.participants.size(); a < N; a++) {
-                        TLRPC.TL_groupCallParticipant participant = groupParticipants.participants.get(a);
-                        TLRPC.TL_groupCallParticipant oldParticipant = participants.get(participant.user_id);
-                        if (oldParticipant != null) {
-                            sortedParticipants.remove(oldParticipant);
-                            participantsBySources.remove(oldParticipant.source);
-                        }
-                        participants.put(participant.user_id, participant);
-                        sortedParticipants.add(participant);
-                        participantsBySources.put(participant.source, participant);
-                        if (invitedUsersMap.contains(participant.user_id)) {
-                            Integer id = participant.user_id;
-                            invitedUsersMap.remove(id);
-                            invitedUsers.remove(id);
-                        }
-                    }
-                    if (call.participants_count < participants.size()) {
-                        call.participants_count = participants.size();
-                    }
-                    sortParticipants();
-                    currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
-                }
-            }));
+            // currentAccount.getConnectionsManager().sendRequest(req, (response, error) -> AndroidUtilities.runOnUIThread(() -> {
+            //     if (!loadingGuids.remove(guid)) {
+            //         return;
+            //     }
+            //     if (response != null) {
+            //         TLRPC.TL_phone_groupParticipants groupParticipants = (TLRPC.TL_phone_groupParticipants) response;
+            //         // currentAccount.getMessagesController().putUsers(groupParticipants.users, false);
+            //         for (int a = 0, N = groupParticipants.participants.size(); a < N; a++) {
+            //             TLRPC.TL_groupCallParticipant participant = groupParticipants.participants.get(a);
+            //             TLRPC.TL_groupCallParticipant oldParticipant = participants.get(participant.user_id);
+            //             if (oldParticipant != null) {
+            //                 sortedParticipants.remove(oldParticipant);
+            //                 participantsBySources.remove(oldParticipant.source);
+            //             }
+            //             participants.put(participant.user_id, participant);
+            //             sortedParticipants.add(participant);
+            //             participantsBySources.put(participant.source, participant);
+            //             if (invitedUsersMap.contains(participant.user_id)) {
+            //                 Integer id = participant.user_id;
+            //                 invitedUsersMap.remove(id);
+            //                 invitedUsers.remove(id);
+            //             }
+            //         }
+            //         if (call.participants_count < participants.size()) {
+            //             call.participants_count = participants.size();
+            //         }
+            //         sortParticipants();
+            //         // currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
+            //     }
+            // }));
         }
 
         public void processVoiceLevelsUpdate(int[] ssrc, float[] levels, boolean[] voice) {
@@ -283,7 +283,7 @@ public class ChatObject {
             }
             if (updated) {
                 sortParticipants();
-                currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
+                // currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
             }
         }
 
@@ -298,7 +298,7 @@ public class ChatObject {
         }
 
         private void processUpdatesQueue() {
-            Collections.sort(updatesQueue, (updates, updates2) -> AndroidUtilities.compare(updates.version, updates2.version));
+            // Collections.sort(updatesQueue, (updates, updates2) -> AndroidUtilities.compare(updates.version, updates2.version));
             if (updatesQueue != null && !updatesQueue.isEmpty()) {
                 boolean anyProceed = false;
                 for (int a = 0; a < updatesQueue.size(); a++) {
@@ -349,7 +349,7 @@ public class ChatObject {
                 processUpdatesQueue();
             }
             if (!updatesQueue.isEmpty()) {
-                AndroidUtilities.runOnUIThread(checkQueueRunnable = this::checkQueue, 1000);
+                // AndroidUtilities.runOnUIThread(checkQueueRunnable = this::checkQueue, 1000);
             }
         }
 
@@ -373,7 +373,7 @@ public class ChatObject {
                         }
                         updatesQueue.add(update);
                         if (checkQueueRunnable == null) {
-                            AndroidUtilities.runOnUIThread(checkQueueRunnable = this::checkQueue, 1500);
+                            // AndroidUtilities.runOnUIThread(checkQueueRunnable = this::checkQueue, 1500);
                         }
                     } else {
                         nextLoadOffset = null;
@@ -450,7 +450,7 @@ public class ChatObject {
             }
             if (updated) {
                 sortParticipants();
-                currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, selfUpdated);
+                // currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, selfUpdated);
             }
         }
 
@@ -460,7 +460,7 @@ public class ChatObject {
                 loadMembers(true);
             }
             call = update.call;
-            currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
+            // currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
         }
 
         public TLRPC.TL_inputGroupCall getInputGroupCall() {
@@ -683,8 +683,9 @@ public class ChatObject {
     }
 
     public static boolean isMegagroup(int currentAccount, int chatId) {
-        TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(chatId);
-        return ChatObject.isChannel(chat) && chat.megagroup;
+        // TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(chatId);
+        // return ChatObject.isChannel(chat) && chat.megagroup;
+        return false;
     }
 
     public static boolean hasAdminRights(TLRPC.Chat chat) {
@@ -757,13 +758,15 @@ public class ChatObject {
     }
 
     public static boolean isChannel(int chatId, int currentAccount) {
-        TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(chatId);
-        return chat instanceof TLRPC.TL_channel || chat instanceof TLRPC.TL_channelForbidden;
+        // TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(chatId);
+        // return chat instanceof TLRPC.TL_channel || chat instanceof TLRPC.TL_channelForbidden;
+        return false;
     }
 
     public static boolean isCanWriteToChannel(int chatId, int currentAccount) {
-        TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(chatId);
-        return ChatObject.canSendMessages(chat) || chat.megagroup;
+        // TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(chatId);
+        // return ChatObject.canSendMessages(chat) || chat.megagroup;
+        return false;
     }
 
     public static boolean canWriteToChat(TLRPC.Chat chat) {
@@ -792,7 +795,7 @@ public class ChatObject {
         int lower_id = (int) did;
         int high_id = (int) (did >> 32);
         if (lower_id < 0) {
-            return MessagesController.getInstance(currentAccount).getChat(-lower_id);
+            // return MessagesController.getInstance(currentAccount).getChat(-lower_id);
         }
         return null;
     }

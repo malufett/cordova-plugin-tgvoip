@@ -115,7 +115,7 @@ public class SvgHelper {
         private static long lastUpdateTime;
         private static Runnable shiftRunnable;
         private static WeakReference<Drawable> shiftDrawable;
-        private ImageReceiver parentImageReceiver;
+        // private ImageReceiver parentImageReceiver;
         private int currentColor;
         private String currentColorKey;
         private float colorAlpha;
@@ -191,20 +191,20 @@ public class SvgHelper {
                     }
                     shiftDrawable = new WeakReference<>(this);
                     if (shiftRunnable != null) {
-                        AndroidUtilities.cancelRunOnUIThread(shiftRunnable);
+                        // AndroidUtilities.cancelRunOnUIThread(shiftRunnable);
                     }
-                    AndroidUtilities.runOnUIThread(shiftRunnable = () -> shiftRunnable = null, (int) (1000 / AndroidUtilities.screenRefreshRate) - 1);
+                    // AndroidUtilities.runOnUIThread(shiftRunnable = () -> shiftRunnable = null, (int) (1000 / AndroidUtilities.screenRefreshRate) - 1);
                 }
-                if (parentImageReceiver != null) {
-                    parentImageReceiver.getParentPosition(parentPosition);
-                }
+                // if (parentImageReceiver != null) {
+                //     parentImageReceiver.getParentPosition(parentPosition);
+                // }
                 placeholderMatrix.reset();
                 placeholderMatrix.postTranslate(-parentPosition[0] + totalTranslation - bounds.left, 0);
                 placeholderMatrix.postScale(1.0f / scale, 1.0f / scale);
                 placeholderGradient.setLocalMatrix(placeholderMatrix);
-                if (parentImageReceiver != null) {
-                    parentImageReceiver.invalidate();
-                }
+                // if (parentImageReceiver != null) {
+                //     parentImageReceiver.invalidate();
+                // }
             }
         }
 
@@ -232,9 +232,9 @@ public class SvgHelper {
             commands.add(command);
         }
 
-        public void setParent(ImageReceiver imageReceiver) {
-            parentImageReceiver = imageReceiver;
-        }
+        // public void setParent(ImageReceiver imageReceiver) {
+        //     parentImageReceiver = imageReceiver;
+        // }
 
         public void setupGradient(String colorKey, float alpha) {
             // int color = Theme.getColor(colorKey);
@@ -243,8 +243,8 @@ public class SvgHelper {
                 colorAlpha = alpha;
                 currentColorKey = colorKey;
                 currentColor = color;
-                gradientWidth = AndroidUtilities.displaySize.x * 2;
-                float w = AndroidUtilities.dp(180) / gradientWidth;
+                // gradientWidth = AndroidUtilities.displaySize.x * 2;
+                float w = (180) / gradientWidth;
                 color = Color.argb((int) (Color.alpha(color) / 2 * colorAlpha), Color.red(color), Color.green(color), Color.blue(color));
                 float centerX = (1.0f - w) / 2;
                 placeholderGradient = new LinearGradient(0, 0, gradientWidth, 0, new int[]{0x00000000, 0x00000000, color, 0x00000000, 0x00000000}, new float[]{0.0f, centerX - w / 2.0f, centerX, centerX + w / 2.0f, 1.0f}, Shader.TileMode.REPEAT);
