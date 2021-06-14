@@ -46,6 +46,7 @@
     <source-file src="src/android/parler/messenger/voip/NativeInstance.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
     <source-file src="src/android/parler/messenger/voip/Resampler.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
     <source-file src="src/android/parler/messenger/voip/VLog.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
+    <source-file src="src/android/parler/messenger/voip/VOIPServerConfig.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
 
     <!-- org.parler.messenger -->
     <source-file src="src/android/parler/messenger/AccountInstance.java" target-dir="app/src/main/java/org/parler/messenger/"/>
