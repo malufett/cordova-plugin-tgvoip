@@ -1205,35 +1205,35 @@ public class FileLoadOperation {
                     }
                 }
                 if (!ungzip) {
-                    boolean renameResult;
-                    if (parentObject instanceof TLRPC.TL_theme) {
-                        try {
-                            // renameResult = AndroidUtilities.copyFile(cacheFileTemp, cacheFileFinal);
-                        } catch (Exception e) {
-                            renameResult = false;
-                            FileLog.e(e);
-                        }
-                    } else {
-                        renameResult = cacheFileTemp.renameTo(cacheFileFinal);
-                    }
-                    if (!renameResult) {
-                        if (BuildVars.LOGS_ENABLED) {
-                            FileLog.e("unable to rename temp = " + cacheFileTemp + " to final = " + cacheFileFinal + " retry = " + renameRetryCount);
-                        }
-                        renameRetryCount++;
-                        if (renameRetryCount < 3) {
-                            state = stateDownloading;
-                            Utilities.stageQueue.postRunnable(() -> {
-                                try {
-                                    onFinishLoadingFile(increment);
-                                } catch (Exception e) {
-                                    onFail(false, 0);
-                                }
-                            }, 200);
-                            return;
-                        }
-                        cacheFileFinal = cacheFileTemp;
-                    }
+                    // boolean renameResult;
+                    // if (parentObject instanceof TLRPC.TL_theme) {
+                    //     try {
+                    //         // renameResult = AndroidUtilities.copyFile(cacheFileTemp, cacheFileFinal);
+                    //     } catch (Exception e) {
+                    //         renameResult = false;
+                    //         FileLog.e(e);
+                    //     }
+                    // } else {
+                    //     renameResult = cacheFileTemp.renameTo(cacheFileFinal);
+                    // }
+                    // if (!renameResult) {
+                    //     if (BuildVars.LOGS_ENABLED) {
+                    //         FileLog.e("unable to rename temp = " + cacheFileTemp + " to final = " + cacheFileFinal + " retry = " + renameRetryCount);
+                    //     }
+                    //     renameRetryCount++;
+                    //     if (renameRetryCount < 3) {
+                    //         state = stateDownloading;
+                    //         Utilities.stageQueue.postRunnable(() -> {
+                    //             try {
+                    //                 onFinishLoadingFile(increment);
+                    //             } catch (Exception e) {
+                    //                 onFail(false, 0);
+                    //             }
+                    //         }, 200);
+                    //         return;
+                    //     }
+                    //     cacheFileFinal = cacheFileTemp;
+                    // }
                 } else {
                     onFail(false, 0);
                     return;
