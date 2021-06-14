@@ -58,7 +58,7 @@ public class TGVoipJni {
 		final Instance.Config config = new Instance.Config(initializationTimeout, receiveTimeout, voipDataSaving, true/*privateCall.p2p_allowed*/, true, true, true,
 			false, false, logFilePath, statisLogFilePath, 32/*privateCall.protocol.max_layer*/);
 
-		final String persistentStateFilePath = new File(ApplicationLoader.applicationContext.getFilesDir(), "voip_persistent_state.json").getAbsolutePath();
+		final String persistentStateFilePath = ""; //new File(ApplicationLoader.applicationContext.getFilesDir(), "voip_persistent_state.json").getAbsolutePath();
 		final int endpointType = forceTcp ? Instance.ENDPOINT_TYPE_TCP_RELAY : Instance.ENDPOINT_TYPE_UDP_RELAY;
 		final Instance.Endpoint[] endpoints = new Instance.Endpoint[0/*privateCall.connections.size()*/];
 
