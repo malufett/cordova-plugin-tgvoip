@@ -115,58 +115,58 @@ public class ChatObject {
             req.call.access_hash = call.access_hash;
             req.offset = nextLoadOffset != null ? nextLoadOffset : "";
             req.limit = 20;
-            currentAccount.getConnectionsManager().sendRequest(req, (response, error) -> AndroidUtilities.runOnUIThread(() -> {
-                loadingMembers = false;
-                if (fromBegin) {
-                    reloadingMembers = false;
-                }
-                if (response != null) {
-                    TLRPC.TL_phone_groupParticipants groupParticipants = (TLRPC.TL_phone_groupParticipants) response;
-                    // currentAccount.getMessagesController().putUsers(groupParticipants.users, false);
-                    SparseArray<TLRPC.TL_groupCallParticipant> old = null;
-                    if (TextUtils.isEmpty(req.offset)) {
-                        if (participants.size() != 0) {
-                            old = participants;
-                            participants = new SparseArray<>();
-                        } else {
-                            participants.clear();
-                        }
-                        sortedParticipants.clear();
-                        participantsBySources.clear();
-                        loadingGuids.clear();
-                    }
-                    nextLoadOffset = groupParticipants.next_offset;
-                    if (groupParticipants.participants.isEmpty() || TextUtils.isEmpty(nextLoadOffset)) {
-                        membersLoadEndReached = true;
-                    }
-                    if (TextUtils.isEmpty(req.offset)) {
-                        call.version = groupParticipants.version;
-                        call.participants_count = groupParticipants.count;
-                    }
-                    for (int a = 0, N = groupParticipants.participants.size(); a < N; a++) {
-                        TLRPC.TL_groupCallParticipant participant = groupParticipants.participants.get(a);
-                        TLRPC.TL_groupCallParticipant oldParticipant = participants.get(participant.user_id);
-                        if (oldParticipant != null) {
-                            sortedParticipants.remove(oldParticipant);
-                            participantsBySources.remove(oldParticipant.source);
-                            participant.active_date = Math.max(participant.active_date, oldParticipant.active_date);
-                        } else if (old != null) {
-                            oldParticipant = old.get(participant.user_id);
-                            if (oldParticipant != null) {
-                                participant.active_date = Math.max(participant.active_date, oldParticipant.active_date);
-                            }
-                        }
-                        participants.put(participant.user_id, participant);
-                        sortedParticipants.add(participant);
-                        participantsBySources.put(participant.source, participant);
-                    }
-                    if (call.participants_count < participants.size()) {
-                        call.participants_count = participants.size();
-                    }
-                    sortParticipants();
-                    // currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
-                }
-            }));
+            // currentAccount.getConnectionsManager().sendRequest(req, (response, error) -> AndroidUtilities.runOnUIThread(() -> {
+            //     loadingMembers = false;
+            //     if (fromBegin) {
+            //         reloadingMembers = false;
+            //     }
+            //     if (response != null) {
+            //         TLRPC.TL_phone_groupParticipants groupParticipants = (TLRPC.TL_phone_groupParticipants) response;
+            //         // currentAccount.getMessagesController().putUsers(groupParticipants.users, false);
+            //         SparseArray<TLRPC.TL_groupCallParticipant> old = null;
+            //         if (TextUtils.isEmpty(req.offset)) {
+            //             if (participants.size() != 0) {
+            //                 old = participants;
+            //                 participants = new SparseArray<>();
+            //             } else {
+            //                 participants.clear();
+            //             }
+            //             sortedParticipants.clear();
+            //             participantsBySources.clear();
+            //             loadingGuids.clear();
+            //         }
+            //         nextLoadOffset = groupParticipants.next_offset;
+            //         if (groupParticipants.participants.isEmpty() || TextUtils.isEmpty(nextLoadOffset)) {
+            //             membersLoadEndReached = true;
+            //         }
+            //         if (TextUtils.isEmpty(req.offset)) {
+            //             call.version = groupParticipants.version;
+            //             call.participants_count = groupParticipants.count;
+            //         }
+            //         for (int a = 0, N = groupParticipants.participants.size(); a < N; a++) {
+            //             TLRPC.TL_groupCallParticipant participant = groupParticipants.participants.get(a);
+            //             TLRPC.TL_groupCallParticipant oldParticipant = participants.get(participant.user_id);
+            //             if (oldParticipant != null) {
+            //                 sortedParticipants.remove(oldParticipant);
+            //                 participantsBySources.remove(oldParticipant.source);
+            //                 participant.active_date = Math.max(participant.active_date, oldParticipant.active_date);
+            //             } else if (old != null) {
+            //                 oldParticipant = old.get(participant.user_id);
+            //                 if (oldParticipant != null) {
+            //                     participant.active_date = Math.max(participant.active_date, oldParticipant.active_date);
+            //                 }
+            //             }
+            //             participants.put(participant.user_id, participant);
+            //             sortedParticipants.add(participant);
+            //             participantsBySources.put(participant.source, participant);
+            //         }
+            //         if (call.participants_count < participants.size()) {
+            //             call.participants_count = participants.size();
+            //         }
+            //         sortParticipants();
+            //         // currentAccount.getNotificationCenter().postNotificationName(NotificationCenter.groupCallUpdated, chatId, call.id, false);
+            //     }
+            // }));
         }
 
         public void addInvitedUser(int uid) {
@@ -486,7 +486,7 @@ public class ChatObject {
 
         private void checkOnlineParticipants() {
             if (typingUpdateRunnableScheduled) {
-                AndroidUtilities.cancelRunOnUIThread(typingUpdateRunnable);
+                // AndroidUtilities.cancelRunOnUIThread(typingUpdateRunnable);
                 typingUpdateRunnableScheduled = false;
             }
             speakingMembersCount = 0;
@@ -504,7 +504,7 @@ public class ChatObject {
                 }
             }
             if (minDiff != Integer.MAX_VALUE) {
-                AndroidUtilities.runOnUIThread(typingUpdateRunnable, minDiff * 1000);
+                // AndroidUtilities.runOnUIThread(typingUpdateRunnable, minDiff * 1000);
                 typingUpdateRunnableScheduled = true;
             }
         }

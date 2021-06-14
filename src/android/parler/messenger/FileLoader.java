@@ -140,7 +140,7 @@ public class FileLoader extends BaseController {
         String key = getAttachFileName(document);
         String dKey = key + (player ? "p" : "");
         loadingVideos.put(dKey, true);
-        getNotificationCenter().postNotificationName(NotificationCenter.videoLoadingStateChanged, key);
+        // getNotificationCenter().postNotificationName(NotificationCenter.videoLoadingStateChanged, key);
     }
 
     public void setLoadingVideo(TLRPC.Document document, boolean player, boolean schedule) {
@@ -168,7 +168,7 @@ public class FileLoader extends BaseController {
         String key = getAttachFileName(document);
         String dKey = key + (player ? "p" : "");
         if (loadingVideos.remove(dKey) != null) {
-            getNotificationCenter().postNotificationName(NotificationCenter.videoLoadingStateChanged, key);
+            // getNotificationCenter().postNotificationName(NotificationCenter.videoLoadingStateChanged, key);
         }
     }
 
