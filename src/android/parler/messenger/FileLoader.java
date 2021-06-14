@@ -900,7 +900,7 @@ public class FileLoader extends BaseController {
             } else if (message.media instanceof TLRPC.TL_messageMediaInvoice) {
                 TLRPC.WebDocument document = ((TLRPC.TL_messageMediaInvoice) message.media).photo;
                 if (document != null) {
-                    return Utilities.MD5(document.url) + "." + ImageLoader.getHttpUrlExtension(document.url, getMimeTypePart(document.mime_type));
+                    // return Utilities.MD5(document.url) + "." + ImageLoader.getHttpUrlExtension(document.url, getMimeTypePart(document.mime_type));
                 }
             }
         }
@@ -1181,8 +1181,8 @@ public class FileLoader extends BaseController {
             TLRPC.TL_secureFile secureFile = (TLRPC.TL_secureFile) attach;
             return secureFile.dc_id + "_" + secureFile.id + ".jpg";
         } else if (attach instanceof WebFile) {
-            WebFile document = (WebFile) attach;
-            return Utilities.MD5(document.url) + "." + ImageLoader.getHttpUrlExtension(document.url, getMimeTypePart(document.mime_type));
+            // WebFile document = (WebFile) attach;
+            // return Utilities.MD5(document.url) + "." + ImageLoader.getHttpUrlExtension(document.url, getMimeTypePart(document.mime_type));
         } else if (attach instanceof TLRPC.PhotoSize) {
             TLRPC.PhotoSize photo = (TLRPC.PhotoSize) attach;
             if (photo.location == null || photo.location instanceof TLRPC.TL_fileLocationUnavailable) {
@@ -1250,7 +1250,7 @@ public class FileLoader extends BaseController {
                 }
             }
             if (type == 2) {
-                ImageLoader.getInstance().clearMemory();
+                // ImageLoader.getInstance().clearMemory();
             }
         });
     }

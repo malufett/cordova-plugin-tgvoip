@@ -108,16 +108,16 @@ public class FileUploadOperation {
             return;
         }
         state = 1;
-        Utilities.stageQueue.postRunnable(() -> {
-            preferences = ApplicationLoader.applicationContext.getSharedPreferences("uploadinfo", Activity.MODE_PRIVATE);
-            slowNetwork = ApplicationLoader.isConnectionSlow();
-            if (BuildVars.LOGS_ENABLED) {
-                FileLog.d("start upload on slow network = " + slowNetwork);
-            }
-            for (int a = 0, count = (slowNetwork ? initialRequestsSlowNetworkCount : initialRequestsCount); a < count; a++) {
-                startUploadRequest();
-            }
-        });
+        // Utilities.stageQueue.postRunnable(() -> {
+        //     // preferences = ApplicationLoader.applicationContext.getSharedPreferences("uploadinfo", Activity.MODE_PRIVATE);
+        //     // slowNetwork = ApplicationLoader.isConnectionSlow();
+        //     if (BuildVars.LOGS_ENABLED) {
+        //         FileLog.d("start upload on slow network = " + slowNetwork);
+        //     }
+        //     for (int a = 0, count = (slowNetwork ? initialRequestsSlowNetworkCount : initialRequestsCount); a < count; a++) {
+        //         startUploadRequest();
+        //     }
+        // });
     }
 
     protected void onNetworkChanged(final boolean slow) {
@@ -174,7 +174,7 @@ public class FileUploadOperation {
 
     private void cleanup() {
         if (preferences == null) {
-            preferences = ApplicationLoader.applicationContext.getSharedPreferences("uploadinfo", Activity.MODE_PRIVATE);
+            // preferences = ApplicationLoader.applicationContext.getSharedPreferences("uploadinfo", Activity.MODE_PRIVATE);
         }
         preferences.edit().remove(fileKey + "_time").
                 remove(fileKey + "_size").
@@ -250,17 +250,17 @@ public class FileUploadOperation {
             started = true;
             if (stream == null) {
                 File cacheFile = new File(uploadingFilePath);
-                if (AndroidUtilities.isInternalUri(Uri.fromFile(cacheFile))) {
-                    throw new Exception("trying to upload internal file");
-                }
+                // if (AndroidUtilities.isInternalUri(Uri.fromFile(cacheFile))) {
+                //     throw new Exception("trying to upload internal file");
+                // }
                 stream = new RandomAccessFile(cacheFile, "r");
                 boolean isInternalFile = false;
                 try {
                     @SuppressLint("DiscouragedPrivateApi") Method getInt = FileDescriptor.class.getDeclaredMethod("getInt$");
                     int fdint = (Integer) getInt.invoke(stream.getFD());
-                    if (AndroidUtilities.isInternalUri(fdint)) {
-                        isInternalFile = true;
-                    }
+                    // if (AndroidUtilities.isInternalUri(fdint)) {
+                    //     isInternalFile = true;
+                    // }
                 } catch (Throwable e) {
                     FileLog.e(e);
                 }
@@ -517,16 +517,16 @@ public class FileUploadOperation {
             if (currentOperationGuid != operationGuid) {
                 return;
             }
-            int networkType = response != null ? response.networkType : ApplicationLoader.getCurrentNetworkType();
-            if (currentType == ConnectionsManager.FileTypeAudio) {
-                StatsController.getInstance(currentAccount).incrementSentBytesCount(networkType, StatsController.TYPE_AUDIOS, requestSize);
-            } else if (currentType == ConnectionsManager.FileTypeVideo) {
-                StatsController.getInstance(currentAccount).incrementSentBytesCount(networkType, StatsController.TYPE_VIDEOS, requestSize);
-            } else if (currentType == ConnectionsManager.FileTypePhoto) {
-                StatsController.getInstance(currentAccount).incrementSentBytesCount(networkType, StatsController.TYPE_PHOTOS, requestSize);
-            } else if (currentType == ConnectionsManager.FileTypeFile) {
-                StatsController.getInstance(currentAccount).incrementSentBytesCount(networkType, StatsController.TYPE_FILES, requestSize);
-            }
+            // int networkType = response != null ? response.networkType : ApplicationLoader.getCurrentNetworkType();
+            // if (currentType == ConnectionsManager.FileTypeAudio) {
+            //     StatsController.getInstance(currentAccount).incrementSentBytesCount(networkType, StatsController.TYPE_AUDIOS, requestSize);
+            // } else if (currentType == ConnectionsManager.FileTypeVideo) {
+            //     StatsController.getInstance(currentAccount).incrementSentBytesCount(networkType, StatsController.TYPE_VIDEOS, requestSize);
+            // } else if (currentType == ConnectionsManager.FileTypePhoto) {
+            //     StatsController.getInstance(currentAccount).incrementSentBytesCount(networkType, StatsController.TYPE_PHOTOS, requestSize);
+            // } else if (currentType == ConnectionsManager.FileTypeFile) {
+            //     StatsController.getInstance(currentAccount).incrementSentBytesCount(networkType, StatsController.TYPE_FILES, requestSize);
+            // }
             if (currentRequestIv != null) {
                 freeRequestIvs.add(currentRequestIv);
             }
@@ -573,15 +573,15 @@ public class FileUploadOperation {
                         delegate.didFinishUploadingFile(FileUploadOperation.this, null, result, key, iv);
                         cleanup();
                     }
-                    if (currentType == ConnectionsManager.FileTypeAudio) {
-                        StatsController.getInstance(currentAccount).incrementSentItemsCount(ApplicationLoader.getCurrentNetworkType(), StatsController.TYPE_AUDIOS, 1);
-                    } else if (currentType == ConnectionsManager.FileTypeVideo) {
-                        StatsController.getInstance(currentAccount).incrementSentItemsCount(ApplicationLoader.getCurrentNetworkType(), StatsController.TYPE_VIDEOS, 1);
-                    } else if (currentType == ConnectionsManager.FileTypePhoto) {
-                        StatsController.getInstance(currentAccount).incrementSentItemsCount(ApplicationLoader.getCurrentNetworkType(), StatsController.TYPE_PHOTOS, 1);
-                    } else if (currentType == ConnectionsManager.FileTypeFile) {
-                        StatsController.getInstance(currentAccount).incrementSentItemsCount(ApplicationLoader.getCurrentNetworkType(), StatsController.TYPE_FILES, 1);
-                    }
+                    // if (currentType == ConnectionsManager.FileTypeAudio) {
+                    //     StatsController.getInstance(currentAccount).incrementSentItemsCount(ApplicationLoader.getCurrentNetworkType(), StatsController.TYPE_AUDIOS, 1);
+                    // } else if (currentType == ConnectionsManager.FileTypeVideo) {
+                    //     StatsController.getInstance(currentAccount).incrementSentItemsCount(ApplicationLoader.getCurrentNetworkType(), StatsController.TYPE_VIDEOS, 1);
+                    // } else if (currentType == ConnectionsManager.FileTypePhoto) {
+                    //     StatsController.getInstance(currentAccount).incrementSentItemsCount(ApplicationLoader.getCurrentNetworkType(), StatsController.TYPE_PHOTOS, 1);
+                    // } else if (currentType == ConnectionsManager.FileTypeFile) {
+                    //     StatsController.getInstance(currentAccount).incrementSentItemsCount(ApplicationLoader.getCurrentNetworkType(), StatsController.TYPE_FILES, 1);
+                    // }
                 } else if (currentUploadRequetsCount < maxRequestsCount) {
                     if (estimatedSize == 0 && !uploadFirstPartLater && !nextPartFirst) {
                         if (saveInfoTimes >= 4) {

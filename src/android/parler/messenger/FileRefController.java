@@ -68,11 +68,12 @@ public class FileRefController extends BaseController {
     }
 
     public static String getKeyForParentObject(Object parentObject) {
-        if (parentObject instanceof MessageObject) {
-            MessageObject messageObject = (MessageObject) parentObject;
-            int channelId = messageObject.getChannelId();
-            return "message" + messageObject.getRealId() + "_" + channelId + "_" + messageObject.scheduled;
-        } else if (parentObject instanceof TLRPC.Message) {
+        // if (parentObject instanceof MessageObject) {
+        //     MessageObject messageObject = (MessageObject) parentObject;
+        //     int channelId = messageObject.getChannelId();
+        //     return "message" + messageObject.getRealId() + "_" + channelId + "_" + messageObject.scheduled;
+        // } else
+         if (parentObject instanceof TLRPC.Message) {
             TLRPC.Message message = (TLRPC.Message) parentObject;
             int channelId = message.peer_id != null ? message.peer_id.channel_id : 0;
             return "message" + message.id + "_" + channelId + "_" + message.from_scheduled;
@@ -219,12 +220,12 @@ public class FileRefController extends BaseController {
             sendErrorToObject(args, 0);
             return;
         }
-        if (parentObject instanceof MessageObject) {
-            MessageObject messageObject = (MessageObject) parentObject;
-            if (messageObject.getRealId() < 0 && messageObject.messageOwner.media.webpage != null) {
-                parentObject = messageObject.messageOwner.media.webpage;
-            }
-        }
+        // if (parentObject instanceof MessageObject) {
+        //     MessageObject messageObject = (MessageObject) parentObject;
+        //     if (messageObject.getRealId() < 0 && messageObject.messageOwner.media.webpage != null) {
+        //         parentObject = messageObject.messageOwner.media.webpage;
+        //     }
+        // }
         String parentKey = getKeyForParentObject(parentObject);
 
         if (parentKey == null) {
@@ -302,25 +303,26 @@ public class FileRefController extends BaseController {
     }
 
     private void requestReferenceFromServer(Object parentObject, String locationKey, String parentKey, Object[] args) {
-        if (parentObject instanceof MessageObject) {
-            MessageObject messageObject = (MessageObject) parentObject;
-            int channelId = messageObject.getChannelId();
-            if (messageObject.scheduled) {
-                TLRPC.TL_messages_getScheduledMessages req = new TLRPC.TL_messages_getScheduledMessages();
-                req.peer = getMessagesController().getInputPeer((int) messageObject.getDialogId());
-                req.id.add(messageObject.getRealId());
-                getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, true));
-            } else if (channelId != 0) {
-                TLRPC.TL_channels_getMessages req = new TLRPC.TL_channels_getMessages();
-                req.channel = getMessagesController().getInputChannel(channelId);
-                req.id.add(messageObject.getRealId());
-                getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, true));
-            } else {
-                TLRPC.TL_messages_getMessages req = new TLRPC.TL_messages_getMessages();
-                req.id.add(messageObject.getRealId());
-                getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, true));
-            }
-        } else if (parentObject instanceof TLRPC.TL_wallPaper) {
+        // if (parentObject instanceof MessageObject) {
+        //     MessageObject messageObject = (MessageObject) parentObject;
+        //     int channelId = messageObject.getChannelId();
+        //     if (messageObject.scheduled) {
+        //         TLRPC.TL_messages_getScheduledMessages req = new TLRPC.TL_messages_getScheduledMessages();
+        //         req.peer = getMessagesController().getInputPeer((int) messageObject.getDialogId());
+        //         req.id.add(messageObject.getRealId());
+        //         getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, true));
+        //     } else if (channelId != 0) {
+        //         TLRPC.TL_channels_getMessages req = new TLRPC.TL_channels_getMessages();
+        //         req.channel = getMessagesController().getInputChannel(channelId);
+        //         req.id.add(messageObject.getRealId());
+        //         getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, true));
+        //     } else {
+        //         TLRPC.TL_messages_getMessages req = new TLRPC.TL_messages_getMessages();
+        //         req.id.add(messageObject.getRealId());
+        //         getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, true));
+        //     }
+        // } else 
+        if (parentObject instanceof TLRPC.TL_wallPaper) {
             TLRPC.TL_wallPaper wallPaper = (TLRPC.TL_wallPaper) parentObject;
             TLRPC.TL_account_getWallPaper req = new TLRPC.TL_account_getWallPaper();
             TLRPC.TL_inputWallPaper inputWallPaper = new TLRPC.TL_inputWallPaper();
@@ -346,7 +348,7 @@ public class FileRefController extends BaseController {
         } else if (parentObject instanceof TLRPC.User) {
             TLRPC.User user = (TLRPC.User) parentObject;
             TLRPC.TL_users_getUsers req = new TLRPC.TL_users_getUsers();
-            req.id.add(getMessagesController().getInputUser(user));
+            // req.id.add(getMessagesController().getInputUser(user));
             getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, true));
         } else if (parentObject instanceof TLRPC.Chat) {
             TLRPC.Chat chat = (TLRPC.Chat) parentObject;
@@ -392,7 +394,7 @@ public class FileRefController extends BaseController {
                     req.limit = 80;
                     req.offset = 0;
                     req.max_id = 0;
-                    req.user_id = getMessagesController().getInputUser(id);
+                    // req.user_id = getMessagesController().getInputUser(id);
                     getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, true));
                 } else {
                     TLRPC.TL_messages_search req = new TLRPC.TL_messages_search();
@@ -400,7 +402,7 @@ public class FileRefController extends BaseController {
                     req.limit = 80;
                     req.offset_id = 0;
                     req.q = "";
-                    req.peer = getMessagesController().getInputPeer(id);
+                    // req.peer = getMessagesController().getInputPeer(id);
                     getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, true));
                 }
             } else if (string.startsWith("sent_")) {
@@ -409,7 +411,7 @@ public class FileRefController extends BaseController {
                     int channelId = Utilities.parseInt(params[1]);
                     if (channelId != 0) {
                         TLRPC.TL_channels_getMessages req = new TLRPC.TL_channels_getMessages();
-                        req.channel = getMessagesController().getInputChannel(channelId);
+                        // req.channel = getMessagesController().getInputChannel(channelId);
                         req.id.add(Utilities.parseInt(params[2]));
                         getConnectionsManager().sendRequest(req, (response, error) -> onRequestComplete(locationKey, parentKey, response, false));
                     } else {
@@ -752,7 +754,7 @@ public class FileRefController extends BaseController {
                     }
                 }
                 if (cache) {
-                    getMediaDataController().processLoadedRecentDocuments(MediaDataController.TYPE_IMAGE, savedGifs.gifs, true, 0, true);
+                    // getMediaDataController().processLoadedRecentDocuments(MediaDataController.TYPE_IMAGE, savedGifs.gifs, true, 0, true);
                 }
             } else if (response instanceof TLRPC.TL_messages_stickerSet) {
                 TLRPC.TL_messages_stickerSet stickerSet = (TLRPC.TL_messages_stickerSet) response;
@@ -776,7 +778,7 @@ public class FileRefController extends BaseController {
                     }
                 }
                 if (cache) {
-                    getMediaDataController().processLoadedRecentDocuments(MediaDataController.TYPE_IMAGE, recentStickers.stickers, false, 0, true);
+                    // getMediaDataController().processLoadedRecentDocuments(MediaDataController.TYPE_IMAGE, recentStickers.stickers, false, 0, true);
                 }
             } else if (response instanceof TLRPC.TL_messages_favedStickers) {
                 TLRPC.TL_messages_favedStickers favedStickers = (TLRPC.TL_messages_favedStickers) response;
@@ -787,7 +789,7 @@ public class FileRefController extends BaseController {
                     }
                 }
                 if (cache) {
-                    getMediaDataController().processLoadedRecentDocuments(MediaDataController.TYPE_FAVE, favedStickers.stickers, false, 0, true);
+                    // getMediaDataController().processLoadedRecentDocuments(MediaDataController.TYPE_FAVE, favedStickers.stickers, false, 0, true);
                 }
             } else if (response instanceof TLRPC.photos_Photos) {
                 TLRPC.photos_Photos res = (TLRPC.photos_Photos) response;

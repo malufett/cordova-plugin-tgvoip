@@ -215,8 +215,9 @@ public class ConnectionsManager extends BaseController {
         // if (preferences.contains("pushConnection")) {
         //     return preferences.getBoolean("pushConnection", true);
         // } else {
-            return MessagesController.getMainSettings(UserConfig.selectedAccount).getBoolean("backgroundConnection", false);
+            // return MessagesController.getMainSettings(UserConfig.selectedAccount).getBoolean("backgroundConnection", false);
         // }
+        return false;
     }
 
     public long getCurrentTimeMillis() {
@@ -335,8 +336,8 @@ public class ConnectionsManager extends BaseController {
     }
 
     public void checkConnection() {
-        native_setUseIpv6(currentAccount, useIpv6Address());
-        native_setNetworkAvailable(currentAccount, ApplicationLoader.isNetworkOnline(), ApplicationLoader.getCurrentNetworkType(), ApplicationLoader.isConnectionSlow());
+        // native_setUseIpv6(currentAccount, useIpv6Address());
+        // native_setNetworkAvailable(currentAccount, ApplicationLoader.isNetworkOnline(), ApplicationLoader.getCurrentNetworkType(), ApplicationLoader.isConnectionSlow());
     }
 
     public void setPushConnectionEnabled(boolean value) {
@@ -363,7 +364,7 @@ public class ConnectionsManager extends BaseController {
             installer = "";
         }
 
-        native_init(currentAccount, version, layer, apiId, deviceModel, systemVersion, appVersion, langCode, systemLangCode, configPath, logPath, regId, cFingerprint, installer, timezoneOffset, userId, enablePushConnection, ApplicationLoader.isNetworkOnline(), ApplicationLoader.getCurrentNetworkType());
+        // native_init(currentAccount, version, layer, apiId, deviceModel, systemVersion, appVersion, langCode, systemLangCode, configPath, logPath, regId, cFingerprint, installer, timezoneOffset, userId, enablePushConnection, ApplicationLoader.isNetworkOnline(), ApplicationLoader.getCurrentNetworkType());
         checkConnection();
     }
 
@@ -459,7 +460,7 @@ public class ConnectionsManager extends BaseController {
                 FileLog.d("reset app pause time");
             }
             if (lastPauseTime != 0 && System.currentTimeMillis() - lastPauseTime > 5000) {
-                getContactsController().checkContacts();
+                // getContactsController().checkContacts();
             }
             lastPauseTime = 0;
             native_resumeNetwork(currentAccount, false);
@@ -467,25 +468,25 @@ public class ConnectionsManager extends BaseController {
     }
 
     public static void onUnparsedMessageReceived(long address, final int currentAccount) {
-        try {
-            NativeByteBuffer buff = NativeByteBuffer.wrap(address);
-            buff.reused = true;
-            int constructor = buff.readInt32(true);
-            final TLObject message = TLClassStore.Instance().TLdeserialize(buff, constructor, true);
-            if (message instanceof TLRPC.Updates) {
-                if (BuildVars.LOGS_ENABLED) {
-                    FileLog.d("java received " + message);
-                }
-                // KeepAliveJob.finishJob();
-                // Utilities.stageQueue.postRunnable(() -> AccountInstance.getInstance(currentAccount).getMessagesController().processUpdates((TLRPC.Updates) message, false));
-            } else {
-                if (BuildVars.LOGS_ENABLED) {
-                    FileLog.d(String.format("java received unknown constructor 0x%x", constructor));
-                }
-            }
-        } catch (Exception e) {
-            FileLog.e(e);
-        }
+        // try {
+        //     NativeByteBuffer buff = NativeByteBuffer.wrap(address);
+        //     buff.reused = true;
+        //     int constructor = buff.readInt32(true);
+        //     final TLObject message = TLClassStore.Instance().TLdeserialize(buff, constructor, true);
+        //     if (message instanceof TLRPC.Updates) {
+        //         if (BuildVars.LOGS_ENABLED) {
+        //             FileLog.d("java received " + message);
+        //         }
+        //         // KeepAliveJob.finishJob();
+        //         // Utilities.stageQueue.postRunnable(() -> AccountInstance.getInstance(currentAccount).getMessagesController().processUpdates((TLRPC.Updates) message, false));
+        //     } else {
+        //         if (BuildVars.LOGS_ENABLED) {
+        //             FileLog.d(String.format("java received unknown constructor 0x%x", constructor));
+        //         }
+        //     }
+        // } catch (Exception e) {
+        //     FileLog.e(e);
+        // }
     }
 
     public static void onUpdate(final int currentAccount) {
@@ -534,47 +535,47 @@ public class ConnectionsManager extends BaseController {
     }
 
     public static void onRequestNewServerIpAndPort(final int second, final int currentAccount) {
-        Utilities.globalQueue.postRunnable(() -> {
-            boolean networkOnline = ApplicationLoader.isNetworkOnline();
-            Utilities.stageQueue.postRunnable(() -> {
-                if (currentTask != null || second == 0 && Math.abs(lastDnsRequestTime - System.currentTimeMillis()) < 10000 || !networkOnline) {
-                    if (BuildVars.LOGS_ENABLED) {
-                        FileLog.d("don't start task, current task = " + currentTask + " next task = " + second + " time diff = " + Math.abs(lastDnsRequestTime - System.currentTimeMillis()) + " network = " + ApplicationLoader.isNetworkOnline());
-                    }
-                    return;
-                }
-                lastDnsRequestTime = System.currentTimeMillis();
-                if (second == 3) {
-                    if (BuildVars.LOGS_ENABLED) {
-                        FileLog.d("start mozilla txt task");
-                    }
-                    MozillaDnsLoadTask task = new MozillaDnsLoadTask(currentAccount);
-                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
-                    currentTask = task;
-                } else if (second == 2) {
-                    if (BuildVars.LOGS_ENABLED) {
-                        FileLog.d("start google txt task");
-                    }
-                    GoogleDnsLoadTask task = new GoogleDnsLoadTask(currentAccount);
-                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
-                    currentTask = task;
-                } else if (second == 1) {
-                    if (BuildVars.LOGS_ENABLED) {
-                        FileLog.d("start dns txt task");
-                    }
-                    DnsTxtLoadTask task = new DnsTxtLoadTask(currentAccount);
-                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
-                    currentTask = task;
-                } else {
-                    if (BuildVars.LOGS_ENABLED) {
-                        FileLog.d("start firebase task");
-                    }
-                    FirebaseTask task = new FirebaseTask(currentAccount);
-                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
-                    currentTask = task;
-                }
-            });
-        });
+        // Utilities.globalQueue.postRunnable(() -> {
+        //     boolean networkOnline = ApplicationLoader.isNetworkOnline();
+        //     Utilities.stageQueue.postRunnable(() -> {
+        //         if (currentTask != null || second == 0 && Math.abs(lastDnsRequestTime - System.currentTimeMillis()) < 10000 || !networkOnline) {
+        //             if (BuildVars.LOGS_ENABLED) {
+        //                 FileLog.d("don't start task, current task = " + currentTask + " next task = " + second + " time diff = " + Math.abs(lastDnsRequestTime - System.currentTimeMillis()) + " network = " + ApplicationLoader.isNetworkOnline());
+        //             }
+        //             return;
+        //         }
+        //         lastDnsRequestTime = System.currentTimeMillis();
+        //         if (second == 3) {
+        //             if (BuildVars.LOGS_ENABLED) {
+        //                 FileLog.d("start mozilla txt task");
+        //             }
+        //             MozillaDnsLoadTask task = new MozillaDnsLoadTask(currentAccount);
+        //             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
+        //             currentTask = task;
+        //         } else if (second == 2) {
+        //             if (BuildVars.LOGS_ENABLED) {
+        //                 FileLog.d("start google txt task");
+        //             }
+        //             GoogleDnsLoadTask task = new GoogleDnsLoadTask(currentAccount);
+        //             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
+        //             currentTask = task;
+        //         } else if (second == 1) {
+        //             if (BuildVars.LOGS_ENABLED) {
+        //                 FileLog.d("start dns txt task");
+        //             }
+        //             DnsTxtLoadTask task = new DnsTxtLoadTask(currentAccount);
+        //             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
+        //             currentTask = task;
+        //         } else {
+        //             if (BuildVars.LOGS_ENABLED) {
+        //                 FileLog.d("start firebase task");
+        //             }
+        //             FirebaseTask task = new FirebaseTask(currentAccount);
+        //             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
+        //             currentTask = task;
+        //         }
+        //     });
+        // });
     }
 
     public static void onProxyError() {
@@ -894,98 +895,98 @@ public class ConnectionsManager extends BaseController {
             ByteArrayOutputStream outbuf = null;
             InputStream httpConnectionStream = null;
             for (int i = 0; i < 3; i++) {
-                try {
-                    String googleDomain;
-                    if (i == 0) {
-                        googleDomain = "www.google.com";
-                    } else if (i == 1) {
-                        googleDomain = "www.google.ru";
-                    } else {
-                        googleDomain = "google.com";
-                    }
-                    String domain = native_isTestBackend(currentAccount) != 0 ? "tapv3.stel.com" : AccountInstance.getInstance(currentAccount).getMessagesController().dcDomainName;
-                    int len = Utilities.random.nextInt(116) + 13;
-                    final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                // try {
+                //     String googleDomain;
+                //     if (i == 0) {
+                //         googleDomain = "www.google.com";
+                //     } else if (i == 1) {
+                //         googleDomain = "www.google.ru";
+                //     } else {
+                //         googleDomain = "google.com";
+                //     }
+                //     String domain = native_isTestBackend(currentAccount) != 0 ? "tapv3.stel.com" : AccountInstance.getInstance(currentAccount).getMessagesController().dcDomainName;
+                //     int len = Utilities.random.nextInt(116) + 13;
+                //     final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-                    StringBuilder padding = new StringBuilder(len);
-                    for (int a = 0; a < len; a++) {
-                        padding.append(characters.charAt(Utilities.random.nextInt(characters.length())));
-                    }
-                    URL downloadUrl = new URL("https://" + googleDomain + "/resolve?name=" + domain + "&type=ANY&random_padding=" + padding);
-                    URLConnection httpConnection = downloadUrl.openConnection();
-                    httpConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/602.1.38 (KHTML, like Gecko) Version/10.0 Mobile/14A5297c Safari/602.1");
-                    httpConnection.addRequestProperty("Host", "dns.google.com");
-                    httpConnection.setConnectTimeout(5000);
-                    httpConnection.setReadTimeout(5000);
-                    httpConnection.connect();
-                    httpConnectionStream = httpConnection.getInputStream();
-                    responseDate = (int) (httpConnection.getDate() / 1000);
+                //     StringBuilder padding = new StringBuilder(len);
+                //     for (int a = 0; a < len; a++) {
+                //         padding.append(characters.charAt(Utilities.random.nextInt(characters.length())));
+                //     }
+                //     URL downloadUrl = new URL("https://" + googleDomain + "/resolve?name=" + domain + "&type=ANY&random_padding=" + padding);
+                //     URLConnection httpConnection = downloadUrl.openConnection();
+                //     httpConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/602.1.38 (KHTML, like Gecko) Version/10.0 Mobile/14A5297c Safari/602.1");
+                //     httpConnection.addRequestProperty("Host", "dns.google.com");
+                //     httpConnection.setConnectTimeout(5000);
+                //     httpConnection.setReadTimeout(5000);
+                //     httpConnection.connect();
+                //     httpConnectionStream = httpConnection.getInputStream();
+                //     responseDate = (int) (httpConnection.getDate() / 1000);
 
-                    outbuf = new ByteArrayOutputStream();
+                //     outbuf = new ByteArrayOutputStream();
 
-                    byte[] data = new byte[1024 * 32];
-                    while (true) {
-                        if (isCancelled()) {
-                            break;
-                        }
-                        int read = httpConnectionStream.read(data);
-                        if (read > 0) {
-                            outbuf.write(data, 0, read);
-                        } else if (read == -1) {
-                            break;
-                        } else {
-                            break;
-                        }
-                    }
+                //     byte[] data = new byte[1024 * 32];
+                //     while (true) {
+                //         if (isCancelled()) {
+                //             break;
+                //         }
+                //         int read = httpConnectionStream.read(data);
+                //         if (read > 0) {
+                //             outbuf.write(data, 0, read);
+                //         } else if (read == -1) {
+                //             break;
+                //         } else {
+                //             break;
+                //         }
+                //     }
 
-                    JSONObject jsonObject = new JSONObject(new String(outbuf.toByteArray()));
-                    JSONArray array = jsonObject.getJSONArray("Answer");
-                    len = array.length();
-                    ArrayList<String> arrayList = new ArrayList<>(len);
-                    for (int a = 0; a < len; a++) {
-                        JSONObject object = array.getJSONObject(a);
-                        int type = object.getInt("type");
-                        if (type != 16) {
-                            continue;
-                        }
-                        arrayList.add(object.getString("data"));
-                    }
-                    Collections.sort(arrayList, (o1, o2) -> {
-                        int l1 = o1.length();
-                        int l2 = o2.length();
-                        if (l1 > l2) {
-                            return -1;
-                        } else if (l1 < l2) {
-                            return 1;
-                        }
-                        return 0;
-                    });
-                    StringBuilder builder = new StringBuilder();
-                    for (int a = 0; a < arrayList.size(); a++) {
-                        builder.append(arrayList.get(a).replace("\"", ""));
-                    }
-                    byte[] bytes = Base64.decode(builder.toString(), Base64.DEFAULT);
-                    NativeByteBuffer buffer = new NativeByteBuffer(bytes.length);
-                    buffer.writeBytes(bytes);
-                    return buffer;
-                } catch (Throwable e) {
-                    FileLog.e(e);
-                } finally {
-                    try {
-                        if (httpConnectionStream != null) {
-                            httpConnectionStream.close();
-                        }
-                    } catch (Throwable e) {
-                        FileLog.e(e);
-                    }
-                    try {
-                        if (outbuf != null) {
-                            outbuf.close();
-                        }
-                    } catch (Exception ignore) {
+                //     JSONObject jsonObject = new JSONObject(new String(outbuf.toByteArray()));
+                //     JSONArray array = jsonObject.getJSONArray("Answer");
+                //     len = array.length();
+                //     ArrayList<String> arrayList = new ArrayList<>(len);
+                //     for (int a = 0; a < len; a++) {
+                //         JSONObject object = array.getJSONObject(a);
+                //         int type = object.getInt("type");
+                //         if (type != 16) {
+                //             continue;
+                //         }
+                //         arrayList.add(object.getString("data"));
+                //     }
+                //     Collections.sort(arrayList, (o1, o2) -> {
+                //         int l1 = o1.length();
+                //         int l2 = o2.length();
+                //         if (l1 > l2) {
+                //             return -1;
+                //         } else if (l1 < l2) {
+                //             return 1;
+                //         }
+                //         return 0;
+                //     });
+                //     StringBuilder builder = new StringBuilder();
+                //     for (int a = 0; a < arrayList.size(); a++) {
+                //         builder.append(arrayList.get(a).replace("\"", ""));
+                //     }
+                //     byte[] bytes = Base64.decode(builder.toString(), Base64.DEFAULT);
+                //     NativeByteBuffer buffer = new NativeByteBuffer(bytes.length);
+                //     buffer.writeBytes(bytes);
+                //     return buffer;
+                // } catch (Throwable e) {
+                //     FileLog.e(e);
+                // } finally {
+                //     try {
+                //         if (httpConnectionStream != null) {
+                //             httpConnectionStream.close();
+                //         }
+                //     } catch (Throwable e) {
+                //         FileLog.e(e);
+                //     }
+                //     try {
+                //         if (outbuf != null) {
+                //             outbuf.close();
+                //         }
+                //     } catch (Exception ignore) {
 
-                    }
-                }
+                //     }
+                // }
             }
             return null;
         }
@@ -1022,89 +1023,89 @@ public class ConnectionsManager extends BaseController {
         protected NativeByteBuffer doInBackground(Void... voids) {
             ByteArrayOutputStream outbuf = null;
             InputStream httpConnectionStream = null;
-            try {
-                String domain = native_isTestBackend(currentAccount) != 0 ? "tapv3.stel.com" : AccountInstance.getInstance(currentAccount).getMessagesController().dcDomainName;
-                int len = Utilities.random.nextInt(116) + 13;
-                final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            // try {
+            //     String domain = native_isTestBackend(currentAccount) != 0 ? "tapv3.stel.com" : AccountInstance.getInstance(currentAccount).getMessagesController().dcDomainName;
+            //     int len = Utilities.random.nextInt(116) + 13;
+            //     final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-                StringBuilder padding = new StringBuilder(len);
-                for (int a = 0; a < len; a++) {
-                    padding.append(characters.charAt(Utilities.random.nextInt(characters.length())));
-                }
-                URL downloadUrl = new URL("https://dns.google.com/resolve?name=" + domain + "&type=ANY&random_padding=" + padding);
-                URLConnection httpConnection = downloadUrl.openConnection();
-                httpConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/602.1.38 (KHTML, like Gecko) Version/10.0 Mobile/14A5297c Safari/602.1");
-                httpConnection.setConnectTimeout(5000);
-                httpConnection.setReadTimeout(5000);
-                httpConnection.connect();
-                httpConnectionStream = httpConnection.getInputStream();
-                responseDate = (int) (httpConnection.getDate() / 1000);
+            //     StringBuilder padding = new StringBuilder(len);
+            //     for (int a = 0; a < len; a++) {
+            //         padding.append(characters.charAt(Utilities.random.nextInt(characters.length())));
+            //     }
+            //     URL downloadUrl = new URL("https://dns.google.com/resolve?name=" + domain + "&type=ANY&random_padding=" + padding);
+            //     URLConnection httpConnection = downloadUrl.openConnection();
+            //     httpConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/602.1.38 (KHTML, like Gecko) Version/10.0 Mobile/14A5297c Safari/602.1");
+            //     httpConnection.setConnectTimeout(5000);
+            //     httpConnection.setReadTimeout(5000);
+            //     httpConnection.connect();
+            //     httpConnectionStream = httpConnection.getInputStream();
+            //     responseDate = (int) (httpConnection.getDate() / 1000);
 
-                outbuf = new ByteArrayOutputStream();
+            //     outbuf = new ByteArrayOutputStream();
 
-                byte[] data = new byte[1024 * 32];
-                while (true) {
-                    if (isCancelled()) {
-                        break;
-                    }
-                    int read = httpConnectionStream.read(data);
-                    if (read > 0) {
-                        outbuf.write(data, 0, read);
-                    } else if (read == -1) {
-                        break;
-                    } else {
-                        break;
-                    }
-                }
+            //     byte[] data = new byte[1024 * 32];
+            //     while (true) {
+            //         if (isCancelled()) {
+            //             break;
+            //         }
+            //         int read = httpConnectionStream.read(data);
+            //         if (read > 0) {
+            //             outbuf.write(data, 0, read);
+            //         } else if (read == -1) {
+            //             break;
+            //         } else {
+            //             break;
+            //         }
+            //     }
 
-                JSONObject jsonObject = new JSONObject(new String(outbuf.toByteArray()));
-                JSONArray array = jsonObject.getJSONArray("Answer");
-                len = array.length();
-                ArrayList<String> arrayList = new ArrayList<>(len);
-                for (int a = 0; a < len; a++) {
-                    JSONObject object = array.getJSONObject(a);
-                    int type = object.getInt("type");
-                    if (type != 16) {
-                        continue;
-                    }
-                    arrayList.add(object.getString("data"));
-                }
-                Collections.sort(arrayList, (o1, o2) -> {
-                    int l1 = o1.length();
-                    int l2 = o2.length();
-                    if (l1 > l2) {
-                        return -1;
-                    } else if (l1 < l2) {
-                        return 1;
-                    }
-                    return 0;
-                });
-                StringBuilder builder = new StringBuilder();
-                for (int a = 0; a < arrayList.size(); a++) {
-                    builder.append(arrayList.get(a).replace("\"", ""));
-                }
-                byte[] bytes = Base64.decode(builder.toString(), Base64.DEFAULT);
-                NativeByteBuffer buffer = new NativeByteBuffer(bytes.length);
-                buffer.writeBytes(bytes);
-                return buffer;
-            } catch (Throwable e) {
-                FileLog.e(e);
-            } finally {
-                try {
-                    if (httpConnectionStream != null) {
-                        httpConnectionStream.close();
-                    }
-                } catch (Throwable e) {
-                    FileLog.e(e);
-                }
-                try {
-                    if (outbuf != null) {
-                        outbuf.close();
-                    }
-                } catch (Exception ignore) {
+            //     JSONObject jsonObject = new JSONObject(new String(outbuf.toByteArray()));
+            //     JSONArray array = jsonObject.getJSONArray("Answer");
+            //     len = array.length();
+            //     ArrayList<String> arrayList = new ArrayList<>(len);
+            //     for (int a = 0; a < len; a++) {
+            //         JSONObject object = array.getJSONObject(a);
+            //         int type = object.getInt("type");
+            //         if (type != 16) {
+            //             continue;
+            //         }
+            //         arrayList.add(object.getString("data"));
+            //     }
+            //     Collections.sort(arrayList, (o1, o2) -> {
+            //         int l1 = o1.length();
+            //         int l2 = o2.length();
+            //         if (l1 > l2) {
+            //             return -1;
+            //         } else if (l1 < l2) {
+            //             return 1;
+            //         }
+            //         return 0;
+            //     });
+            //     StringBuilder builder = new StringBuilder();
+            //     for (int a = 0; a < arrayList.size(); a++) {
+            //         builder.append(arrayList.get(a).replace("\"", ""));
+            //     }
+            //     byte[] bytes = Base64.decode(builder.toString(), Base64.DEFAULT);
+            //     NativeByteBuffer buffer = new NativeByteBuffer(bytes.length);
+            //     buffer.writeBytes(bytes);
+            //     return buffer;
+            // } catch (Throwable e) {
+            //     FileLog.e(e);
+            // } finally {
+            //     try {
+            //         if (httpConnectionStream != null) {
+            //             httpConnectionStream.close();
+            //         }
+            //     } catch (Throwable e) {
+            //         FileLog.e(e);
+            //     }
+            //     try {
+            //         if (outbuf != null) {
+            //             outbuf.close();
+            //         }
+            //     } catch (Exception ignore) {
 
-                }
-            }
+            //     }
+            // }
             return null;
         }
 
@@ -1140,90 +1141,90 @@ public class ConnectionsManager extends BaseController {
         protected NativeByteBuffer doInBackground(Void... voids) {
             ByteArrayOutputStream outbuf = null;
             InputStream httpConnectionStream = null;
-            try {
-                String domain = native_isTestBackend(currentAccount) != 0 ? "tapv3.stel.com" : AccountInstance.getInstance(currentAccount).getMessagesController().dcDomainName;
-                int len = Utilities.random.nextInt(116) + 13;
-                final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            // try {
+            //     String domain = native_isTestBackend(currentAccount) != 0 ? "tapv3.stel.com" : AccountInstance.getInstance(currentAccount).getMessagesController().dcDomainName;
+            //     int len = Utilities.random.nextInt(116) + 13;
+            //     final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-                StringBuilder padding = new StringBuilder(len);
-                for (int a = 0; a < len; a++) {
-                    padding.append(characters.charAt(Utilities.random.nextInt(characters.length())));
-                }
-                URL downloadUrl = new URL("https://mozilla.cloudflare-dns.com/dns-query?name=" + domain + "&type=TXT&random_padding=" + padding);
-                URLConnection httpConnection = downloadUrl.openConnection();
-                httpConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/602.1.38 (KHTML, like Gecko) Version/10.0 Mobile/14A5297c Safari/602.1");
-                httpConnection.addRequestProperty("accept", "application/dns-json");
-                httpConnection.setConnectTimeout(5000);
-                httpConnection.setReadTimeout(5000);
-                httpConnection.connect();
-                httpConnectionStream = httpConnection.getInputStream();
-                responseDate = (int) (httpConnection.getDate() / 1000);
+            //     StringBuilder padding = new StringBuilder(len);
+            //     for (int a = 0; a < len; a++) {
+            //         padding.append(characters.charAt(Utilities.random.nextInt(characters.length())));
+            //     }
+            //     URL downloadUrl = new URL("https://mozilla.cloudflare-dns.com/dns-query?name=" + domain + "&type=TXT&random_padding=" + padding);
+            //     URLConnection httpConnection = downloadUrl.openConnection();
+            //     httpConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/602.1.38 (KHTML, like Gecko) Version/10.0 Mobile/14A5297c Safari/602.1");
+            //     httpConnection.addRequestProperty("accept", "application/dns-json");
+            //     httpConnection.setConnectTimeout(5000);
+            //     httpConnection.setReadTimeout(5000);
+            //     httpConnection.connect();
+            //     httpConnectionStream = httpConnection.getInputStream();
+            //     responseDate = (int) (httpConnection.getDate() / 1000);
 
-                outbuf = new ByteArrayOutputStream();
+            //     outbuf = new ByteArrayOutputStream();
 
-                byte[] data = new byte[1024 * 32];
-                while (true) {
-                    if (isCancelled()) {
-                        break;
-                    }
-                    int read = httpConnectionStream.read(data);
-                    if (read > 0) {
-                        outbuf.write(data, 0, read);
-                    } else if (read == -1) {
-                        break;
-                    } else {
-                        break;
-                    }
-                }
+            //     byte[] data = new byte[1024 * 32];
+            //     while (true) {
+            //         if (isCancelled()) {
+            //             break;
+            //         }
+            //         int read = httpConnectionStream.read(data);
+            //         if (read > 0) {
+            //             outbuf.write(data, 0, read);
+            //         } else if (read == -1) {
+            //             break;
+            //         } else {
+            //             break;
+            //         }
+            //     }
 
-                JSONObject jsonObject = new JSONObject(new String(outbuf.toByteArray()));
-                JSONArray array = jsonObject.getJSONArray("Answer");
-                len = array.length();
-                ArrayList<String> arrayList = new ArrayList<>(len);
-                for (int a = 0; a < len; a++) {
-                    JSONObject object = array.getJSONObject(a);
-                    int type = object.getInt("type");
-                    if (type != 16) {
-                        continue;
-                    }
-                    arrayList.add(object.getString("data"));
-                }
-                Collections.sort(arrayList, (o1, o2) -> {
-                    int l1 = o1.length();
-                    int l2 = o2.length();
-                    if (l1 > l2) {
-                        return -1;
-                    } else if (l1 < l2) {
-                        return 1;
-                    }
-                    return 0;
-                });
-                StringBuilder builder = new StringBuilder();
-                for (int a = 0; a < arrayList.size(); a++) {
-                    builder.append(arrayList.get(a).replace("\"", ""));
-                }
-                byte[] bytes = Base64.decode(builder.toString(), Base64.DEFAULT);
-                NativeByteBuffer buffer = new NativeByteBuffer(bytes.length);
-                buffer.writeBytes(bytes);
-                return buffer;
-            } catch (Throwable e) {
-                FileLog.e(e);
-            } finally {
-                try {
-                    if (httpConnectionStream != null) {
-                        httpConnectionStream.close();
-                    }
-                } catch (Throwable e) {
-                    FileLog.e(e);
-                }
-                try {
-                    if (outbuf != null) {
-                        outbuf.close();
-                    }
-                } catch (Exception ignore) {
+            //     JSONObject jsonObject = new JSONObject(new String(outbuf.toByteArray()));
+            //     JSONArray array = jsonObject.getJSONArray("Answer");
+            //     len = array.length();
+            //     ArrayList<String> arrayList = new ArrayList<>(len);
+            //     for (int a = 0; a < len; a++) {
+            //         JSONObject object = array.getJSONObject(a);
+            //         int type = object.getInt("type");
+            //         if (type != 16) {
+            //             continue;
+            //         }
+            //         arrayList.add(object.getString("data"));
+            //     }
+            //     Collections.sort(arrayList, (o1, o2) -> {
+            //         int l1 = o1.length();
+            //         int l2 = o2.length();
+            //         if (l1 > l2) {
+            //             return -1;
+            //         } else if (l1 < l2) {
+            //             return 1;
+            //         }
+            //         return 0;
+            //     });
+            //     StringBuilder builder = new StringBuilder();
+            //     for (int a = 0; a < arrayList.size(); a++) {
+            //         builder.append(arrayList.get(a).replace("\"", ""));
+            //     }
+            //     byte[] bytes = Base64.decode(builder.toString(), Base64.DEFAULT);
+            //     NativeByteBuffer buffer = new NativeByteBuffer(bytes.length);
+            //     buffer.writeBytes(bytes);
+            //     return buffer;
+            // } catch (Throwable e) {
+            //     FileLog.e(e);
+            // } finally {
+            //     try {
+            //         if (httpConnectionStream != null) {
+            //             httpConnectionStream.close();
+            //         }
+            //     } catch (Throwable e) {
+            //         FileLog.e(e);
+            //     }
+            //     try {
+            //         if (outbuf != null) {
+            //             outbuf.close();
+            //         }
+            //     } catch (Exception ignore) {
 
-                }
-            }
+            //     }
+            // }
             return null;
         }
 

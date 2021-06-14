@@ -289,7 +289,7 @@ public class NotificationCenter {
     public int setAnimationInProgress(int oldIndex, int[] allowedNotifications, boolean stopHeavyOperations) {
         onAnimationFinish(oldIndex);
         if (heavyOperationsCounter.isEmpty() && stopHeavyOperations) {
-            getGlobalInstance().postNotificationName(stopAllHeavyOperations, 512);
+            // getGlobalInstance().postNotificationName(stopAllHeavyOperations, 512);
         }
 
         animationInProgressCount++;
@@ -352,7 +352,7 @@ public class NotificationCenter {
             if (!heavyOperationsCounter.isEmpty()) {
                 heavyOperationsCounter.remove(index);
                 if (heavyOperationsCounter.isEmpty()) {
-                    NotificationCenter.getGlobalInstance().postNotificationName(startAllHeavyOperations, 512);
+                    // NotificationCenter.getGlobalInstance().postNotificationName(startAllHeavyOperations, 512);
                 }
             }
             if (animationInProgressCount == 0) {
@@ -372,7 +372,7 @@ public class NotificationCenter {
             delayedPosts.clear();
             for (int a = 0; a < delayedPostsTmp.size(); a++) {
                 DelayedPost delayedPost = delayedPostsTmp.get(a);
-                postNotificationNameInternal(delayedPost.id, true, delayedPost.args);
+                // postNotificationNameInternal(delayedPost.id, true, delayedPost.args);
             }
             delayedPostsTmp.clear();
         }
@@ -432,7 +432,7 @@ public class NotificationCenter {
             Integer flags = (Integer) args[0];
             currentHeavyOperationFlags |= flags;
         }
-        postNotificationNameInternal(id, allowDuringAnimation, args);
+        // postNotificationNameInternal(id, allowDuringAnimation, args);
 
         if (expiredIndices != null) {
             for (int i = 0; i < expiredIndices.size(); i++) {
@@ -499,9 +499,9 @@ public class NotificationCenter {
 
     public void addObserver(NotificationCenterDelegate observer, int id) {
         if (BuildVars.DEBUG_VERSION) {
-            if (Thread.currentThread() != ApplicationLoader.applicationHandler.getLooper().getThread()) {
-                throw new RuntimeException("addObserver allowed only from MAIN thread");
-            }
+            // if (Thread.currentThread() != ApplicationLoader.applicationHandler.getLooper().getThread()) {
+            //     throw new RuntimeException("addObserver allowed only from MAIN thread");
+            // }
         }
         if (broadcasting != 0) {
             ArrayList<NotificationCenterDelegate> arrayList = addAfterBroadcast.get(id);
@@ -524,9 +524,9 @@ public class NotificationCenter {
 
     public void removeObserver(NotificationCenterDelegate observer, int id) {
         if (BuildVars.DEBUG_VERSION) {
-            if (Thread.currentThread() != ApplicationLoader.applicationHandler.getLooper().getThread()) {
-                throw new RuntimeException("removeObserver allowed only from MAIN thread");
-            }
+            // if (Thread.currentThread() != ApplicationLoader.applicationHandler.getLooper().getThread()) {
+            //     throw new RuntimeException("removeObserver allowed only from MAIN thread");
+            // }
         }
         if (broadcasting != 0) {
             ArrayList<NotificationCenterDelegate> arrayList = removeAfterBroadcast.get(id);
@@ -549,9 +549,9 @@ public class NotificationCenter {
 
     public void addPostponeNotificationsCallback(PostponeNotificationCallback callback) {
         if (BuildVars.DEBUG_VERSION) {
-            if (Thread.currentThread() != ApplicationLoader.applicationHandler.getLooper().getThread()) {
-                throw new RuntimeException("PostponeNotificationsCallback allowed only from MAIN thread");
-            }
+            // if (Thread.currentThread() != ApplicationLoader.applicationHandler.getLooper().getThread()) {
+            //     throw new RuntimeException("PostponeNotificationsCallback allowed only from MAIN thread");
+            // }
         }
         if (!postponeCallbackList.contains(callback)) {
             postponeCallbackList.add(callback);
@@ -560,9 +560,9 @@ public class NotificationCenter {
 
     public void removePostponeNotificationsCallback(PostponeNotificationCallback callback) {
         if (BuildVars.DEBUG_VERSION) {
-            if (Thread.currentThread() != ApplicationLoader.applicationHandler.getLooper().getThread()) {
-                throw new RuntimeException("removePostponeNotificationsCallback allowed only from MAIN thread");
-            }
+            // if (Thread.currentThread() != ApplicationLoader.applicationHandler.getLooper().getThread()) {
+            //     throw new RuntimeException("removePostponeNotificationsCallback allowed only from MAIN thread");
+            // }
         }
         if (postponeCallbackList.remove(callback)) {
             runDelayedNotifications();

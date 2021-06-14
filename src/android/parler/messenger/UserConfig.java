@@ -207,7 +207,7 @@ public class UserConfig extends BaseController {
                     }
                 }
 
-                SharedConfig.saveConfig();
+                // SharedConfig.saveConfig();
 
                 if (tmpPassword != null) {
                     SerializedData data = new SerializedData();
@@ -358,7 +358,7 @@ public class UserConfig extends BaseController {
                         }
                         if (pendingAppUpdateBuildVersion != BuildVars.BUILD_VERSION || pendingAppUpdateInstallTime < updateTime) {
                             pendingAppUpdate = null;
-                            AndroidUtilities.runOnUIThread(() -> saveConfig(false));
+                            // AndroidUtilities.runOnUIThread(() -> saveConfig(false));
                         }
                     }
                 } catch (Exception e) {
@@ -494,7 +494,7 @@ public class UserConfig extends BaseController {
             }
         }
         if (!hasActivated) {
-            SharedConfig.clearConfig();
+            // SharedConfig.clearConfig();
         }
         saveConfig(true);
     }
