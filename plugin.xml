@@ -61,6 +61,8 @@
     <source-file src="src/android/parler/messenger/NativeLoader.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/NotificationCenter.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/SecureDocument.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/SecureDocumentKey.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <source-file src="src/android/parler/messenger/SvgHelper.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/Utilities.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/UserConfig.java" target-dir="app/src/main/java/org/parler/messenger/"/>
     <source-file src="src/android/parler/messenger/Webfile.java" target-dir="app/src/main/java/org/parler/messenger/"/>
@@ -69,9 +71,14 @@
     <source-file src="src/android/parler/tgnet/AbstractSerializedData.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
     <source-file src="src/android/parler/tgnet/ConnectionsManager.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
     <source-file src="src/android/parler/tgnet/NativeByteBuffer.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+    <source-file src="src/android/parler/tgnet/QuickAckDelegate.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+    <source-file src="src/android/parler/tgnet/RequestDelegate.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+    <source-file src="src/android/parler/tgnet/RequestDelegateInternal.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+    <source-file src="src/android/parler/tgnet/RequestTimeDelegate.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
     <source-file src="src/android/parler/tgnet/SerializedData.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
     <source-file src="src/android/parler/tgnet/TLObject.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
     <source-file src="src/android/parler/tgnet/TLRPC.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+    <source-file src="src/android/parler/tgnet/WriteToSocketDelegate.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
 
     <!-- org.parger.ui.Components-->
     <source-file src="src/android/parler/ui/Components/AnimatedFileDrawable.java" target-dir="app/src/main/java/org/parler/ui/Components/"/>

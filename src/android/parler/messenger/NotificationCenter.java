@@ -8,7 +8,7 @@
 
 package org.parler.messenger;
 
-import androidx.annotation.UiThread;
+// import androidx.annotation.UiThread;
 
 import android.os.SystemClock;
 import android.util.SparseArray;
@@ -250,33 +250,33 @@ public class NotificationCenter {
     private static volatile NotificationCenter[] Instance = new NotificationCenter[UserConfig.MAX_ACCOUNT_COUNT];
     private static volatile NotificationCenter globalInstance;
 
-    @UiThread
-    public static NotificationCenter getInstance(int num) {
-        NotificationCenter localInstance = Instance[num];
-        if (localInstance == null) {
-            synchronized (NotificationCenter.class) {
-                localInstance = Instance[num];
-                if (localInstance == null) {
-                    Instance[num] = localInstance = new NotificationCenter(num);
-                }
-            }
-        }
-        return localInstance;
-    }
+    // @UiThread
+    // public static NotificationCenter getInstance(int num) {
+    //     NotificationCenter localInstance = Instance[num];
+    //     if (localInstance == null) {
+    //         synchronized (NotificationCenter.class) {
+    //             localInstance = Instance[num];
+    //             if (localInstance == null) {
+    //                 Instance[num] = localInstance = new NotificationCenter(num);
+    //             }
+    //         }
+    //     }
+    //     return localInstance;
+    // }
 
-    @UiThread
-    public static NotificationCenter getGlobalInstance() {
-        NotificationCenter localInstance = globalInstance;
-        if (localInstance == null) {
-            synchronized (NotificationCenter.class) {
-                localInstance = globalInstance;
-                if (localInstance == null) {
-                    globalInstance = localInstance = new NotificationCenter(-1);
-                }
-            }
-        }
-        return localInstance;
-    }
+    // @UiThread
+    // public static NotificationCenter getGlobalInstance() {
+    //     NotificationCenter localInstance = globalInstance;
+    //     if (localInstance == null) {
+    //         synchronized (NotificationCenter.class) {
+    //             localInstance = globalInstance;
+    //             if (localInstance == null) {
+    //                 globalInstance = localInstance = new NotificationCenter(-1);
+    //             }
+    //         }
+    //     }
+    //     return localInstance;
+    // }
 
     public NotificationCenter(int account) {
         currentAccount = account;
@@ -302,7 +302,7 @@ public class NotificationCenter {
         notifications.allowedIds = allowedNotifications;
         this.allowedNotifications.put(animationInProgressPointer, notifications);
         if (checkForExpiredNotifications == null) {
-            AndroidUtilities.runOnUIThread(checkForExpiredNotifications = this::checkForExpiredNotifications, 1017);
+            // AndroidUtilities.runOnUIThread(checkForExpiredNotifications = this::checkForExpiredNotifications, 1017);
         }
 
         return animationInProgressPointer;
@@ -334,7 +334,7 @@ public class NotificationCenter {
         }
         if (minTime != Long.MAX_VALUE) {
             long time = 1017 - (currentTime - minTime);
-            AndroidUtilities.runOnUIThread(() -> checkForExpiredNotifications = this::checkForExpiredNotifications, Math.max(17, time));
+            // AndroidUtilities.runOnUIThread(() -> checkForExpiredNotifications = this::checkForExpiredNotifications, Math.max(17, time));
         }
     }
 
@@ -360,7 +360,7 @@ public class NotificationCenter {
             }
         }
         if (checkForExpiredNotifications != null && allowedNotifications.isEmpty()) {
-            AndroidUtilities.cancelRunOnUIThread(checkForExpiredNotifications);
+            // AndroidUtilities.cancelRunOnUIThread(checkForExpiredNotifications);
             checkForExpiredNotifications = null;
         }
     }
@@ -441,61 +441,61 @@ public class NotificationCenter {
         }
     }
 
-    @UiThread
-    public void postNotificationNameInternal(int id, boolean allowDuringAnimation, Object... args) {
-        if (BuildVars.DEBUG_VERSION) {
-            if (Thread.currentThread() != ApplicationLoader.applicationHandler.getLooper().getThread()) {
-                throw new RuntimeException("postNotificationName allowed only from MAIN thread");
-            }
-        }
-        if (!allowDuringAnimation && isAnimationInProgress()) {
-            DelayedPost delayedPost = new DelayedPost(id, args);
-            delayedPosts.add(delayedPost);
-            if (BuildVars.LOGS_ENABLED) {
-                FileLog.e("delay post notification " + id + " with args count = " + args.length);
-            }
-            return;
-        }
-        if (!postponeCallbackList.isEmpty()) {
-            for (int i = 0; i < postponeCallbackList.size(); i++) {
-                if (postponeCallbackList.get(i).needPostpone(id, currentAccount, args)) {
-                    delayedPosts.add(new DelayedPost(id, args));
-                    return;
-                }
-            }
-        }
-        broadcasting++;
-        ArrayList<NotificationCenterDelegate> objects = observers.get(id);
-        if (objects != null && !objects.isEmpty()) {
-            for (int a = 0; a < objects.size(); a++) {
-                NotificationCenterDelegate obj = objects.get(a);
-                obj.didReceivedNotification(id, currentAccount, args);
-            }
-        }
-        broadcasting--;
-        if (broadcasting == 0) {
-            if (removeAfterBroadcast.size() != 0) {
-                for (int a = 0; a < removeAfterBroadcast.size(); a++) {
-                    int key = removeAfterBroadcast.keyAt(a);
-                    ArrayList<NotificationCenterDelegate> arrayList = removeAfterBroadcast.get(key);
-                    for (int b = 0; b < arrayList.size(); b++) {
-                        removeObserver(arrayList.get(b), key);
-                    }
-                }
-                removeAfterBroadcast.clear();
-            }
-            if (addAfterBroadcast.size() != 0) {
-                for (int a = 0; a < addAfterBroadcast.size(); a++) {
-                    int key = addAfterBroadcast.keyAt(a);
-                    ArrayList<NotificationCenterDelegate> arrayList = addAfterBroadcast.get(key);
-                    for (int b = 0; b < arrayList.size(); b++) {
-                        addObserver(arrayList.get(b), key);
-                    }
-                }
-                addAfterBroadcast.clear();
-            }
-        }
-    }
+    // @UiThread
+    // public void postNotificationNameInternal(int id, boolean allowDuringAnimation, Object... args) {
+    //     if (BuildVars.DEBUG_VERSION) {
+    //         if (Thread.currentThread() != ApplicationLoader.applicationHandler.getLooper().getThread()) {
+    //             throw new RuntimeException("postNotificationName allowed only from MAIN thread");
+    //         }
+    //     }
+    //     if (!allowDuringAnimation && isAnimationInProgress()) {
+    //         DelayedPost delayedPost = new DelayedPost(id, args);
+    //         delayedPosts.add(delayedPost);
+    //         if (BuildVars.LOGS_ENABLED) {
+    //             FileLog.e("delay post notification " + id + " with args count = " + args.length);
+    //         }
+    //         return;
+    //     }
+    //     if (!postponeCallbackList.isEmpty()) {
+    //         for (int i = 0; i < postponeCallbackList.size(); i++) {
+    //             if (postponeCallbackList.get(i).needPostpone(id, currentAccount, args)) {
+    //                 delayedPosts.add(new DelayedPost(id, args));
+    //                 return;
+    //             }
+    //         }
+    //     }
+    //     broadcasting++;
+    //     ArrayList<NotificationCenterDelegate> objects = observers.get(id);
+    //     if (objects != null && !objects.isEmpty()) {
+    //         for (int a = 0; a < objects.size(); a++) {
+    //             NotificationCenterDelegate obj = objects.get(a);
+    //             obj.didReceivedNotification(id, currentAccount, args);
+    //         }
+    //     }
+    //     broadcasting--;
+    //     if (broadcasting == 0) {
+    //         if (removeAfterBroadcast.size() != 0) {
+    //             for (int a = 0; a < removeAfterBroadcast.size(); a++) {
+    //                 int key = removeAfterBroadcast.keyAt(a);
+    //                 ArrayList<NotificationCenterDelegate> arrayList = removeAfterBroadcast.get(key);
+    //                 for (int b = 0; b < arrayList.size(); b++) {
+    //                     removeObserver(arrayList.get(b), key);
+    //                 }
+    //             }
+    //             removeAfterBroadcast.clear();
+    //         }
+    //         if (addAfterBroadcast.size() != 0) {
+    //             for (int a = 0; a < addAfterBroadcast.size(); a++) {
+    //                 int key = addAfterBroadcast.keyAt(a);
+    //                 ArrayList<NotificationCenterDelegate> arrayList = addAfterBroadcast.get(key);
+    //                 for (int b = 0; b < arrayList.size(); b++) {
+    //                     addObserver(arrayList.get(b), key);
+    //                 }
+    //             }
+    //             addAfterBroadcast.clear();
+    //         }
+    //     }
+    // }
 
     public void addObserver(NotificationCenterDelegate observer, int id) {
         if (BuildVars.DEBUG_VERSION) {

@@ -16,29 +16,29 @@ public class BaseController {
         return parentAccountInstance;
     }
 
-    protected final MessagesController getMessagesController() {
-        return parentAccountInstance.getMessagesController();
-    }
+    // protected final MessagesController getMessagesController() {
+    //     return parentAccountInstance.getMessagesController();
+    // }
 
-    protected final ContactsController getContactsController() {
-        return parentAccountInstance.getContactsController();
-    }
+    // protected final ContactsController getContactsController() {
+    //     return parentAccountInstance.getContactsController();
+    // }
 
-    protected final MediaDataController getMediaDataController() {
-        return parentAccountInstance.getMediaDataController();
-    }
+    // protected final MediaDataController getMediaDataController() {
+    //     return parentAccountInstance.getMediaDataController();
+    // }
 
     protected final ConnectionsManager getConnectionsManager() {
         return parentAccountInstance.getConnectionsManager();
     }
 
-    protected final LocationController getLocationController() {
-        return parentAccountInstance.getLocationController();
-    }
+    // protected final LocationController getLocationController() {
+    //     return parentAccountInstance.getLocationController();
+    // }
 
-    protected final NotificationsController getNotificationsController() {
-        return parentAccountInstance.getNotificationsController();
-    }
+    // protected final NotificationsController getNotificationsController() {
+    //     return parentAccountInstance.getNotificationsController();
+    // }
 
     protected final NotificationCenter getNotificationCenter() {
         return parentAccountInstance.getNotificationCenter();
@@ -48,25 +48,25 @@ public class BaseController {
         return parentAccountInstance.getUserConfig();
     }
 
-    protected final MessagesStorage getMessagesStorage() {
-        return parentAccountInstance.getMessagesStorage();
-    }
+    // protected final MessagesStorage getMessagesStorage() {
+    //     return parentAccountInstance.getMessagesStorage();
+    // }
 
-    protected final DownloadController getDownloadController() {
-        return parentAccountInstance.getDownloadController();
-    }
+    // protected final DownloadController getDownloadController() {
+    //     return parentAccountInstance.getDownloadController();
+    // }
 
-    protected final SendMessagesHelper getSendMessagesHelper() {
-        return parentAccountInstance.getSendMessagesHelper();
-    }
+    // protected final SendMessagesHelper getSendMessagesHelper() {
+    //     return parentAccountInstance.getSendMessagesHelper();
+    // }
 
-    protected final SecretChatHelper getSecretChatHelper() {
-        return parentAccountInstance.getSecretChatHelper();
-    }
+    // protected final SecretChatHelper getSecretChatHelper() {
+    //     return parentAccountInstance.getSecretChatHelper();
+    // }
 
-    protected final StatsController getStatsController() {
-        return parentAccountInstance.getStatsController();
-    }
+    // protected final StatsController getStatsController() {
+    //     return parentAccountInstance.getStatsController();
+    // }
 
     protected final FileLoader getFileLoader() {
         return parentAccountInstance.getFileLoader();

@@ -10,8 +10,8 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Base64;
 
-import com.google.android.exoplayer2.util.Log;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+// import com.google.android.exoplayer2.util.Log;
+// import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,14 +20,14 @@ import org.parler.messenger.AccountInstance;
 import org.parler.messenger.BaseController;
 import org.parler.messenger.BuildVars;
 import org.parler.messenger.ApplicationLoader;
-import org.parler.messenger.EmuDetector;
+// import org.parler.messenger.EmuDetector;
 import org.parler.messenger.FileLog;
-import org.parler.messenger.KeepAliveJob;
-import org.parler.messenger.LocaleController;
-import org.parler.messenger.MessagesController;
+// import org.parler.messenger.KeepAliveJob;
+// import org.parler.messenger.LocaleController;
+// import org.parler.messenger.MessagesController;
 import org.parler.messenger.NotificationCenter;
-import org.parler.messenger.SharedConfig;
-import org.parler.messenger.StatsController;
+// import org.parler.messenger.SharedConfig;
+// import org.parler.messenger.StatsController;
 import org.parler.messenger.UserConfig;
 import org.parler.messenger.Utilities;
 
@@ -167,8 +167,8 @@ public class ConnectionsManager extends BaseController {
         String configPath = config.toString();
         boolean enablePushConnection = isPushConnectionEnabled();
         try {
-            systemLangCode = LocaleController.getSystemLocaleStringIso639().toLowerCase();
-            langCode = LocaleController.getLocaleStringIso639().toLowerCase();
+            // systemLangCode = LocaleController.getSystemLocaleStringIso639().toLowerCase();
+            // langCode = LocaleController.getLocaleStringIso639().toLowerCase();
             deviceModel = Build.MANUFACTURER + Build.MODEL;
             PackageInfo pInfo = ApplicationLoader.applicationContext.getPackageManager().getPackageInfo(ApplicationLoader.applicationContext.getPackageName(), 0);
             appVersion = pInfo.versionName + " (" + pInfo.versionCode + ")";
@@ -198,10 +198,10 @@ public class ConnectionsManager extends BaseController {
             systemVersion = "SDK Unknown";
         }
         getUserConfig().loadConfig();
-        String pushString = SharedConfig.pushString;
-        if (TextUtils.isEmpty(pushString) && !TextUtils.isEmpty(SharedConfig.pushStringStatus)) {
-            pushString = SharedConfig.pushStringStatus;
-        }
+        // String pushString = SharedConfig.pushString;
+        // if (TextUtils.isEmpty(pushString) && !TextUtils.isEmpty(SharedConfig.pushStringStatus)) {
+        //     pushString = SharedConfig.pushStringStatus;
+        // }
         // String fingerprint = AndroidUtilities.getCertificateSHA256Fingerprint();
         String fingerprint = "";
 
@@ -211,12 +211,12 @@ public class ConnectionsManager extends BaseController {
     }
 
     public boolean isPushConnectionEnabled() {
-        SharedPreferences preferences = MessagesController.getGlobalNotificationsSettings();
-        if (preferences.contains("pushConnection")) {
-            return preferences.getBoolean("pushConnection", true);
-        } else {
+        // SharedPreferences preferences = MessagesController.getGlobalNotificationsSettings();
+        // if (preferences.contains("pushConnection")) {
+        //     return preferences.getBoolean("pushConnection", true);
+        // } else {
             return MessagesController.getMainSettings(UserConfig.selectedAccount).getBoolean("backgroundConnection", false);
-        }
+        // }
     }
 
     public long getCurrentTimeMillis() {
@@ -261,7 +261,7 @@ public class ConnectionsManager extends BaseController {
                 NativeByteBuffer buffer = new NativeByteBuffer(object.getObjectSize());
                 object.serializeToStream(buffer);
                 object.freeResources();
-                Log.d("Requesting", currentAccount + ":" + buffer.address );
+                // Log.d("Requesting", currentAccount + ":" + buffer.address );
                 native_sendRequest(currentAccount, buffer.address, (response, errorCode, errorText, networkType) -> {
                     try {
                         TLObject resp = null;
@@ -392,8 +392,8 @@ public class ConnectionsManager extends BaseController {
     }
 
     public void switchBackend() {
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        preferences.edit().remove("language_showed2").commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // preferences.edit().remove("language_showed2").commit();
         native_switchBackend(currentAccount);
     }
 
@@ -476,8 +476,8 @@ public class ConnectionsManager extends BaseController {
                 if (BuildVars.LOGS_ENABLED) {
                     FileLog.d("java received " + message);
                 }
-                KeepAliveJob.finishJob();
-                Utilities.stageQueue.postRunnable(() -> AccountInstance.getInstance(currentAccount).getMessagesController().processUpdates((TLRPC.Updates) message, false));
+                // KeepAliveJob.finishJob();
+                // Utilities.stageQueue.postRunnable(() -> AccountInstance.getInstance(currentAccount).getMessagesController().processUpdates((TLRPC.Updates) message, false));
             } else {
                 if (BuildVars.LOGS_ENABLED) {
                     FileLog.d(String.format("java received unknown constructor 0x%x", constructor));
@@ -489,11 +489,11 @@ public class ConnectionsManager extends BaseController {
     }
 
     public static void onUpdate(final int currentAccount) {
-        Utilities.stageQueue.postRunnable(() -> AccountInstance.getInstance(currentAccount).getMessagesController().updateTimerProc());
+        // Utilities.stageQueue.postRunnable(() -> AccountInstance.getInstance(currentAccount).getMessagesController().updateTimerProc());
     }
 
     public static void onSessionCreated(final int currentAccount) {
-        Utilities.stageQueue.postRunnable(() -> AccountInstance.getInstance(currentAccount).getMessagesController().getDifference());
+        // Utilities.stageQueue.postRunnable(() -> AccountInstance.getInstance(currentAccount).getMessagesController().getDifference());
     }
 
     public static void onConnectionStateChanged(final int state, final int currentAccount) {
@@ -515,19 +515,19 @@ public class ConnectionsManager extends BaseController {
 
     public static int getInitFlags() {
         int flags = 0;
-        EmuDetector detector = EmuDetector.with(ApplicationLoader.applicationContext);
-        if (detector.detect()) {
-            if (BuildVars.LOGS_ENABLED) {
-                FileLog.d("detected emu");
-            }
-            flags |= 1024;
-        }
+        // EmuDetector detector = EmuDetector.with(ApplicationLoader.applicationContext);
+        // if (detector.detect()) {
+        //     if (BuildVars.LOGS_ENABLED) {
+        //         FileLog.d("detected emu");
+        //     }
+        //     flags |= 1024;
+        // }
         return flags;
     }
 
     public static void onBytesSent(int amount, int networkType, final int currentAccount) {
         try {
-            AccountInstance.getInstance(currentAccount).getStatsController().incrementSentBytesCount(networkType, StatsController.TYPE_TOTAL, amount);
+            // AccountInstance.getInstance(currentAccount).getStatsController().incrementSentBytesCount(networkType, StatsController.TYPE_TOTAL, amount);
         } catch (Exception e) {
             FileLog.e(e);
         }
@@ -606,7 +606,7 @@ public class ConnectionsManager extends BaseController {
 
     public static void onBytesReceived(int amount, int networkType, final int currentAccount) {
         try {
-            StatsController.getInstance(currentAccount).incrementReceivedBytesCount(networkType, StatsController.TYPE_TOTAL, amount);
+            // StatsController.getInstance(currentAccount).incrementReceivedBytesCount(networkType, StatsController.TYPE_TOTAL, amount);
         } catch (Exception e) {
             FileLog.e(e);
         }
@@ -618,7 +618,7 @@ public class ConnectionsManager extends BaseController {
             buff.reused = true;
             final TLRPC.TL_config message = TLRPC.TL_config.TLdeserialize(buff, buff.readInt32(true), true);
             if (message != null) {
-                Utilities.stageQueue.postRunnable(() -> AccountInstance.getInstance(currentAccount).getMessagesController().updateConfig(message));
+                // Utilities.stageQueue.postRunnable(() -> AccountInstance.getInstance(currentAccount).getMessagesController().updateConfig(message));
             }
         } catch (Exception e) {
             FileLog.e(e);
@@ -626,7 +626,7 @@ public class ConnectionsManager extends BaseController {
     }
 
     public static void onInternalPushReceived(final int currentAccount) {
-        KeepAliveJob.startJob();
+        // KeepAliveJob.startJob();
     }
 
     public static void setProxySettings(boolean enabled, String address, int port, String username, String password, String secret) {
@@ -650,7 +650,7 @@ public class ConnectionsManager extends BaseController {
             }
             AccountInstance accountInstance = AccountInstance.getInstance(a);
             if (accountInstance.getUserConfig().isClientActivated()) {
-                accountInstance.getMessagesController().checkPromoInfo(true);
+                // accountInstance.getMessagesController().checkPromoInfo(true);
             }
         }
     }
@@ -1245,7 +1245,7 @@ public class ConnectionsManager extends BaseController {
     private static class FirebaseTask extends AsyncTask<Void, Void, NativeByteBuffer> {
 
         private int currentAccount;
-        private FirebaseRemoteConfig firebaseRemoteConfig;
+        // private FirebaseRemoteConfig firebaseRemoteConfig;
 
         public FirebaseTask(int instance) {
             super();
@@ -1253,58 +1253,58 @@ public class ConnectionsManager extends BaseController {
         }
 
         protected NativeByteBuffer doInBackground(Void... voids) {
-            try {
-                if (native_isTestBackend(currentAccount) != 0) {
-                    throw new Exception("test backend");
-                }
-                firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-                String currentValue = firebaseRemoteConfig.getString("ipconfigv3");
-                if (BuildVars.LOGS_ENABLED) {
-                    FileLog.d("current firebase value = " + currentValue);
-                }
+            // try {
+            //     if (native_isTestBackend(currentAccount) != 0) {
+            //         throw new Exception("test backend");
+            //     }
+            //     firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+            //     String currentValue = firebaseRemoteConfig.getString("ipconfigv3");
+            //     if (BuildVars.LOGS_ENABLED) {
+            //         FileLog.d("current firebase value = " + currentValue);
+            //     }
 
-                firebaseRemoteConfig.fetch(0).addOnCompleteListener(finishedTask -> {
-                    final boolean success = finishedTask.isSuccessful();
-                    Utilities.stageQueue.postRunnable(() -> {
-                        if (success) {
-                            firebaseRemoteConfig.activate().addOnCompleteListener(finishedTask2 -> {
-                                currentTask = null;
-                                String config = firebaseRemoteConfig.getString("ipconfigv3");
-                                if (!TextUtils.isEmpty(config)) {
-                                    byte[] bytes = Base64.decode(config, Base64.DEFAULT);
-                                    try {
-                                        NativeByteBuffer buffer = new NativeByteBuffer(bytes.length);
-                                        buffer.writeBytes(bytes);
-                                        int date = (int) (firebaseRemoteConfig.getInfo().getFetchTimeMillis() / 1000);
-                                        native_applyDnsConfig(currentAccount, buffer.address, AccountInstance.getInstance(currentAccount).getUserConfig().getClientPhone(), date);
-                                    } catch (Exception e) {
-                                        FileLog.e(e);
-                                    }
-                                } else {
-                                    if (BuildVars.LOGS_ENABLED) {
-                                        FileLog.d("failed to get firebase result");
-                                        FileLog.d("start dns txt task");
-                                    }
-                                    DnsTxtLoadTask task = new DnsTxtLoadTask(currentAccount);
-                                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
-                                    currentTask = task;
-                                }
-                            });
-                        }
-                    });
-                });
-            } catch (Throwable e) {
-                Utilities.stageQueue.postRunnable(() -> {
-                    if (BuildVars.LOGS_ENABLED) {
-                        FileLog.d("failed to get firebase result");
-                        FileLog.d("start dns txt task");
-                    }
-                    DnsTxtLoadTask task = new DnsTxtLoadTask(currentAccount);
-                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
-                    currentTask = task;
-                });
-                FileLog.e(e);
-            }
+            //     firebaseRemoteConfig.fetch(0).addOnCompleteListener(finishedTask -> {
+            //         final boolean success = finishedTask.isSuccessful();
+            //         Utilities.stageQueue.postRunnable(() -> {
+            //             if (success) {
+            //                 firebaseRemoteConfig.activate().addOnCompleteListener(finishedTask2 -> {
+            //                     currentTask = null;
+            //                     String config = firebaseRemoteConfig.getString("ipconfigv3");
+            //                     if (!TextUtils.isEmpty(config)) {
+            //                         byte[] bytes = Base64.decode(config, Base64.DEFAULT);
+            //                         try {
+            //                             NativeByteBuffer buffer = new NativeByteBuffer(bytes.length);
+            //                             buffer.writeBytes(bytes);
+            //                             int date = (int) (firebaseRemoteConfig.getInfo().getFetchTimeMillis() / 1000);
+            //                             native_applyDnsConfig(currentAccount, buffer.address, AccountInstance.getInstance(currentAccount).getUserConfig().getClientPhone(), date);
+            //                         } catch (Exception e) {
+            //                             FileLog.e(e);
+            //                         }
+            //                     } else {
+            //                         if (BuildVars.LOGS_ENABLED) {
+            //                             FileLog.d("failed to get firebase result");
+            //                             FileLog.d("start dns txt task");
+            //                         }
+            //                         DnsTxtLoadTask task = new DnsTxtLoadTask(currentAccount);
+            //                         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
+            //                         currentTask = task;
+            //                     }
+            //                 });
+            //             }
+            //         });
+            //     });
+            // } catch (Throwable e) {
+            //     Utilities.stageQueue.postRunnable(() -> {
+            //         if (BuildVars.LOGS_ENABLED) {
+            //             FileLog.d("failed to get firebase result");
+            //             FileLog.d("start dns txt task");
+            //         }
+            //         DnsTxtLoadTask task = new DnsTxtLoadTask(currentAccount);
+            //         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
+            //         currentTask = task;
+            //     });
+            //     FileLog.e(e);
+            // }
             return null;
         }
 
