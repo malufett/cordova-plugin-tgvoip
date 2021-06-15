@@ -37,13 +37,15 @@ public class TGVoipJni {
 
     static {
 		System.loadLibrary(LIB_NAME);		
-		ApplicationLoader app = new ApplicationLoader();
-		app.onCreate();
     }
 
 	TGVoipJni(){		
         localSink = new ProxyVideoSink();
 		remoteSink = new ProxyVideoSink();
+	}
+
+	public void createCall(TLRPC.PhoneCall phoneCall){
+		privateCall = phoneCall;
 	}
 
 	public void initiateActualEncryptedCall(){
