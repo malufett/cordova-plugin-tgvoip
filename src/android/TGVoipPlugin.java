@@ -3,10 +3,11 @@ package org.parler;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.parler.tgnet.TLRPC;
+import org.json.JSONArray;
+import java.util.ArrayList;
+import org.json.JSONObject;
 
 import android.util.Log;
 
@@ -55,7 +56,7 @@ public class TGVoipPlugin extends CordovaPlugin {
 
                 temp.key_fingerprint = phoneCall.getLong("key_fingerprint");
 
-                JSONObject tempProtocol = phoneCall.getObject("protocol");
+                JSONObject tempProtocol = phoneCall.getJSONObject("protocol");
                 temp.protocol = new TLRPC.TL_phoneCallProtocol();
 
                 temp.protocol.flags = tempProtocol.getInt("flags");
