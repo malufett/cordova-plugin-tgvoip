@@ -35,7 +35,7 @@ public class TGVoipPlugin extends CordovaPlugin {
             }
             PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
             callbackContext.sendPluginResult(pluginResult);
-        } else if(action.equals('createCall')) {
+        } else if(action.equals("createCall")) {
             try {
                 JSONObject phoneCall = args.getJSONObject(0);
                 TLRPC.TL_phoneCall temp = new TLRPC.TL_phoneCall();
@@ -95,7 +95,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                     result.id = conn.getLong("id");
                     result.ip = conn.getString("ip");
                     result.ipv6 = conn.getString("ipv6");
-                    result.port = conn.getInt("port")
+                    result.port = conn.getInt("port");
                     temp.connections.add(result);
                 }
 
