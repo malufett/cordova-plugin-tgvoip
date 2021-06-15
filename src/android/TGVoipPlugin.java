@@ -42,7 +42,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 TLRPC.TL_phoneCall temp = new TLRPC.TL_phoneCall();
 
                 temp.flags = phoneCall.getInt("flags");
-                temp.p2p_allowed = phoneCall.getBoolean("p2p_allowed");
+                temp.p2p_allowed = (temp.flags & 32) != 0;
                 temp.id = phoneCall.getLong("id");
                 temp.access_hash = phoneCall.getLong("access_hash");
                 temp.date = phoneCall.getInt("date");
