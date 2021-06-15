@@ -82,8 +82,8 @@ public class TGVoipPlugin extends CordovaPlugin {
                         result = new TLRPC.TL_phoneConnection();
                             JSONArray perrArr = conn.getJSONArray("peer_tag");
                             result.peer_tag =  new byte[perrArr.length()];
-                            for(int i = 0; i < perrArr.length(); i++) 
-                                result.peer_tag[i] = (byte)perrArr.getInt(i);                              
+                            for(int x = 0; x < perrArr.length(); x++) 
+                                result.peer_tag[x] = (byte)perrArr.getInt(x);                              
                     } else {
                         result = new TLRPC.TL_phoneConnectionWebrtc();
                             result.flags = conn.getInt("flags");
