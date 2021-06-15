@@ -13,7 +13,7 @@ import android.util.Log;
 
 public class TGVoipPlugin extends CordovaPlugin {
     protected static final String TAG = "TGVoipPlugin";
-    protected final TGVoipJni jni;
+    protected TGVoipJni jni;
 
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) {
