@@ -39,7 +39,6 @@ public class TGVoipJni {
     protected TLRPC.PhoneCall privateCall;	
 	private byte[] g_a;
 	private byte[] a_or_b;
-	private byte[] g_a_hash;
 	private byte[] authKey;
 	private long keyFingerprint;
 	private byte[] secretPBytes = new byte[]{ 
@@ -61,7 +60,7 @@ public class TGVoipJni {
 		remoteSink = new ProxyVideoSink();
 	}
 
-	public void createCall(TLRPC.PhoneCall phoneCall, boolean isOutgoing) throws Exception{
+	public void createCall(TLRPC.PhoneCall phoneCall, byte[] g_a_hash, boolean isOutgoing) throws Exception{
 		if (phoneCall.g_a_or_b == null) {
 			callFailed(tgVoip != null ? tgVoip.getLastError() : "Invalid g_a_or_b");
 			return;

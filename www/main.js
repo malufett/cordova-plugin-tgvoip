@@ -1,8 +1,8 @@
 /*global cordova, module*/
 
 module.exports = {
-    createCall: function (params, isOutgoing, successCallback, errorCallback) {
+    createCall: function (params, GA, isOutgoing, successCallback, errorCallback) {
         console.log('executed createCall!');
-        cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "createCall", [params, isOutgoing]);
+        cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "createCall", [params, GA, isOutgoing]);
     },
 };

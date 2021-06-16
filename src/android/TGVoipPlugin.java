@@ -23,8 +23,14 @@ public class TGVoipPlugin extends CordovaPlugin {
         if(action.equals("createCall")) {
             try {
                 JSONObject phoneCall = args.getJSONObject(0);
-                boolean isOutgoing = args.getBoolean(1);
+                JSONArray GAHASH = args.getJSONArray(1);
+                boolean isOutgoing = args.getBoolean(2);
                 TLRPC.TL_phoneCall temp = new TLRPC.TL_phoneCall();
+                byte[] g_a_hash = new byte[GAHASH.length()];
+
+                for(int i = 0; i < GAHASH.length(); i ++){
+                    g_a_hash[i] = (byte) GAHASH.getInt(i);
+                }
 
                 temp.flags = phoneCall.getInt("flags");
                 temp.p2p_allowed = (temp.flags & 32) != 0;                
@@ -120,7 +126,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 // temp.receive_date = phoneCall.getInt("receive_date");
 
                 jni = new TGVoipJni();
-                jni.createCall(temp, isOutgoing);
+                jni.createCall(temp, g_a_hash, isOutgoing);
 
                 callbackContext.success();
             } catch(Exception e) {                        
