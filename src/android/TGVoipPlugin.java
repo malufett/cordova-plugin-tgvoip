@@ -21,31 +21,43 @@ public class TGVoipPlugin extends CordovaPlugin {
         Log.d(TAG, "execute action:" + action);
 
         if (action.equals("generateG_A")) {
-            JSONArray jRandom = args.getJSONArray(0);
-            byte[] random = new byte[jRandom.length()];
+            try{
+                JSONArray jRandom = args.getJSONArray(0);
+                byte[] random = new byte[jRandom.length()];
 
-            for(int i = 0; i < jRandom.length(); i++)
-                random[i] = (byte) jRandom.getInt(i);
-            byte[] ga = TGVoipJni.generateG_A(random);
+                for(int i = 0; i < jRandom.length(); i++)
+                    random[i] = (byte) jRandom.getInt(i);
+                byte[] ga = TGVoipJni.generateG_A(random);
 
-            JSONArray retval = new JSONArray();
-            for(int i = 0; i < ga.length; i++)
-                retval.put((int)ga[i]&0xFF);
+                JSONArray retval = new JSONArray();
+                for(int i = 0; i < ga.length; i++)
+                    retval.put((int)ga[i]&0xFF);
 
-            callbackContext.success(retval);
+                callbackContext.success(retval);
+            } catch(Exception e) {
+                Log.e(TAG, "exeption:" + e.getMessage());
+                callbackContext.error("Error encountered: " + e.getMessage());
+                return false;
+            }
         } else if(action.equals("generateG_B")) {
-            JSONArray jRandom = args.getJSONArray(0);
-            byte[] random = new byte[jRandom.length()];
+            try {
+                JSONArray jRandom = args.getJSONArray(0);
+                byte[] random = new byte[jRandom.length()];
 
-            for(int i = 0; i < jRandom.length(); i++)
-                random[i] = (byte) jRandom.getInt(i);
-            byte[] gb = TGVoipJni.generateG_B(random);
+                for(int i = 0; i < jRandom.length(); i++)
+                    random[i] = (byte) jRandom.getInt(i);
+                byte[] gb = TGVoipJni.generateG_B(random);
 
-            JSONArray retval = new JSONArray();
-            for(int i = 0; i < gb.length; i++)
-                retval.put((int)gb[i]&0xFF);
-                
-            callbackContext.success(retval);
+                JSONArray retval = new JSONArray();
+                for(int i = 0; i < gb.length; i++)
+                    retval.put((int)gb[i]&0xFF);
+                    
+                callbackContext.success(retval);
+            } catch(Exception e) {
+                Log.e(TAG, "exeption:" + e.getMessage());
+                callbackContext.error("Error encountered: " + e.getMessage());
+                return false;
+            }
         } else if(action.equals("createCall")) {
             try {
                 JSONObject phoneCall = args.getJSONObject(0);
@@ -156,9 +168,9 @@ public class TGVoipPlugin extends CordovaPlugin {
 
                 callbackContext.success();
             } catch(Exception e) {                        
-                    Log.e(TAG, "exeption:" + e.getMessage());
-                    callbackContext.error("Error encountered: " + e.getMessage());
-                    return false;
+                Log.e(TAG, "exeption:" + e.getMessage());
+                callbackContext.error("Error encountered: " + e.getMessage());
+                return false;
             }
             PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
             callbackContext.sendPluginResult(pluginResult);
