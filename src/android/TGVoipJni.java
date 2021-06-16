@@ -61,7 +61,7 @@ public class TGVoipJni {
 		remoteSink = new ProxyVideoSink();
 	}
 
-	public void createCall(TLRPC.PhoneCall phoneCall, boolean isOutgoing){
+	public void createCall(TLRPC.PhoneCall phoneCall, boolean isOutgoing) throws Exception{
 		if (phoneCall.g_a_or_b == null) {
 			callFailed(tgVoip != null ? tgVoip.getLastError() : Instance.ERROR_UNKNOWN);
 			return;
@@ -111,7 +111,7 @@ public class TGVoipJni {
 		return privateCall != null ? privateCall.id : 0;
 	}
 
-	protected void callFailed(String error) {		
+	protected void callFailed(String error) throws Exception {		
 		throw new Exception("Call " + getCallID() + " failed with error: " + error);
 	}
 
