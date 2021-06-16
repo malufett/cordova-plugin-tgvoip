@@ -2,7 +2,12 @@
 
 module.exports = {
     createCall: function (params, GA, isOutgoing, successCallback, errorCallback) {
-        console.log('executed createCall!');
         cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "createCall", [params, GA, isOutgoing]);
     },
+    generateGA: function (random, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "generateG_A", [random]);
+    },
+    generateGB: function (random, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "generateG_B", [random]);
+    }
 };
