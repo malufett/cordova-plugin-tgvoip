@@ -47,8 +47,8 @@ public class TGVoipPlugin extends CordovaPlugin {
                 temp.protocol.flags = tempProtocol.getInt("flags");
                 temp.protocol.udp_p2p =  (temp.protocol.flags & 1) != 0;
                 temp.protocol.udp_reflector = (temp.protocol.flags & 2) != 0;
-                temp.protocol.min_layer = tempProtocol.getInt("udp_reflector");
-                temp.protocol.max_layer = tempProtocol.getInt("udp_reflector");
+                temp.protocol.min_layer = tempProtocol.getInt("min_layer");
+                temp.protocol.max_layer = tempProtocol.getInt("max_layer");
 
                 JSONArray library_versionsArr = tempProtocol.getJSONArray("library_versions");
                 temp.protocol.library_versions = new ArrayList<>();
