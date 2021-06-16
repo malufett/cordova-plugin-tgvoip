@@ -63,11 +63,11 @@ public class TGVoipJni {
 
 	public void createCall(TLRPC.PhoneCall phoneCall, boolean isOutgoing) throws Exception{
 		if (phoneCall.g_a_or_b == null) {
-			callFailed(tgVoip != null ? tgVoip.getLastError() : Instance.ERROR_UNKNOWN);
+			callFailed(tgVoip != null ? tgVoip.getLastError() : "Invalid g_a_or_b");
 			return;
 		}
 		if (!Arrays.equals(g_a_hash, Utilities.computeSHA256(phoneCall.g_a_or_b, 0, phoneCall.g_a_or_b.length))) {
-			callFailed(tgVoip != null ? tgVoip.getLastError() : Instance.ERROR_UNKNOWN);
+			callFailed(tgVoip != null ? tgVoip.getLastError() : "Invalid GA hash");
 			return;
 		}
 		g_a = phoneCall.g_a_or_b;
@@ -75,7 +75,7 @@ public class TGVoipJni {
 		BigInteger p = new BigInteger(1, secretPBytes);
 
 		if (!Utilities.isGoodGaAndGb(g_a, p)) {
-			callFailed(tgVoip != null ? tgVoip.getLastError() : Instance.ERROR_UNKNOWN);
+			callFailed(tgVoip != null ? tgVoip.getLastError() : "Bad GA");
 			return;
 		}
 		g_a = g_a.modPow(new BigInteger(1, a_or_b), p);
@@ -99,7 +99,7 @@ public class TGVoipJni {
 		keyFingerprint = Utilities.bytesToLong(authKeyId);
 
 		if (keyFingerprint != phoneCall.key_fingerprint) {
-			callFailed(tgVoip != null ? tgVoip.getLastError() : Instance.ERROR_UNKNOWN);
+			callFailed(tgVoip != null ? tgVoip.getLastError() : "Fingerprint mismatch");
 			return;
 		}
 
