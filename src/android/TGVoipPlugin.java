@@ -55,7 +55,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 for(int i = 0; i < library_versionsArr.length(); i++)
                     temp.protocol.library_versions.add(library_versionsArr.getString(i));
                 
-                JSONArray connectionsArr = tempProtocol.getJSONArray("connections");
+                JSONArray connectionsArr = phoneCall.getJSONArray("connections");
                 temp.connections = new ArrayList<>();
                 for(int i = 0; i < connectionsArr.length(); i++){
                     JSONObject conn = connectionsArr.getJSONObject(i);
