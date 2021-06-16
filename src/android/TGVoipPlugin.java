@@ -27,7 +27,8 @@ public class TGVoipPlugin extends CordovaPlugin {
                 TLRPC.TL_phoneCall temp = new TLRPC.TL_phoneCall();
 
                 temp.flags = phoneCall.getInt("flags");
-                temp.p2p_allowed = (temp.flags & 32) != 0;
+                temp.p2p_allowed = (temp.flags & 32) != 0;                
+                temp.video = (temp.flags & 64) != 0;  
                 temp.id = phoneCall.getLong("id");
                 temp.access_hash = phoneCall.getLong("access_hash");
                 temp.date = phoneCall.getInt("date");
@@ -85,9 +86,8 @@ public class TGVoipPlugin extends CordovaPlugin {
                 }
 
                 temp.start_date = phoneCall.getInt("start_date");
-                temp.need_rating = phoneCall.getBoolean("need_rating");
-                temp.need_debug = phoneCall.getBoolean("need_debug");
-                temp.video = phoneCall.getBoolean("video");
+                // temp.need_rating = phoneCall.getBoolean("need_rating");
+                // temp.need_debug = phoneCall.getBoolean("need_debug");
 
                 JSONObject reasonObj = phoneCall.getJSONObject("reason");
                 temp.reason = null;
@@ -105,19 +105,19 @@ public class TGVoipPlugin extends CordovaPlugin {
                         temp.reason = new TLRPC.TL_phoneCallDiscardReasonDisconnect();
                 }
 
-                temp.duration = phoneCall.getInt("duration");
+                // temp.duration = phoneCall.getInt("duration");
 
-                JSONArray tempArr2 = phoneCall.getJSONArray("g_a_hash");
-                temp.g_a_hash = new byte[tempArr2.length()];
-                for(int i = 0; i < tempArr2.length(); i++)
-                    temp.g_a_hash[i] = (byte)tempArr.getInt(i);   
+                // JSONArray tempArr2 = phoneCall.getJSONArray("g_a_hash");
+                // temp.g_a_hash = new byte[tempArr2.length()];
+                // for(int i = 0; i < tempArr2.length(); i++)
+                //     temp.g_a_hash[i] = (byte)tempArr.getInt(i);   
 
-                JSONArray tempArr3 = phoneCall.getJSONArray("g_a_hash");
-                temp.g_b = new byte[tempArr3.length()];
-                for(int i = 0; i < tempArr3.length(); i++)
-                    temp.g_b[i] = (byte)tempArr3.getInt(i);   
+                // JSONArray tempArr3 = phoneCall.getJSONArray("g_a_hash");
+                // temp.g_b = new byte[tempArr3.length()];
+                // for(int i = 0; i < tempArr3.length(); i++)
+                //     temp.g_b[i] = (byte)tempArr3.getInt(i);   
         
-                temp.receive_date = phoneCall.getInt("receive_date");
+                // temp.receive_date = phoneCall.getInt("receive_date");
 
                 jni = new TGVoipJni();
                 jni.createCall(temp, isOutgoing);
