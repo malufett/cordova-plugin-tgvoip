@@ -83,7 +83,7 @@ public class TGVoipJni {
 	public static byte[] generateG_B(byte[] random_) {
 		byte[] salt = new byte[256];
 		for (int a = 0; a < 256; a++) {
-			salt[a] = (byte) ((byte) (random.nextDouble() * 256) ^ random_[a]);
+			salt[a] = (byte) ((byte) (Utilities.random.nextDouble() * 256) ^ random_[a]);
 		}
 		
 		BigInteger g_b = BigInteger.valueOf(3);
