@@ -18,7 +18,10 @@ import org.parler.tgnet.TLRPC;
 import org.webrtc.VideoSink;
 import org.webrtc.VideoFrame;
 import java.io.File;
+import java.math.*;
+import java.util.*;
 import org.parler.messenger.NativeLoader;
+import org.parler.messenger.Utilities;
 
 
 public class TGVoipJni {	
@@ -77,7 +80,7 @@ public class TGVoipJni {
 		}
 		g_a = g_a.modPow(new BigInteger(1, a_or_b), p);
 
-		byte[] authKey = g_a.toByteArray();
+		authKey = g_a.toByteArray();
 		if (authKey.length > 256) {
 			byte[] correctedAuth = new byte[256];
 			System.arraycopy(authKey, authKey.length - 256, correctedAuth, 0, 256);
@@ -93,7 +96,6 @@ public class TGVoipJni {
 		byte[] authKeyHash = Utilities.computeSHA1(authKey);
 		byte[] authKeyId = new byte[8];
 		System.arraycopy(authKeyHash, authKeyHash.length - 8, authKeyId, 0, 8);
-		VoIPService.this.authKey = authKey;
 		keyFingerprint = Utilities.bytesToLong(authKeyId);
 
 		if (keyFingerprint != phoneCall.key_fingerprint) {
