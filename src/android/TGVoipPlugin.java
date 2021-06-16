@@ -89,21 +89,21 @@ public class TGVoipPlugin extends CordovaPlugin {
                 // temp.need_rating = phoneCall.getBoolean("need_rating");
                 // temp.need_debug = phoneCall.getBoolean("need_debug");
 
-                JSONObject reasonObj = phoneCall.getJSONObject("reason");
-                temp.reason = null;
-                switch(reasonObj.getString("_")){
-                    case "phoneCallDiscardReasonHangup":
-                        temp.reason = new TLRPC.TL_phoneCallDiscardReasonHangup();
-                        break;
-                    case "phoneCallDiscardReasonBusy":
-                        temp.reason = new TLRPC.TL_phoneCallDiscardReasonBusy();
-                        break;
-                    case "phoneCallDiscardReasonMissed":
-                        temp.reason = new TLRPC.TL_phoneCallDiscardReasonMissed();
-                        break;
-                    case "phoneCallDiscardReasonDisconnect":
-                        temp.reason = new TLRPC.TL_phoneCallDiscardReasonDisconnect();
-                }
+                // JSONObject reasonObj = phoneCall.getJSONObject("reason");
+                // temp.reason = null;
+                // switch(reasonObj.getString("_")){
+                //     case "phoneCallDiscardReasonHangup":
+                //         temp.reason = new TLRPC.TL_phoneCallDiscardReasonHangup();
+                //         break;
+                //     case "phoneCallDiscardReasonBusy":
+                //         temp.reason = new TLRPC.TL_phoneCallDiscardReasonBusy();
+                //         break;
+                //     case "phoneCallDiscardReasonMissed":
+                //         temp.reason = new TLRPC.TL_phoneCallDiscardReasonMissed();
+                //         break;
+                //     case "phoneCallDiscardReasonDisconnect":
+                //         temp.reason = new TLRPC.TL_phoneCallDiscardReasonDisconnect();
+                // }
 
                 // temp.duration = phoneCall.getInt("duration");
 
