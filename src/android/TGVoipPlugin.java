@@ -19,26 +19,11 @@ public class TGVoipPlugin extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) {
         Log.d(TAG, "executed 'excute' function");
         Log.d(TAG, "execute action:" + action);
-        if (action.equals("test")) {
-            try {
-                JSONObject options = args.getJSONObject(0);
-                String message = options.getString("message");
-                String duration = options.getString("duration");
 
-                Log.d(TAG, "result:" + (message + duration));                
-                if(jni != null)
-                    jni.initiateActualEncryptedCall();
-                callbackContext.success(message + duration);
-            } catch (JSONException e) {                
-                Log.e(TAG, "exeption:" + e.getMessage());
-                callbackContext.error("Error encountered: " + e.getMessage());
-                return false;
-            }
-            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
-            callbackContext.sendPluginResult(pluginResult);
-        } else if(action.equals("createCall")) {
+        if(action.equals("createCall")) {
             try {
                 JSONObject phoneCall = args.getJSONObject(0);
+                boolean isOutgoing = args.getBoolean(1);
                 TLRPC.TL_phoneCall temp = new TLRPC.TL_phoneCall();
 
                 temp.flags = phoneCall.getInt("flags");
@@ -60,17 +45,16 @@ public class TGVoipPlugin extends CordovaPlugin {
                 temp.protocol = new TLRPC.TL_phoneCallProtocol();
 
                 temp.protocol.flags = tempProtocol.getInt("flags");
-                temp.protocol.udp_p2p = tempProtocol.getBoolean("udp_p2p");
-                temp.protocol.udp_reflector = tempProtocol.getBoolean("udp_reflector");
+                temp.protocol.udp_p2p =  (temp.protocol.flags & 1) != 0;
+                temp.protocol.udp_reflector = (temp.protocol.flags & 2) != 0;
                 temp.protocol.min_layer = tempProtocol.getInt("udp_reflector");
                 temp.protocol.max_layer = tempProtocol.getInt("udp_reflector");
 
                 JSONArray library_versionsArr = tempProtocol.getJSONArray("library_versions");
                 temp.protocol.library_versions = new ArrayList<>();
-                for(int i = 0; i < library_versionsArr.length(); i++){
+                for(int i = 0; i < library_versionsArr.length(); i++)
                     temp.protocol.library_versions.add(library_versionsArr.getString(i));
-                }
-
+                
                 JSONArray connectionsArr = tempProtocol.getJSONArray("connections");
                 temp.connections = new ArrayList<>();
                 for(int i = 0; i < connectionsArr.length(); i++){
@@ -136,7 +120,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 temp.receive_date = phoneCall.getInt("receive_date");
 
                 jni = new TGVoipJni();
-                jni.createCall(temp);
+                jni.createCall(temp, isOutgoing);
 
                 callbackContext.success();
             } catch(Exception e) {                        
