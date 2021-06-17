@@ -191,7 +191,7 @@ public class WebRtcAudioManager {
       return true;
     }
     // Logging.d(TAG, "audio mode is: "
-        + WebRtcAudioUtils.modeToString(audioManager.getMode()));
+        // + WebRtcAudioUtils.modeToString(audioManager.getMode()));
     initialized = true;
     volumeLogger.start();
     return true;
@@ -290,7 +290,7 @@ public class WebRtcAudioManager {
     // If so, use that value and return here.
     if (WebRtcAudioUtils.isDefaultSampleRateOverridden()) {
       // Logging.d(TAG, "Default sample rate is overriden to "
-              + WebRtcAudioUtils.getDefaultSampleRateHz() + " Hz");
+              // + WebRtcAudioUtils.getDefaultSampleRateHz() + " Hz");
       return WebRtcAudioUtils.getDefaultSampleRateHz();
     }
     // No overrides available. Deliver best possible estimate based on default
