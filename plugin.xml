@@ -103,6 +103,8 @@
     <source-file src="src/android/webrtc/CalledByNativeUnchecked.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/Camera1Capturer.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/Camera1Enumerator.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/Camera1Session.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/Camera2Capturer.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/Camera2Enumerator.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/CameraCapturer.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/CameraEnumerationAndroid.java" target-dir="app/src/main/java/org/webrtc/"/>
