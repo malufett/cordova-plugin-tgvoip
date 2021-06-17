@@ -1,5 +1,6 @@
 package org.parler;
 
+import org.parler.messenger.ApplicationLoader;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
@@ -15,6 +16,11 @@ import android.util.Log;
 public class TGVoipPlugin extends CordovaPlugin {
     protected static final String TAG = "TGVoipPlugin";
     protected TGVoipJni jni;
+
+    public TGVoipPlugin(){
+        super();
+        ApplicationLoader.applicationContext = this.cordova.getActivity().getApplicationContext(); 
+    }
 
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) {
