@@ -121,7 +121,7 @@
     <source-file src="src/android/webrtc/GlTextureFrameBuffer.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/GlUtil.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/Histogram.java" target-dir="app/src/main/java/org/webrtc/"/>
-    <source-file src="src/android/webrtc/Java420Buffer.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/JavaI420Buffer.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/JniCommon.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/JniHelper.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/JNILogging.java" target-dir="app/src/main/java/org/webrtc/"/>
