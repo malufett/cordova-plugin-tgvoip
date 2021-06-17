@@ -129,12 +129,12 @@ public class WebRtcAudioManager {
         final int mode = audioManager.getMode();
         if (mode == AudioManager.MODE_RINGTONE) {
           // Logging.d(TAG, "STREAM_RING stream volume: "
-                  + audioManager.getStreamVolume(AudioManager.STREAM_RING) + " (max="
-                  + maxRingVolume + ")");
+                  // + audioManager.getStreamVolume(AudioManager.STREAM_RING) + " (max="
+                  // + maxRingVolume + ")");
         } else if (mode == AudioManager.MODE_IN_COMMUNICATION) {
           // Logging.d(TAG, "VOICE_CALL stream volume: "
-                  + audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL) + " (max="
-                  + maxVoiceCallVolume + ")");
+                  // + audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL) + " (max="
+                  // + maxVoiceCallVolume + ")");
         }
       }
     }

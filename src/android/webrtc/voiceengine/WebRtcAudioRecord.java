@@ -327,16 +327,16 @@ public class WebRtcAudioRecord {
 
   private void logMainParameters() {
     // Logging.d(TAG, "AudioRecord: "
-            + "session ID: " + audioRecord.getAudioSessionId() + ", "
-            + "channels: " + audioRecord.getChannelCount() + ", "
-            + "sample rate: " + audioRecord.getSampleRate());
+            // + "session ID: " + audioRecord.getAudioSessionId() + ", "
+            // + "channels: " + audioRecord.getChannelCount() + ", "
+            // + "sample rate: " + audioRecord.getSampleRate());
   }
 
   private void logMainParametersExtended() {
     if (Build.VERSION.SDK_INT >= 23) {
       // Logging.d(TAG, "AudioRecord: "
               // The frame count of the native AudioRecord buffer.
-              + "buffer size in frames: " + audioRecord.getBufferSizeInFrames());
+              // + "buffer size in frames: " + audioRecord.getBufferSizeInFrames());
     }
   }
 
@@ -358,7 +358,7 @@ public class WebRtcAudioRecord {
   @SuppressWarnings("NoSynchronizedMethodCheck")
   public static synchronized void setAudioSource(int source) {
     // Logging.w(TAG, "Audio source is changed from: " + audioSource
-            + " to " + source);
+            // + " to " + source);
     audioSource = source;
   }
 

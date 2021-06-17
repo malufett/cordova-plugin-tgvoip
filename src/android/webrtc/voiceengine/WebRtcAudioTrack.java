@@ -57,7 +57,7 @@ public class WebRtcAudioTrack {
   @SuppressWarnings("NoSynchronizedMethodCheck")
   public static synchronized void setAudioTrackUsageAttribute(int usage) {
     // Logging.w(TAG, "Default usage attribute is changed from: "
-        + DEFAULT_USAGE + " to " + usage);
+        // + DEFAULT_USAGE + " to " + usage);
     usageAttribute = usage;
   }
 
@@ -223,8 +223,8 @@ public class WebRtcAudioTrack {
   private int initPlayout(int sampleRate, int channels, double bufferSizeFactor) {
     threadChecker.checkIsOnValidThread();
     // Logging.d(TAG,
-        "initPlayout(sampleRate=" + sampleRate + ", channels=" + channels
-            + ", bufferSizeFactor=" + bufferSizeFactor + ")");
+        // "initPlayout(sampleRate=" + sampleRate + ", channels=" + channels
+        //     + ", bufferSizeFactor=" + bufferSizeFactor + ")");
     final int bytesPerFrame = channels * (BITS_PER_SAMPLE / 8);
     byteBuffer = ByteBuffer.allocateDirect(bytesPerFrame * (sampleRate / BUFFERS_PER_SECOND));
     // Logging.d(TAG, "byteBuffer.capacity: " + byteBuffer.capacity());
@@ -382,11 +382,11 @@ public class WebRtcAudioTrack {
 
   private void logMainParameters() {
     // Logging.d(TAG, "AudioTrack: "
-            + "session ID: " + audioTrack.getAudioSessionId() + ", "
-            + "channels: " + audioTrack.getChannelCount() + ", "
-            + "sample rate: " + audioTrack.getSampleRate() + ", "
-            // Gain (>=1.0) expressed as linear multiplier on sample values.
-            + "max gain: " + AudioTrack.getMaxVolume());
+            // + "session ID: " + audioTrack.getAudioSessionId() + ", "
+            // + "channels: " + audioTrack.getChannelCount() + ", "
+            // + "sample rate: " + audioTrack.getSampleRate() + ", "
+            // // Gain (>=1.0) expressed as linear multiplier on sample values.
+            // + "max gain: " + AudioTrack.getMaxVolume());
   }
 
   // Creates and AudioTrack instance using AudioAttributes and AudioFormat as input.
@@ -434,7 +434,7 @@ public class WebRtcAudioTrack {
     if (Build.VERSION.SDK_INT >= 23) {
       // Logging.d(TAG, "AudioTrack: "
               // The effective size of the AudioTrack buffer that the app writes to.
-              + "buffer size in frames: " + audioTrack.getBufferSizeInFrames());
+              // + "buffer size in frames: " + audioTrack.getBufferSizeInFrames());
     }
   }
 
@@ -448,9 +448,9 @@ public class WebRtcAudioTrack {
   private void logBufferCapacityInFrames() {
     if (Build.VERSION.SDK_INT >= 24) {
       // Logging.d(TAG,
-          "AudioTrack: "
-              // Maximum size of the AudioTrack buffer in frames.
-              + "buffer capacity in frames: " + audioTrack.getBufferCapacityInFrames());
+          // "AudioTrack: "
+          //     // Maximum size of the AudioTrack buffer in frames.
+          //     + "buffer capacity in frames: " + audioTrack.getBufferCapacityInFrames());
     }
   }
 

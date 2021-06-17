@@ -213,9 +213,9 @@ public class WebRtcAudioEffects {
       for (Descriptor d : AudioEffect.queryEffects()) {
         if (effectTypeIsVoIP(d.type)) {
           // // Logging.d(TAG, "name: " + d.name + ", "
-                  + "mode: " + d.connectMode + ", "
-                  + "implementor: " + d.implementor + ", "
-                  + "UUID: " + d.uuid);
+                  // + "mode: " + d.connectMode + ", "
+                  // + "implementor: " + d.implementor + ", "
+                  // + "UUID: " + d.uuid);
         }
       }
     }
@@ -231,8 +231,8 @@ public class WebRtcAudioEffects {
           // Logging.e(TAG, "Failed to set the AcousticEchoCanceler state");
         }
         // Logging.d(TAG, "AcousticEchoCanceler: was " + (enabled ? "enabled" : "disabled")
-                + ", enable: " + enable + ", is now: "
-                + (aec.getEnabled() ? "enabled" : "disabled"));
+                // + ", enable: " + enable + ", is now: "
+                // + (aec.getEnabled() ? "enabled" : "disabled"));
       } else {
         // Logging.e(TAG, "Failed to create the AcousticEchoCanceler instance");
       }
@@ -249,7 +249,7 @@ public class WebRtcAudioEffects {
           // Logging.e(TAG, "Failed to set the NoiseSuppressor state");
         }
         // Logging.d(TAG, "NoiseSuppressor: was " + (enabled ? "enabled" : "disabled") + ", enable: "
-                + enable + ", is now: " + (ns.getEnabled() ? "enabled" : "disabled"));
+                // + enable + ", is now: " + (ns.getEnabled() ? "enabled" : "disabled"));
       } else {
         // Logging.e(TAG, "Failed to create the NoiseSuppressor instance");
       }

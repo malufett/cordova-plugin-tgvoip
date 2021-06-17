@@ -180,14 +180,14 @@ public final class WebRtcAudioUtils {
   // Information about the current build, taken from system properties.
   static void logDeviceInfo(String tag) {
     // Logging.d(tag, "Android SDK: " + Build.VERSION.SDK_INT + ", "
-            + "Release: " + Build.VERSION.RELEASE + ", "
-            + "Brand: " + Build.BRAND + ", "
-            + "Device: " + Build.DEVICE + ", "
-            + "Id: " + Build.ID + ", "
-            + "Hardware: " + Build.HARDWARE + ", "
-            + "Manufacturer: " + Build.MANUFACTURER + ", "
-            + "Model: " + Build.MODEL + ", "
-            + "Product: " + Build.PRODUCT);
+            // + "Release: " + Build.VERSION.RELEASE + ", "
+            // + "Brand: " + Build.BRAND + ", "
+            // + "Device: " + Build.DEVICE + ", "
+            // + "Id: " + Build.ID + ", "
+            // + "Hardware: " + Build.HARDWARE + ", "
+            // + "Manufacturer: " + Build.MANUFACTURER + ", "
+            // + "Model: " + Build.MODEL + ", "
+            // + "Product: " + Build.PRODUCT);
   }
 
   // Logs information about the current audio state. The idea is to call this
@@ -206,12 +206,12 @@ public final class WebRtcAudioUtils {
   // Reports basic audio statistics.
   private static void logAudioStateBasic(String tag, AudioManager audioManager) {
     // Logging.d(tag, "Audio State: "
-            + "audio mode: " + modeToString(audioManager.getMode()) + ", "
-            + "has mic: " + hasMicrophone() + ", "
-            + "mic muted: " + audioManager.isMicrophoneMute() + ", "
-            + "music active: " + audioManager.isMusicActive() + ", "
-            + "speakerphone: " + audioManager.isSpeakerphoneOn() + ", "
-            + "BT SCO: " + audioManager.isBluetoothScoOn());
+            // + "audio mode: " + modeToString(audioManager.getMode()) + ", "
+            // + "has mic: " + hasMicrophone() + ", "
+            // + "mic muted: " + audioManager.isMicrophoneMute() + ", "
+            // + "music active: " + audioManager.isMusicActive() + ", "
+            // + "speakerphone: " + audioManager.isSpeakerphoneOn() + ", "
+            // + "BT SCO: " + audioManager.isBluetoothScoOn());
   }
 
   private static boolean isVolumeFixed(AudioManager audioManager) {
