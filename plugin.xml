@@ -100,8 +100,23 @@
 
     <!-- org.webrtc -->
     <source-file src="src/android/webrtc/CalledByNative.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/Camera1Enumerator.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/Camera2Enumerator.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/CameraEnumerationAndroid.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/CameraEnumerator.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/CameraVideoCapturer.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/CapturerObserver.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/ContextUtils.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/EglBase.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/EglBase10.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/EglBase10Impl.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/EglBase14.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/EglBase14Impl.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/EglRenderer.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/Logging.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/RefCounted.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/SurfaceTextureHelper.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/TextureBufferImpl.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/ThreadUtils.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/VideoSink.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/VideoFrame.java" target-dir="app/src/main/java/org/webrtc/"/>
