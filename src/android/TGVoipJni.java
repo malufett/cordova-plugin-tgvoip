@@ -69,7 +69,7 @@ public class TGVoipJni {
 		return Utilities.bytesToLong(authKeyId);
 	}
 
-	public static byte[] generateAuthKey(byte[] g_b, byte[] a_or_b) {
+	public static byte[] generateAuthKey(byte[] g_b, byte[] a_or_b) throws Exception {
 		BigInteger p = new BigInteger(1, secretPBytes);
 		BigInteger i_authKey = new BigInteger(1, g_b);
 
