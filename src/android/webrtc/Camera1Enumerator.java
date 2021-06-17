@@ -75,7 +75,7 @@ public class Camera1Enumerator implements CameraEnumerator {
   }
 
   // private static @Nullable android.hardware.Camera.CameraInfo getCameraInfo(int index) {
-  private staticandroid.hardware.Camera.CameraInfo getCameraInfo(int index) {
+  private static android.hardware.Camera.CameraInfo getCameraInfo(int index) {
     android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
     try {
       android.hardware.Camera.getCameraInfo(index, info);
@@ -175,13 +175,13 @@ public class Camera1Enumerator implements CameraEnumerator {
   // camera can not be used.
   // static @Nullable String getDeviceName(int index) {
   static String getDeviceName(int index) {
-    android.hardware.Camera.CameraInfo info = getCameraInfo(index);
-    if (info == null) {
-      return null;
-    }
+    // android.hardware.Camera.CameraInfo info = getCameraInfo(index);
+    // if (info == null) {
+    //   return null;
+    // }
 
-    String facing =
-        (info.facing == android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT) ? "front" : "back";
-    return "Camera " + index + ", Facing " + facing + ", Orientation " + info.orientation;
+    String facing = "";
+        // (info.facing == android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT) ? "front" : "back";
+    return "Camera " + index + ", Facing " + facing + ", Orientation ";// + info.orientation;
   }
 }
