@@ -17,7 +17,7 @@ import org.parler.messenger.FileLog;
 
 import java.nio.ByteBuffer;
 
-import androidx.annotation.Nullable;
+// import androidx.annotation.Nullable;
 
 /**
  * Android texture buffer that glues together the necessary information together with a generic
@@ -47,7 +47,8 @@ public class TextureBufferImpl implements VideoFrame.TextureBuffer {
   private final RefCountMonitor refCountMonitor;
 
   public TextureBufferImpl(int width, int height, Type type, int id, Matrix transformMatrix,
-      Handler toI420Handler, YuvConverter yuvConverter, @Nullable Runnable releaseCallback) {
+      // Handler toI420Handler, YuvConverter yuvConverter, @Nullable Runnable releaseCallback) {
+      Handler toI420Handler, YuvConverter yuvConverter, Runnable releaseCallback) {
     this(width, height, width, height, type, id, transformMatrix, toI420Handler, yuvConverter,
         new RefCountMonitor() {
           @Override

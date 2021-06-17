@@ -10,7 +10,7 @@
 
 package org.webrtc;
 
-import androidx.annotation.Nullable;
+// import androidx.annotation.Nullable;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.EnumSet;
@@ -42,7 +42,8 @@ import org.webrtc.Loggable;
 public class Logging {
   private static final Logger fallbackLogger = createFallbackLogger();
   private static volatile boolean loggingEnabled;
-  @Nullable private static Loggable loggable;
+  // @Nullable private static Loggable loggable;
+  private static Loggable loggable;
   private static Severity loggableSeverity;
 
   private static Logger createFallbackLogger() {

@@ -100,6 +100,7 @@
 
     <!-- org.webrtc -->
     <source-file src="src/android/webrtc/CalledByNative.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/CalledByNativeUnchecked.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/Camera1Enumerator.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/Camera2Enumerator.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/CameraEnumerationAndroid.java" target-dir="app/src/main/java/org/webrtc/"/>
@@ -113,14 +114,28 @@
     <source-file src="src/android/webrtc/EglBase14.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/EglBase14Impl.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/EglRenderer.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/GlTextureFrameBuffer.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/Histogram.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/JniCommon.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/JniHelper.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/JNILogging.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/Loggable.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/Logging.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/RefCountDelegate.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/RefCounted.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/RendererCommon.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/Size.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/SurfaceTextureHelper.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/TextureBufferImpl.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/ThreadUtils.java" target-dir="app/src/main/java/org/webrtc/"/>
-    <source-file src="src/android/webrtc/VideoSink.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/TimestampAligner.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/VideoCapturer.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/VideoFrame.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/VideoFrameDrawer.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/VideoSink.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/WebRtcClassLoader.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/YuvConverter.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/YuvHelper.java" target-dir="app/src/main/java/org/webrtc/"/>
 
     <!-- org.parler-->
     <source-file src="src/android/TGVoipPlugin.java" target-dir="app/src/main/java/org/parler/"/>
