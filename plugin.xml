@@ -18,9 +18,6 @@
   <engines>
     <engine name="cordova" version=">=3.0.0"/>
   </engines>
-  <config-file target="config.xml" parent="/*">
-    <preference name="AndroidXEnabled" value="true" />
-  </config-file>
   <platform name="android">
 
     <config-file parent="/*" target="res/xml/config.xml">

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import androidx.core.content.pm.ShortcutManagerCompat;
+// import androidx.core.content.pm.ShortcutManagerCompat;
 
 public class SharedConfig {
 
