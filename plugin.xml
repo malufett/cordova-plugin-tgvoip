@@ -106,6 +106,7 @@
     <source-file src="src/android/webrtc/Camera1Session.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/Camera2Capturer.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/Camera2Enumerator.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/Camera2Session.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/CameraCapturer.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/CameraEnumerationAndroid.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/CameraEnumerator.java" target-dir="app/src/main/java/org/webrtc/"/>
@@ -130,6 +131,8 @@
     <source-file src="src/android/webrtc/JNILogging.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/Loggable.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/Logging.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/NV21Buffer.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/OrientationHelper.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/RefCountDelegate.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/RefCounted.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/RendererCommon.java" target-dir="app/src/main/java/org/webrtc/"/>
