@@ -5,7 +5,6 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import org.parler.messenger.Utilities;
-import android.content.Context;
 import org.json.JSONException;
 import org.parler.tgnet.TLRPC;
 import org.json.JSONArray;
@@ -17,13 +16,10 @@ import android.util.Log;
 public class TGVoipPlugin extends CordovaPlugin {
     protected static final String TAG = "TGVoipPlugin";
     protected TGVoipJni jni;
-    protected Context context;
 
     public TGVoipPlugin(){
         super();        
-        context = this.cordova.getActivity().getApplicationContext();
-        ApplicationLoader.applicationContext = 
-                this.cordova.getActivity().getApplicationContext(); 
+        ApplicationLoader.applicationContext = Build.VERSION.SDK_INT >= 21 ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
     }
 
     @Override
