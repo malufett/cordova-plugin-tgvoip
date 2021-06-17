@@ -22,18 +22,24 @@ public class TGVoipPlugin extends CordovaPlugin {
         Log.d(TAG, "execute action:" + action);
 
         if (action.equals("generateFingerprint")) {
-            JSONArray jGB = args.getJSONArray(0);
-            JSONArray jAB = args.getJSONArray(1);
-            byte[] g_b = new byte[jGB.length()];
-            byte[] a_or_b = new byte[jGB.length()];
+            try{
+                JSONArray jGB = args.getJSONArray(0);
+                JSONArray jAB = args.getJSONArray(1);
+                byte[] g_b = new byte[jGB.length()];
+                byte[] a_or_b = new byte[jGB.length()];
 
-            for(int i = 0; i < jGB.length(); i++)
-                g_b[i] = (byte) jGB.getInt(i);
-            for(int i = 0; i < jAB.length(); i++)
-                a_or_b[i] = (byte) jAB.getInt(i);
+                for(int i = 0; i < jGB.length(); i++)
+                    g_b[i] = (byte) jGB.getInt(i);
+                for(int i = 0; i < jAB.length(); i++)
+                    a_or_b[i] = (byte) jAB.getInt(i);
 
-            long fingerprint = TGVoipJni.generateFingerprint(g_b, a_or_b);
-            callbackContext.success("" + fingerprint);
+                long fingerprint = TGVoipJni.generateFingerprint(g_b, a_or_b);
+                callbackContext.success("" + fingerprint);
+            } catch(Exception e) {
+                Log.e(TAG, "exeption:" + e.getMessage());
+                callbackContext.error("Error encountered: " + e.getMessage());
+                return false;
+            }
         } else if (action.equals("generateG_A")) {
             try{
                 JSONArray jRandom = args.getJSONArray(0);

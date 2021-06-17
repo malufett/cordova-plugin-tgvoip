@@ -60,13 +60,12 @@ public class TGVoipJni {
 		remoteSink = new ProxyVideoSink();
 	}
 
-	public static long generateFingerprint(byte[] g_b, byte[] a_or_b){
+	public static long generateFingerprint(byte[] g_b, byte[] a_or_b) throws Exception{
 		BigInteger p = new BigInteger(1, secretPBytes);
 		BigInteger i_authKey = new BigInteger(1, g_b);
 
 		if (!Utilities.isGoodGaAndGb(i_authKey, p)) {
-			callFailed("Not good g_a_b");
-			return;
+			throw new Exception("Not good g_a_b");
 		}
 
 		i_authKey = i_authKey.modPow(new BigInteger(1, a_or_b), p);
