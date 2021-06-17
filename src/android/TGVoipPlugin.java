@@ -21,27 +21,46 @@ public class TGVoipPlugin extends CordovaPlugin {
         Log.d(TAG, "executed 'excute' function");
         Log.d(TAG, "execute action:" + action);
 
-        if (action.equals("generateG_A")) {
+        if (action.equals("generateFingerprint")) {
+            JSONArray jGB = args.getJSONArray(0);
+            JSONArray jAB = args.getJSONArray(1);
+            byte[] g_b = new byte[jGB.length()];
+            byte[] a_or_b = new byte[jGB.length()];
+
+            for(int i = 0; i < jGB.length(); i++)
+                g_b[i] = (byte) jGB.getInt(i);
+            for(int i = 0; i < jAB.length(); i++)
+                a_or_b[i] = (byte) jAB.getInt(i);
+
+            long fingerprint = TGVoipJni.generateFingerprint(g_b, a_or_b);
+            callbackContext.success("" + fingerprint);
+        } else if (action.equals("generateG_A")) {
             try{
                 JSONArray jRandom = args.getJSONArray(0);
                 byte[] random = new byte[jRandom.length()];
 
                 for(int i = 0; i < jRandom.length(); i++)
                     random[i] = (byte) jRandom.getInt(i);
-                byte[] ga = TGVoipJni.generateG_A(random);
+
+                byte[] a_or_b = TGVoipJni.generateSalt(random);
+                byte[] ga = TGVoipJni.generateG_A(a_or_b);
                 byte[] hash = Utilities.computeSHA256(ga, 0, ga.length);
 
                 JSONObject retval = new JSONObject();
                 JSONArray retvalA = new JSONArray();
                 JSONArray retvalHash = new JSONArray();
+                JSONArray retvalAB = new JSONArray();
+
                 for(int i = 0; i < ga.length; i++)
-                    retvalA.put((int)ga[i]&0xFF);
-                    
+                    retvalA.put((int)ga[i]&0xFF);                    
                 for(int i = 0; i < hash.length; i++)
                     retvalHash.put((int)hash[i]&0xFF);
+                for(int i = 0; i < a_or_b.length; i++)
+                    retvalAB.put((int)a_or_b[i]&0xFF);
 
                 retval.put("g_a", retvalA);
                 retval.put("g_a_hash", retvalHash);
+                retval.put("a_or_b", retvalAB);
 
                 callbackContext.success(retval);
             } catch(Exception e) {

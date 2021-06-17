@@ -60,7 +60,38 @@ public class TGVoipJni {
 		remoteSink = new ProxyVideoSink();
 	}
 
-	public static byte[] generateG_A(byte[] random) {
+	public static long generateFingerprint(byte[] g_b, byte[] a_or_b){
+		BigInteger p = new BigInteger(1, secretPBytes);
+		BigInteger i_authKey = new BigInteger(1, g_b);
+
+		if (!Utilities.isGoodGaAndGb(i_authKey, p)) {
+			callFailed("Not good g_a_b");
+			return;
+		}
+
+		i_authKey = i_authKey.modPow(new BigInteger(1, a_or_b), p);
+
+		byte[] authKey = i_authKey.toByteArray();
+		if (authKey.length > 256) {
+			byte[] correctedAuth = new byte[256];
+			System.arraycopy(authKey, authKey.length - 256, correctedAuth, 0, 256);
+			authKey = correctedAuth;
+		} else if (authKey.length < 256) {
+			byte[] correctedAuth = new byte[256];
+			System.arraycopy(authKey, 0, correctedAuth, 256 - authKey.length, authKey.length);
+			for (int a = 0; a < 256 - authKey.length; a++) {
+				correctedAuth[a] = 0;
+			}
+			authKey = correctedAuth;
+		}
+		byte[] authKeyHash = Utilities.computeSHA1(authKey);
+		byte[] authKeyId = new byte[8];
+		System.arraycopy(authKeyHash, authKeyHash.length - 8, authKeyId, 0, 8);
+		
+		return Utilities.bytesToLong(authKeyId);
+	}
+
+	public static byte[] generateSalt(byte[] random) {
 		final byte[] salt = new byte[256];
 		Utilities.random.nextBytes(salt);
 
@@ -68,9 +99,12 @@ public class TGVoipJni {
 		for (int a = 0; a < 256; a++) {
 			salt1[a] = (byte) ((byte) (Utilities.random.nextDouble() * 256) ^ random[a]);
 		}
+		return salt1;
+	}
 
+	public static byte[] generateG_A(byte[] salt) {		
 		BigInteger i_g_a = BigInteger.valueOf(3);
-		i_g_a = i_g_a.modPow(new BigInteger(1, salt1), new BigInteger(1, secretPBytes));
+		i_g_a = i_g_a.modPow(new BigInteger(1, salt), new BigInteger(1, secretPBytes));
 		byte[] g_a = i_g_a.toByteArray();
 		if (g_a.length > 256) {
 			byte[] correctedAuth = new byte[256];
