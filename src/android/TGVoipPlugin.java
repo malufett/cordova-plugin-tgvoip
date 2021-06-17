@@ -5,6 +5,7 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import org.parler.messenger.Utilities;
+import android.content.Context;
 import org.json.JSONException;
 import org.parler.tgnet.TLRPC;
 import org.json.JSONArray;
