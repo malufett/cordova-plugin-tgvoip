@@ -90,10 +90,19 @@
     <!-- org.parger.ui.Components-->
     <source-file src="src/android/parler/ui/Components/AnimatedFileDrawable.java" target-dir="app/src/main/java/org/parler/ui/Components/"/>
 
+    <!-- org.webrtc.voiceengine -->
+    <source-file src="src/android/webrtc/voiceengine/BuildInfo.java" target-dir="app/src/main/java/org/webrtc/voiceengine/"/>
+    <source-file src="src/android/webrtc/voiceengine/WebRtcAudioEffects.java" target-dir="app/src/main/java/org/webrtc/voiceengine/"/>
+    <source-file src="src/android/webrtc/voiceengine/WebRtcAudioManager.java" target-dir="app/src/main/java/org/webrtc/voiceengine/"/>
+    <source-file src="src/android/webrtc/voiceengine/WebRtcAudioRecord.java" target-dir="app/src/main/java/org/webrtc/voiceengine/"/>
+    <source-file src="src/android/webrtc/voiceengine/WebRtcAudioTrack.java" target-dir="app/src/main/java/org/webrtc/voiceengine/"/>
+    <source-file src="src/android/webrtc/voiceengine/WebRtcAudioUtils.java" target-dir="app/src/main/java/org/webrtc/voiceengine/"/>
+
     <!-- org.webrtc -->
     <source-file src="src/android/webrtc/CalledByNative.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/ContextUtils.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/RefCounted.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/ThreadUtils.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/VideoSink.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/VideoFrame.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/WebRtcClassLoader.java" target-dir="app/src/main/java/org/webrtc/"/>
