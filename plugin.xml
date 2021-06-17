@@ -96,6 +96,7 @@
     <source-file src="src/android/webrtc/RefCounted.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/VideoSink.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/VideoFrame.java" target-dir="app/src/main/java/org/webrtc/"/>
+    <source-file src="src/android/webrtc/WebRtcClassLoader.java" target-dir="app/src/main/java/org/webrtc/"/>
 
     <!-- org.parler-->
     <source-file src="src/android/TGVoipPlugin.java" target-dir="app/src/main/java/org/parler/"/>
