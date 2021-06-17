@@ -257,7 +257,7 @@ public class SharedConfig {
             hasCameraCache = preferences.contains("cameraCache");
             roundCamera16to9 = true;//preferences.getBoolean("roundCamera16to9", false);
             repeatMode = preferences.getInt("repeatMode", 0);
-            fontSize = preferences.getInt("fons_size", AndroidUtilities.isTablet() ? 18 : 16);
+            fontSize = preferences.getInt("fons_size", 16);
             bubbleRadius = preferences.getInt("bubbleRadius", 10);
             ivFontSize = preferences.getInt("iv_font_size", fontSize);
             allowBigEmoji = preferences.getBoolean("allowBigEmoji", true);
@@ -410,83 +410,83 @@ public class SharedConfig {
 
     public static void setSuggestStickers(int type) {
         suggestStickers = type;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("suggestStickers", suggestStickers);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("suggestStickers", suggestStickers);
+        // editor.commit();
     }
 
     public static void setSearchMessagesAsListUsed(boolean searchMessagesAsListUsed) {
-        SharedConfig.searchMessagesAsListUsed = searchMessagesAsListUsed;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("searchMessagesAsListUsed", searchMessagesAsListUsed);
-        editor.commit();
+        // SharedConfig.searchMessagesAsListUsed = searchMessagesAsListUsed;
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("searchMessagesAsListUsed", searchMessagesAsListUsed);
+        // editor.commit();
     }
 
     public static void setStickersReorderingHintUsed(boolean stickersReorderingHintUsed) {
-        SharedConfig.stickersReorderingHintUsed = stickersReorderingHintUsed;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("stickersReorderingHintUsed", stickersReorderingHintUsed);
-        editor.commit();
+        // SharedConfig.stickersReorderingHintUsed = stickersReorderingHintUsed;
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("stickersReorderingHintUsed", stickersReorderingHintUsed);
+        // editor.commit();
     }
 
     public static void increaseTextSelectionHintShowed() {
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("textSelectionHintShows", ++textSelectionHintShows);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("textSelectionHintShows", ++textSelectionHintShows);
+        // editor.commit();
     }
 
     public static void removeTextSelectionHint() {
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("textSelectionHintShows", 3);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("textSelectionHintShows", 3);
+        // editor.commit();
     }
 
     public static void increaseScheduledOrNoSuoundHintShowed() {
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("scheduledOrNoSoundHintShows", ++scheduledOrNoSoundHintShows);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("scheduledOrNoSoundHintShows", ++scheduledOrNoSoundHintShows);
+        // editor.commit();
     }
 
     public static void removeScheduledOrNoSuoundHint() {
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("scheduledOrNoSoundHintShows", 3);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("scheduledOrNoSoundHintShows", 3);
+        // editor.commit();
     }
 
     public static void increaseLockRecordAudioVideoHintShowed() {
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("lockRecordAudioVideoHint", ++lockRecordAudioVideoHint);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("lockRecordAudioVideoHint", ++lockRecordAudioVideoHint);
+        // editor.commit();
     }
 
     public static void removeLockRecordAudioVideoHint() {
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("lockRecordAudioVideoHint", 3);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("lockRecordAudioVideoHint", 3);
+        // editor.commit();
     }
 
     public static void increaseSearchAsListHintShows() {
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("searchMessagesAsListHintShows", ++searchMessagesAsListHintShows);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("searchMessagesAsListHintShows", ++searchMessagesAsListHintShows);
+        // editor.commit();
     }
 
     public static void setKeepMedia(int value) {
-        keepMedia = value;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("keep_media", keepMedia);
-        editor.commit();
+        // keepMedia = value;
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("keep_media", keepMedia);
+        // editor.commit();
     }
 
     public static void checkKeepMedia() {
@@ -507,17 +507,17 @@ public class SharedConfig {
                     days = 3;
                 }
                 long currentTime = time - 60 * 60 * 24 * days;
-                final SparseArray<File> paths = ImageLoader.getInstance().createMediaPaths();
-                for (int a = 0; a < paths.size(); a++) {
-                    if (paths.keyAt(a) == FileLoader.MEDIA_DIR_CACHE) {
-                        continue;
-                    }
-                    try {
-                        Utilities.clearDir(paths.valueAt(a).getAbsolutePath(), 0, currentTime, false);
-                    } catch (Throwable e) {
-                        FileLog.e(e);
-                    }
-                }
+                // final SparseArray<File> paths = ImageLoader.getInstance().createMediaPaths();
+                // for (int a = 0; a < paths.size(); a++) {
+                //     if (paths.keyAt(a) == FileLoader.MEDIA_DIR_CACHE) {
+                //         continue;
+                //     }
+                //     try {
+                //         Utilities.clearDir(paths.valueAt(a).getAbsolutePath(), 0, currentTime, false);
+                //     } catch (Throwable e) {
+                //         FileLog.e(e);
+                //     }
+                // }
             }
             File stickersPath = new File(cacheDir, "acache");
             if (stickersPath.exists()) {
@@ -528,43 +528,43 @@ public class SharedConfig {
                     FileLog.e(e);
                 }
             }
-            SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("lastKeepMediaCheckTime", lastKeepMediaCheckTime);
-            editor.commit();
+            // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+            // SharedPreferences.Editor editor = preferences.edit();
+            // editor.putInt("lastKeepMediaCheckTime", lastKeepMediaCheckTime);
+            // editor.commit();
         });
     }
 
     public static void toggleDisableVoiceAudioEffects() {
         disableVoiceAudioEffects = !disableVoiceAudioEffects;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("disableVoiceAudioEffects", disableVoiceAudioEffects);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("disableVoiceAudioEffects", disableVoiceAudioEffects);
+        // editor.commit();
     }
 
     public static void toggleNoStatusBar() {
         noStatusBar = !noStatusBar;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("noStatusBar", noStatusBar);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("noStatusBar", noStatusBar);
+        // editor.commit();
     }
 
     public static void toggleLoopStickers() {
         loopStickers = !loopStickers;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("loopStickers", loopStickers);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("loopStickers", loopStickers);
+        // editor.commit();
     }
 
     public static void toggleBigEmoji() {
         allowBigEmoji = !allowBigEmoji;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("allowBigEmoji", allowBigEmoji);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("allowBigEmoji", allowBigEmoji);
+        // editor.commit();
     }
 
     public static void setPlaybackOrderType(int type) {
@@ -579,11 +579,11 @@ public class SharedConfig {
             shuffleMusic = false;
         }
         MediaController.getInstance().checkIsNextMediaFileDownloaded();
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("shuffleMusic", shuffleMusic);
-        editor.putBoolean("playOrderReversed", playOrderReversed);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("shuffleMusic", shuffleMusic);
+        // editor.putBoolean("playOrderReversed", playOrderReversed);
+        // editor.commit();
     }
 
     public static void setRepeatMode(int mode) {
@@ -591,65 +591,66 @@ public class SharedConfig {
         if (repeatMode < 0 || repeatMode > 2) {
             repeatMode = 0;
         }
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("repeatMode", repeatMode);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("repeatMode", repeatMode);
+        // editor.commit();
     }
 
     public static void toggleSaveToGallery() {
         saveToGallery = !saveToGallery;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("save_gallery", saveToGallery);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("save_gallery", saveToGallery);
+        // editor.commit();
         checkSaveToGalleryFiles();
     }
 
     public static void toggleAutoplayGifs() {
         autoplayGifs = !autoplayGifs;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("autoplay_gif", autoplayGifs);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("autoplay_gif", autoplayGifs);
+        // editor.commit();
     }
 
     public static void setUseThreeLinesLayout(boolean value) {
         useThreeLinesLayout = value;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("useThreeLinesLayout", useThreeLinesLayout);
-        editor.commit();
-        NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.dialogsNeedReload, true);
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("useThreeLinesLayout", useThreeLinesLayout);
+        // editor.commit();
+        // NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.dialogsNeedReload, true);
     }
 
     public static void toggleArchiveHidden() {
         archiveHidden = !archiveHidden;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("archiveHidden", archiveHidden);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("archiveHidden", archiveHidden);
+        // editor.commit();
     }
 
     public static void toggleAutoplayVideo() {
         autoplayVideo = !autoplayVideo;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("autoplay_video", autoplayVideo);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("autoplay_video", autoplayVideo);
+        // editor.commit();
     }
 
     public static boolean isSecretMapPreviewSet() {
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        return preferences.contains("mapPreviewType");
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // return preferences.contains("mapPreviewType");
+        return false;
     }
 
     public static void setSecretMapPreviewType(int value) {
         mapPreviewType = value;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("mapPreviewType", mapPreviewType);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("mapPreviewType", mapPreviewType);
+        // editor.commit();
     }
 
     public static void setNoSoundHintShowed(boolean value) {
@@ -657,125 +658,125 @@ public class SharedConfig {
             return;
         }
         noSoundHintShowed = value;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("noSoundHintShowed", noSoundHintShowed);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("noSoundHintShowed", noSoundHintShowed);
+        // editor.commit();
     }
 
     public static void toogleRaiseToSpeak() {
         raiseToSpeak = !raiseToSpeak;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("raise_to_speak", raiseToSpeak);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("raise_to_speak", raiseToSpeak);
+        // editor.commit();
     }
 
     public static void toggleCustomTabs() {
         customTabs = !customTabs;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("custom_tabs", customTabs);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("custom_tabs", customTabs);
+        // editor.commit();
     }
 
     public static void toggleDirectShare() {
         directShare = !directShare;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("direct_share", directShare);
-        editor.commit();
-        ShortcutManagerCompat.removeAllDynamicShortcuts(ApplicationLoader.applicationContext);
-        MediaDataController.getInstance(UserConfig.selectedAccount).buildShortcuts();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("direct_share", directShare);
+        // editor.commit();
+        // ShortcutManagerCompat.removeAllDynamicShortcuts(ApplicationLoader.applicationContext);
+        // MediaDataController.getInstance(UserConfig.selectedAccount).buildShortcuts();
     }
 
     public static void toggleStreamMedia() {
         streamMedia = !streamMedia;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("streamMedia", streamMedia);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("streamMedia", streamMedia);
+        // editor.commit();
     }
 
     public static void toggleSortContactsByName() {
         sortContactsByName = !sortContactsByName;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("sortContactsByName", sortContactsByName);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("sortContactsByName", sortContactsByName);
+        // editor.commit();
     }
 
     public static void toggleSortFilesByName() {
         sortFilesByName = !sortFilesByName;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("sortFilesByName", sortFilesByName);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("sortFilesByName", sortFilesByName);
+        // editor.commit();
     }
 
     public static void toggleStreamAllVideo() {
         streamAllVideo = !streamAllVideo;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("streamAllVideo", streamAllVideo);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("streamAllVideo", streamAllVideo);
+        // editor.commit();
     }
 
     public static void toggleStreamMkv() {
         streamMkv = !streamMkv;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("streamMkv", streamMkv);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("streamMkv", streamMkv);
+        // editor.commit();
     }
 
     public static void toggleSaveStreamMedia() {
         saveStreamMedia = !saveStreamMedia;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("saveStreamMedia", saveStreamMedia);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("saveStreamMedia", saveStreamMedia);
+        // editor.commit();
     }
 
     public static void toggleSmoothKeyboard() {
         smoothKeyboard = !smoothKeyboard;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("smoothKeyboard2", smoothKeyboard);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("smoothKeyboard2", smoothKeyboard);
+        // editor.commit();
     }
 
     public static void togglePauseMusicOnRecord() {
         pauseMusicOnRecord = !pauseMusicOnRecord;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("pauseMusicOnRecord", pauseMusicOnRecord);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("pauseMusicOnRecord", pauseMusicOnRecord);
+        // editor.commit();
     }
 
     public static void toggleInappCamera() {
         inappCamera = !inappCamera;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("inappCamera", inappCamera);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("inappCamera", inappCamera);
+        // editor.commit();
     }
 
     public static void toggleRoundCamera16to9() {
         roundCamera16to9 = !roundCamera16to9;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("roundCamera16to9", roundCamera16to9);
-        editor.commit();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putBoolean("roundCamera16to9", roundCamera16to9);
+        // editor.commit();
     }
 
     public static void setDistanceSystemType(int type) {
         distanceSystemType = type;
-        SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("distanceSystemType", distanceSystemType);
-        editor.commit();
-        LocaleController.resetImperialSystemType();
+        // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+        // SharedPreferences.Editor editor = preferences.edit();
+        // editor.putInt("distanceSystemType", distanceSystemType);
+        // editor.commit();
+        // LocaleController.resetImperialSystemType();
     }
 
     public static void loadProxyList() {
@@ -853,20 +854,20 @@ public class SharedConfig {
     public static void deleteProxy(ProxyInfo proxyInfo) {
         if (currentProxy == proxyInfo) {
             currentProxy = null;
-            SharedPreferences preferences = MessagesController.getGlobalMainSettings();
-            boolean enabled = preferences.getBoolean("proxy_enabled", false);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("proxy_ip", "");
-            editor.putString("proxy_pass", "");
-            editor.putString("proxy_user", "");
-            editor.putString("proxy_secret", "");
-            editor.putInt("proxy_port", 1080);
-            editor.putBoolean("proxy_enabled", false);
-            editor.putBoolean("proxy_enabled_calls", false);
-            editor.commit();
-            if (enabled) {
-                ConnectionsManager.setProxySettings(false, "", 0, "", "", "");
-            }
+            // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+            // boolean enabled = preferences.getBoolean("proxy_enabled", false);
+            // SharedPreferences.Editor editor = preferences.edit();
+            // editor.putString("proxy_ip", "");
+            // editor.putString("proxy_pass", "");
+            // editor.putString("proxy_user", "");
+            // editor.putString("proxy_secret", "");
+            // editor.putInt("proxy_port", 1080);
+            // editor.putBoolean("proxy_enabled", false);
+            // editor.putBoolean("proxy_enabled_calls", false);
+            // editor.commit();
+            // if (enabled) {
+            //     ConnectionsManager.setProxySettings(false, "", 0, "", "", "");
+            // }
         }
         proxyList.remove(proxyInfo);
         saveProxyList();
@@ -889,10 +890,10 @@ public class SharedConfig {
                 }
             } else {
                 if (imagePath.isDirectory()) {
-                    AndroidUtilities.createEmptyFile(new File(imagePath, ".nomedia"));
+                    // AndroidUtilities.createEmptyFile(new File(imagePath, ".nomedia"));
                 }
                 if (videoPath.isDirectory()) {
-                    AndroidUtilities.createEmptyFile(new File(videoPath, ".nomedia"));
+                    // AndroidUtilities.createEmptyFile(new File(videoPath, ".nomedia"));
                 }
             }
         } catch (Throwable e) {
