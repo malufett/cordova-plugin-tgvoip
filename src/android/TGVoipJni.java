@@ -61,7 +61,7 @@ public class TGVoipJni {
 	}
 
 	public static long generateFingerprint(byte[] g_b, byte[] a_or_b) throws Exception {
-		byte[] authKey = TGVoipJni.generateAuthKey(g_b, a_or_b)
+		byte[] authKey = TGVoipJni.generateAuthKey(g_b, a_or_b);
 		byte[] authKeyHash = Utilities.computeSHA1(authKey);
 		byte[] authKeyId = new byte[8];
 		System.arraycopy(authKeyHash, authKeyHash.length - 8, authKeyId, 0, 8);
