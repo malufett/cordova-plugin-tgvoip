@@ -16,10 +16,13 @@ import android.util.Log;
 public class TGVoipPlugin extends CordovaPlugin {
     protected static final String TAG = "TGVoipPlugin";
     protected TGVoipJni jni;
+    protected Context context;
 
     public TGVoipPlugin(){
-        super();
-        ApplicationLoader.applicationContext = this.cordova.getActivity().getApplicationContext(); 
+        super();        
+        context = this.cordova.getActivity().getApplicationContext();
+        ApplicationLoader.applicationContext = 
+                this.cordova.getActivity().getApplicationContext(); 
     }
 
     @Override
