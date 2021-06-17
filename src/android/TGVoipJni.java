@@ -60,7 +60,16 @@ public class TGVoipJni {
 		remoteSink = new ProxyVideoSink();
 	}
 
-	public static long generateFingerprint(byte[] g_b, byte[] a_or_b) throws Exception{
+	public static long generateFingerprint(byte[] g_b, byte[] a_or_b) throws Exception {
+		byte[] authKey = TGVoipJni.generateAuthKey(g_b, a_or_b)
+		byte[] authKeyHash = Utilities.computeSHA1(authKey);
+		byte[] authKeyId = new byte[8];
+		System.arraycopy(authKeyHash, authKeyHash.length - 8, authKeyId, 0, 8);
+		
+		return Utilities.bytesToLong(authKeyId);
+	}
+
+	public static byte[] generateAuthKey(byte[] g_b, byte[] a_or_b) {
 		BigInteger p = new BigInteger(1, secretPBytes);
 		BigInteger i_authKey = new BigInteger(1, g_b);
 
@@ -83,11 +92,7 @@ public class TGVoipJni {
 			}
 			authKey = correctedAuth;
 		}
-		byte[] authKeyHash = Utilities.computeSHA1(authKey);
-		byte[] authKeyId = new byte[8];
-		System.arraycopy(authKeyHash, authKeyHash.length - 8, authKeyId, 0, 8);
-		
-		return Utilities.bytesToLong(authKeyId);
+		return authKey;
 	}
 
 	public static byte[] generateSalt(byte[] random) {
@@ -140,49 +145,53 @@ public class TGVoipJni {
 		return retval + "]";
 	}
 
-	public void createCall(TLRPC.PhoneCall phoneCall, byte[] g_a_hash, boolean isOutgoing) throws Exception{
-		if (phoneCall.g_a_or_b == null) {
-			callFailed(tgVoip != null ? tgVoip.getLastError() : "Invalid g_a_or_b");
-			return;
-		}
-		if (!Arrays.equals(g_a_hash, Utilities.computeSHA256(phoneCall.g_a_or_b, 0, phoneCall.g_a_or_b.length))) {
-			callFailed(tgVoip != null ? tgVoip.getLastError() : "Invalid GA hash! " + bytesToString(g_a_hash) + "!=" + bytesToString(Utilities.computeSHA256(phoneCall.g_a_or_b, 0, phoneCall.g_a_or_b.length)));
-			// Log.e(TAG, e.toString());
-			return;
-		}
-		g_a = phoneCall.g_a_or_b;
-		BigInteger g_a = new BigInteger(1, phoneCall.g_a_or_b);
-		BigInteger p = new BigInteger(1, secretPBytes);
-
-		if (!Utilities.isGoodGaAndGb(g_a, p)) {
-			callFailed(tgVoip != null ? tgVoip.getLastError() : "Bad GA");
-			return;
-		}
-		g_a = g_a.modPow(new BigInteger(1, a_or_b), p);
-
-		authKey = g_a.toByteArray();
-		if (authKey.length > 256) {
-			byte[] correctedAuth = new byte[256];
-			System.arraycopy(authKey, authKey.length - 256, correctedAuth, 0, 256);
-			authKey = correctedAuth;
-		} else if (authKey.length < 256) {
-			byte[] correctedAuth = new byte[256];
-			System.arraycopy(authKey, 0, correctedAuth, 256 - authKey.length, authKey.length);
-			for (int a = 0; a < 256 - authKey.length; a++) {
-				correctedAuth[a] = 0;
+	public void createCall(TLRPC.PhoneCall phoneCall, byte[] g_b, byte[] a_or_b, byte[] g_a_hash, boolean isOutgoing) throws Exception{
+		if(!isOutgoing){
+			if (phoneCall.g_a_or_b == null) {
+				callFailed(tgVoip != null ? tgVoip.getLastError() : "Invalid g_a_or_b");
+				return;
 			}
-			authKey = correctedAuth;
-		}
-		byte[] authKeyHash = Utilities.computeSHA1(authKey);
-		byte[] authKeyId = new byte[8];
-		System.arraycopy(authKeyHash, authKeyHash.length - 8, authKeyId, 0, 8);
-		keyFingerprint = Utilities.bytesToLong(authKeyId);
+			if (!Arrays.equals(g_a_hash, Utilities.computeSHA256(phoneCall.g_a_or_b, 0, phoneCall.g_a_or_b.length))) {
+				callFailed(tgVoip != null ? tgVoip.getLastError() : "Invalid GA hash! " + bytesToString(g_a_hash) + "!=" + bytesToString(Utilities.computeSHA256(phoneCall.g_a_or_b, 0, phoneCall.g_a_or_b.length)));
+				// Log.e(TAG, e.toString());
+				return;
+			}
+			g_a = phoneCall.g_a_or_b;
+			BigInteger g_a = new BigInteger(1, phoneCall.g_a_or_b);
+			BigInteger p = new BigInteger(1, secretPBytes);
 
-		if (keyFingerprint != phoneCall.key_fingerprint) {
-			callFailed(tgVoip != null ? tgVoip.getLastError() : "Fingerprint mismatch! " + keyFingerprint + " != " + phoneCall.key_fingerprint);
-			return;
-		}
+			if (!Utilities.isGoodGaAndGb(g_a, p)) {
+				callFailed(tgVoip != null ? tgVoip.getLastError() : "Bad GA");
+				return;
+			}
+			g_a = g_a.modPow(new BigInteger(1, a_or_b), p);
 
+			authKey = g_a.toByteArray();
+			if (authKey.length > 256) {
+				byte[] correctedAuth = new byte[256];
+				System.arraycopy(authKey, authKey.length - 256, correctedAuth, 0, 256);
+				authKey = correctedAuth;
+			} else if (authKey.length < 256) {
+				byte[] correctedAuth = new byte[256];
+				System.arraycopy(authKey, 0, correctedAuth, 256 - authKey.length, authKey.length);
+				for (int a = 0; a < 256 - authKey.length; a++) {
+					correctedAuth[a] = 0;
+				}
+				authKey = correctedAuth;
+			}
+			byte[] authKeyHash = Utilities.computeSHA1(authKey);
+			byte[] authKeyId = new byte[8];
+			System.arraycopy(authKeyHash, authKeyHash.length - 8, authKeyId, 0, 8);
+			keyFingerprint = Utilities.bytesToLong(authKeyId);
+
+			if (keyFingerprint != phoneCall.key_fingerprint) {
+				callFailed(tgVoip != null ? tgVoip.getLastError() : "Fingerprint mismatch! " + keyFingerprint + " != " + phoneCall.key_fingerprint);
+				return;
+			}
+		} else {
+			authKey = TGVoipJni.generateAuthKey(g_b, a_or_b);
+			keyFingerprint = TGVoipJni.generateFingerprint(g_b, a_or_b);
+		}
 		privateCall = phoneCall;
 		this.initiateActualEncryptedCall(isOutgoing);
 	}

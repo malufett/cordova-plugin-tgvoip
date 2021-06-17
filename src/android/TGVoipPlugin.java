@@ -96,12 +96,23 @@ public class TGVoipPlugin extends CordovaPlugin {
         } else if(action.equals("createCall")) {
             try {
                 JSONObject phoneCall = args.getJSONObject(0);
-                JSONArray GAHASH = args.getJSONArray(1);
-                boolean isOutgoing = args.getBoolean(2);
+                JSONArray jGB = args.getJSONArray(1);
+                JSONArray jAORB = args.getJSONArray(2);
+                JSONArray GAHASH = args.getJSONArray(3);
+                boolean isOutgoing = args.getBoolean(4);
+
                 TLRPC.TL_phoneCall temp = new TLRPC.TL_phoneCall();
+                byte[] g_b = new byte[jGB.length()];
+                byte[] a_or_b = new byte[jAORB.length()];
                 byte[] g_a_hash = new byte[GAHASH.length()];
 
-                for(int i = 0; i < GAHASH.length(); i ++){
+                for(int i = 0; i < jGB.length(); i++){
+                    g_b[i] = (byte) jGB.getInt(i);
+                }
+                for(int i = 0; i < jAORB.length(); i++){
+                    a_or_b[i] = (byte) jAORB.getInt(i);
+                }
+                for(int i = 0; i < GAHASH.length(); i++){
                     g_a_hash[i] = (byte) GAHASH.getInt(i);
                 }
 
@@ -199,7 +210,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 // temp.receive_date = phoneCall.getInt("receive_date");
 
                 jni = new TGVoipJni();
-                jni.createCall(temp, g_a_hash, isOutgoing);
+                jni.createCall(temp, g_b, a_or_b, g_a_hash, isOutgoing);
 
                 callbackContext.success();
             } catch(Exception e) {                        
