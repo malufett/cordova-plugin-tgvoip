@@ -578,7 +578,7 @@ public class SharedConfig {
             playOrderReversed = false;
             shuffleMusic = false;
         }
-        MediaController.getInstance().checkIsNextMediaFileDownloaded();
+        // MediaController.getInstance().checkIsNextMediaFileDownloaded();
         // SharedPreferences preferences = MessagesController.getGlobalMainSettings();
         // SharedPreferences.Editor editor = preferences.edit();
         // editor.putBoolean("shuffleMusic", shuffleMusic);
