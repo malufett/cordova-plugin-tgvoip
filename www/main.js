@@ -5,9 +5,17 @@ module.exports = {
         cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "createCall", [params, GA, isOutgoing]);
     },
     generateGA: function (random, successCallback, errorCallback) {
+        successCallback = function (result) {
+            result.g_a = new Uint8Array(result.g_a);
+            result.g_a_hash = new Uint8Array(result.g_a_hash);
+            successCallback(result);
+        };
         cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "generateG_A", [random]);
     },
     generateGB: function (random, successCallback, errorCallback) {
+        successCallback = function (result) {
+            successCallback(new Uint8Array(result));
+        };
         cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "generateG_B", [random]);
     }
 };

@@ -3,6 +3,7 @@ package org.parler;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
+import org.parler.messenger.Utilities;
 import org.json.JSONException;
 import org.parler.tgnet.TLRPC;
 import org.json.JSONArray;
@@ -28,10 +29,19 @@ public class TGVoipPlugin extends CordovaPlugin {
                 for(int i = 0; i < jRandom.length(); i++)
                     random[i] = (byte) jRandom.getInt(i);
                 byte[] ga = TGVoipJni.generateG_A(random);
+                byte[] hash = Utilities.computeSHA256(ga, 0, ga.length);
 
-                JSONArray retval = new JSONArray();
+                JSONObject retval = new JSONObject();
+                JSONArray retvalA = new JSONArray();
+                JSONArray retvalHash = new JSONArray();
                 for(int i = 0; i < ga.length; i++)
-                    retval.put((int)ga[i]&0xFF);
+                    retvalA.put((int)ga[i]&0xFF);
+                    
+                for(int i = 0; i < hash.length; i++)
+                    retvalHash.put((int)hash[i]&0xFF);
+
+                retval.put("g_a", retvalA);
+                retval.put("g_a_hash", retvalHash);
 
                 callbackContext.success(retval);
             } catch(Exception e) {
