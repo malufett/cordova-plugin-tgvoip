@@ -20,11 +20,11 @@ public class TGVoipPlugin extends CordovaPlugin {
 
     public TGVoipPlugin(){
         super();        
-        ApplicationLoader.applicationContext = Build.VERSION.SDK_INT >= 21 ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
     }
 
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) {
+        ApplicationLoader.applicationContext = Build.VERSION.SDK_INT >= 21 ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
         Log.d(TAG, "executed 'excute' function");
         Log.d(TAG, "execute action:" + action);
 
