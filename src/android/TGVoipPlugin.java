@@ -29,7 +29,7 @@ public class TGVoipPlugin extends CordovaPlugin {
         Log.d(TAG, "executed 'excute' function");
         Log.d(TAG, "execute action:" + action);
 
-        if (action.equals("test") { 
+        if (action.equals("test")) { 
             try{
                 testCounter++;
                 JSONObject retval = new JSONObject();
