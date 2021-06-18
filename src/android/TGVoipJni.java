@@ -234,6 +234,12 @@ public class TGVoipJni {
 		tgVoip.setMuteMicrophone(micMute);
 	}
 
+	public void receiveSignalingData(long phone_call_id, byte[] data) {
+		if (tgVoip == null || tgVoip.isGroup() || getCallID() != phone_call_id) {
+			return;
+		}
+		tgVoip.onSignalingDataReceive(data);
+	}
     private int convertDataSavingMode(int mode) {
 		if (mode != Instance.DATA_SAVING_ROAMING) {
 			return mode;

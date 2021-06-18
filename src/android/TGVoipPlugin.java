@@ -23,6 +23,20 @@ public class TGVoipPlugin extends CordovaPlugin {
         super();        
     }
 
+    public byte[] JSONArray2Bytes(JSONArray jarray) throws JSONException {
+        byte[] retval = new byte[jarray.length()];
+        for(int i = 0; i < jarray.length(); i++)
+            retval[i] = (byte) jarray.getInt(i);
+        return retval;
+    }
+
+    public JSONArray Bytes2JSONArray(byte[] data) throws JSONException {
+        JSONArray retval = new JSONArray();
+        for(int i = 0; i < data.length; i++)
+            retval.put((int)data[i]&0xFF);
+        return retval;
+    }
+
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) {
         ApplicationLoader.applicationContext = Build.VERSION.SDK_INT >= 21 ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
@@ -45,13 +59,8 @@ public class TGVoipPlugin extends CordovaPlugin {
             try{
                 JSONArray jGB = args.getJSONArray(0);
                 JSONArray jAB = args.getJSONArray(1);
-                byte[] g_b = new byte[jGB.length()];
-                byte[] a_or_b = new byte[jGB.length()];
-
-                for(int i = 0; i < jGB.length(); i++)
-                    g_b[i] = (byte) jGB.getInt(i);
-                for(int i = 0; i < jAB.length(); i++)
-                    a_or_b[i] = (byte) jAB.getInt(i);
+                byte[] g_b = JSONArray2Bytes(jGB);
+                byte[] a_or_b = JSONArray2Bytes(jGB);
 
                 long fingerprint = TGVoipJni.generateFingerprint(g_b, a_or_b);
                 callbackContext.success("" + fingerprint);
@@ -63,26 +72,15 @@ public class TGVoipPlugin extends CordovaPlugin {
         } else if (action.equals("generateG_A")) {
             try{
                 JSONArray jRandom = args.getJSONArray(0);
-                byte[] random = new byte[jRandom.length()];
-
-                for(int i = 0; i < jRandom.length(); i++)
-                    random[i] = (byte) jRandom.getInt(i);
-
+                byte[] random = JSONArray2Bytes(jRandom);           
                 byte[] a_or_b = TGVoipJni.generateSalt(random);
                 byte[] ga = TGVoipJni.generateG_A(a_or_b);
                 byte[] hash = Utilities.computeSHA256(ga, 0, ga.length);
 
                 JSONObject retval = new JSONObject();
-                JSONArray retvalA = new JSONArray();
-                JSONArray retvalHash = new JSONArray();
-                JSONArray retvalAB = new JSONArray();
-
-                for(int i = 0; i < ga.length; i++)
-                    retvalA.put((int)ga[i]&0xFF);                    
-                for(int i = 0; i < hash.length; i++)
-                    retvalHash.put((int)hash[i]&0xFF);
-                for(int i = 0; i < a_or_b.length; i++)
-                    retvalAB.put((int)a_or_b[i]&0xFF);
+                JSONArray retvalA = Bytes2JSONArray(ga);
+                JSONArray retvalHash = Bytes2JSONArray(hash);
+                JSONArray retvalAB = new JSONArray(a_or_b);
 
                 retval.put("g_a", retvalA);
                 retval.put("g_a_hash", retvalHash);
@@ -97,17 +95,23 @@ public class TGVoipPlugin extends CordovaPlugin {
         } else if(action.equals("generateG_B")) {
             try {
                 JSONArray jRandom = args.getJSONArray(0);
-                byte[] random = new byte[jRandom.length()];
-
-                for(int i = 0; i < jRandom.length(); i++)
-                    random[i] = (byte) jRandom.getInt(i);
+                byte[] random = JSONArray2Bytes(jRandom);
                 byte[] gb = TGVoipJni.generateG_B(random);
-
-                JSONArray retval = new JSONArray();
-                for(int i = 0; i < gb.length; i++)
-                    retval.put((int)gb[i]&0xFF);
+                JSONArray retval = Bytes2JSONArray(gb);
                     
                 callbackContext.success(retval);
+            } catch(Exception e) {
+                Log.e(TAG, "exeption:" + e.getMessage());
+                callbackContext.error(action + ": Error encountered: " + e.getMessage());
+                return false;
+            }
+        } else if (action.equals("receiveSignalingData")) {
+            try {
+                long call_id = args.getLong(0);
+                JSONArray array = args.getJSONArray(1);
+                byte[] data = JSONArray2Bytes(array);
+
+                jni.receiveSignalingData(call_id, data);
             } catch(Exception e) {
                 Log.e(TAG, "exeption:" + e.getMessage());
                 callbackContext.error(action + ": Error encountered: " + e.getMessage());
@@ -122,19 +126,9 @@ public class TGVoipPlugin extends CordovaPlugin {
                 boolean isOutgoing = args.getBoolean(4);
 
                 TLRPC.TL_phoneCall temp = new TLRPC.TL_phoneCall();
-                byte[] g_b = new byte[jGB.length()];
-                byte[] a_or_b = new byte[jAORB.length()];
-                byte[] g_a_hash = new byte[GAHASH.length()];
-
-                for(int i = 0; i < jGB.length(); i++){
-                    g_b[i] = (byte) jGB.getInt(i);
-                }
-                for(int i = 0; i < jAORB.length(); i++){
-                    a_or_b[i] = (byte) jAORB.getInt(i);
-                }
-                for(int i = 0; i < GAHASH.length(); i++){
-                    g_a_hash[i] = (byte) GAHASH.getInt(i);
-                }
+                byte[] g_b = JSONArray2Bytes(jGB);
+                byte[] a_or_b = JSONArray2Bytes(jAORB);
+                byte[] g_a_hash = JSONArray2Bytes(GAHASH);
 
                 temp.flags = phoneCall.getInt("flags");
                 temp.p2p_allowed = (temp.flags & 32) != 0;                
@@ -146,10 +140,8 @@ public class TGVoipPlugin extends CordovaPlugin {
                 temp.participant_id = phoneCall.getInt("participant_id");
 
                 JSONArray tempArr = phoneCall.getJSONArray("g_a_or_b");
-                temp.g_a_or_b = new byte[tempArr.length()];
-                for(int i = 0; i < tempArr.length(); i++)
-                    temp.g_a_or_b[i] = (byte)tempArr.getInt(i);                
-
+                
+                temp.g_a_or_b = JSONArray2Bytes(tempArr);                
                 temp.key_fingerprint = phoneCall.getLong("key_fingerprint");
 
                 JSONObject tempProtocol = phoneCall.getJSONObject("protocol");
