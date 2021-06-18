@@ -21,5 +21,8 @@ module.exports = {
     },
     generateFingerPrint: function (gb, aorb, successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "generateFingerprint", [gb, aorb]);
+    },
+    test: function (successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "test", []);
     }
 };

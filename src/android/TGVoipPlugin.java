@@ -17,6 +17,7 @@ import android.util.Log;
 public class TGVoipPlugin extends CordovaPlugin {
     protected static final String TAG = "TGVoipPlugin";
     protected TGVoipJni jni;
+    protected int testCounter = 0;
 
     public TGVoipPlugin(){
         super();        
@@ -28,7 +29,19 @@ public class TGVoipPlugin extends CordovaPlugin {
         Log.d(TAG, "executed 'excute' function");
         Log.d(TAG, "execute action:" + action);
 
-        if (action.equals("generateFingerprint")) {
+        if (action.equals("test") { 
+            try{
+                testCounter++;
+                JSONObject retval = new JSONObject();
+                retval.put("counter", testCounter);
+                Log.d(TAG, "test counter:" + testCounter);
+                callbackContext.success(retval);
+            } catch(Exception e) {
+                Log.e(TAG, "exeption:" + e.getMessage());
+                callbackContext.error(action + ": Error encountered: " + e.getMessage());
+                return false;
+            }
+        } else if (action.equals("generateFingerprint")) {
             try{
                 JSONArray jGB = args.getJSONArray(0);
                 JSONArray jAB = args.getJSONArray(1);
@@ -44,7 +57,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 callbackContext.success("" + fingerprint);
             } catch(Exception e) {
                 Log.e(TAG, "exeption:" + e.getMessage());
-                callbackContext.error("Error encountered: " + e.getMessage());
+                callbackContext.error(action + ": Error encountered: " + e.getMessage());
                 return false;
             }
         } else if (action.equals("generateG_A")) {
@@ -78,7 +91,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 callbackContext.success(retval);
             } catch(Exception e) {
                 Log.e(TAG, "exeption:" + e.getMessage());
-                callbackContext.error("Error encountered: " + e.getMessage());
+                callbackContext.error(action + ": Error encountered: " + e.getMessage());
                 return false;
             }
         } else if(action.equals("generateG_B")) {
@@ -97,7 +110,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 callbackContext.success(retval);
             } catch(Exception e) {
                 Log.e(TAG, "exeption:" + e.getMessage());
-                callbackContext.error("Error encountered: " + e.getMessage());
+                callbackContext.error(action + ": Error encountered: " + e.getMessage());
                 return false;
             }
         } else if(action.equals("createCall")) {
@@ -222,7 +235,7 @@ public class TGVoipPlugin extends CordovaPlugin {
                 callbackContext.success();
             } catch(Exception e) {                        
                 Log.e(TAG, "exeption:" + e.getMessage());
-                callbackContext.error("Error encountered: " + e.getMessage());
+                callbackContext.error(action + ": Error encountered: " + e.getMessage());
                 return false;
             }
             PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
