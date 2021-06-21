@@ -35,6 +35,10 @@ module.exports = {
     generateFingerPrint: function (gb, aorb, successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "generateFingerprint", [convertToArray(gb), convertToArray(aorb)]);
     },
+    setGlobalServerConfig: function (config, successCallback, errorCallback) {
+        config = config || {};
+        cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "setGlobalServerConfig", [config]);
+    },
     test: function (successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "TGVoipPlugin", "test", []);
     }

@@ -1,6 +1,7 @@
 package org.parler;
 
 import org.parler.messenger.ApplicationLoader;
+import org.parler.messenger.voip.Instance;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
@@ -92,7 +93,17 @@ public class TGVoipPlugin extends CordovaPlugin {
                 callbackContext.error(action + ": Error encountered: " + e.getMessage());
                 return false;
             }
-        } else if(action.equals("generateG_B")) {
+        } else if (action.equals("setGlobalServerConfig")) {
+            try {
+                JSONObject config = args.getJSONObject(0);
+
+                Instance.setGlobalServerConfig(config.toString());
+            } catch (Exception e) {                
+                Log.e(TAG, "exeption:" + e.getMessage());
+                callbackContext.error(action + ": Error encountered: " + e.getMessage());
+                return false;
+            }
+        }else if (action.equals("generateG_B")) {
             try {
                 JSONArray jRandom = args.getJSONArray(0);
                 byte[] random = JSONArray2Bytes(jRandom);
