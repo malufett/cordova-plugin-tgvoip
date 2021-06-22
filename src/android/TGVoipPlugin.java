@@ -96,8 +96,8 @@ public class TGVoipPlugin extends CordovaPlugin {
         } else if (action.equals("setGlobalServerConfig")) {
             try {
                 JSONObject config = args.getJSONObject(0);
-
                 Instance.setGlobalServerConfig(config.toString());
+                callbackContext.success(true);
             } catch (Exception e) {                
                 Log.e(TAG, "exeption:" + e.getMessage());
                 callbackContext.error(action + ": Error encountered: " + e.getMessage());
