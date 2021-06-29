@@ -235,6 +235,10 @@ public class TGVoipPlugin extends CordovaPlugin {
                 jni = new TGVoipJni();
                 jni.createCall(temp, g_b, a_or_b, g_a_hash, isOutgoing);
                 jni.setCallbackContext(callbackContext);
+
+                PluginResult pluginResult = new  PluginResult(PluginResult.Status.OK, ""); 
+                pluginResult.setKeepCallback(true);
+                callbackContext.sendPluginResult(pluginResult);
             } catch(Exception e) {                        
                 Log.e(TAG, "exeption:" + e.getMessage());
                 callbackContext.error(action + ": Error encountered: " + e.getMessage());
