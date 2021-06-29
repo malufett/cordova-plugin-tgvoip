@@ -29,18 +29,20 @@ public class TGVoipJni {
     protected CallbackContext context;
     protected NativeInstance tgVoip;    
     protected long videoCapturer;
+	protected TLRPC.PhoneCall privateCall;	
     private ProxyVideoSink localSink;
 	private ProxyVideoSink remoteSink;
     private boolean micMute = false;
 	protected NetworkInfo lastNetInfo;
-	private final static int LIB_VERSION = 35;
-    private final static String LIB_NAME = "tmessages." + LIB_VERSION;
+	private CallbackContext callbackContext;
 
-    protected TLRPC.PhoneCall privateCall;	
 	private byte[] g_a;
 	private byte[] a_or_b;
 	private byte[] authKey;
 	private long keyFingerprint;
+
+	private final static int LIB_VERSION = 35;
+    private final static String LIB_NAME = "tmessages." + LIB_VERSION;
 	private static byte[] secretPBytes = new byte[]{ 
 		-57, 28, -82, -71, -58, -79, -55, 4, -114, 108, 82, 47, 112, -15, 63, 115, -104, 13, 64, 35, -114, 62, 33, -63, 73, 52, -48, 55, 86, 61, -109, 15, 72, 25, -118, 10,
 		-89, -63, 64, 88, 34, -108, -109, -46, 37, 48, -12, -37, -6, 51, 111, 110, 10, -55, 37, 19, -107, 67, -82, -44, 76, -50, 124, 55, 32, -3, 81, -10, -108, 88, 112, 90,
@@ -145,6 +147,10 @@ public class TGVoipJni {
 		return retval + "]";
 	}
 
+	public void setCallbackContext(final CallbackContext callbackContext) {
+		this.callbackContext = callbackContext;
+	}
+
 	public void createCall(TLRPC.PhoneCall phoneCall, byte[] g_b, byte[] a_or_b, byte[] g_a_hash, boolean isOutgoing) throws Exception{
 		if(!isOutgoing){
 			if (phoneCall.g_a_or_b == null) {
@@ -231,9 +237,28 @@ public class TGVoipJni {
 		videoCapturer = 0;
 
 		tgVoip = Instance.makeInstance("2.4.4", config, persistentStateFilePath, endpoints, proxy, getNetworkType(), encryptionKey, remoteSink, videoCapturer);
+		tgVoip.setOnSignalDataListener(this::onSignalingData);
 		tgVoip.setMuteMicrophone(micMute);
 	}
+	public void onSignalingData(byte[] data) {
+		if (privateCall == null) {
+			return;
+		}
+		JSONObject jObject = new JSONObject();
+		JSONArray arr = new JSONArray();
 
+		jObject.put("_", "phone.sendSignalingData");
+		jObject.put("access_hash", privateCall.access_hash);
+		jObject.put("id", privateCall.id);
+		
+        for(int i = 0; i < data.length; i++)
+            arr.put((int)data[i]&0xFF);
+        jObject.put("data", arr);
+		
+		PluginResult pluginResult = new  PluginResult(PluginResult.Status.OK, jObject); 
+		pluginResult.setKeepCallback(true);
+		callbackContext.sendPluginResult(pluginResult);
+	}
 	public void receiveSignalingData(long phone_call_id, byte[] data) {
 		if (tgVoip == null || tgVoip.isGroup() || getCallID() != phone_call_id) {
 			return;
