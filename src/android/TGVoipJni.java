@@ -247,13 +247,19 @@ public class TGVoipJni {
 		JSONObject jObject = new JSONObject();
 		JSONArray arr = new JSONArray();
 
-		jObject.put("_", "phone.sendSignalingData");
-		jObject.put("access_hash", privateCall.access_hash);
-		jObject.put("id", privateCall.id);
-		
-        for(int i = 0; i < data.length; i++)
-            arr.put((int)data[i]&0xFF);
-        jObject.put("data", arr);
+		try {
+			jObject.put("_", "phone.sendSignalingData");
+			jObject.put("access_hash", privateCall.access_hash);
+			jObject.put("id", privateCall.id);
+			
+			for(int i = 0; i < data.length; i++)
+				arr.put((int)data[i]&0xFF);
+			jObject.put("data", arr);
+		} catch (Exception e) {
+ 			Log.e(TAG, "exeption:" + e.getMessage());
+			callbackContext.error(action + ": Error encountered: " + e.getMessage());
+			return;
+		}
 		
 		PluginResult pluginResult = new  PluginResult(PluginResult.Status.OK, jObject); 
 		pluginResult.setKeepCallback(true);
