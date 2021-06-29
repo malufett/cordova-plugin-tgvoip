@@ -257,7 +257,7 @@ public class TGVoipJni {
 			jObject.put("data", arr);
 		} catch (Exception e) {
  			Log.e(TAG, "exeption:" + e.getMessage());
-			callbackContext.error(action + ": Error encountered: " + e.getMessage());
+			callbackContext.error("onSignalingData: Error encountered: " + e.getMessage());
 			return;
 		}
 		
