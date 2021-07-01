@@ -41,7 +41,7 @@ public class TGVoipJni {
 	private byte[] authKey;
 	private long keyFingerprint;
 
-	private final static int LIB_VERSION = 35;
+	private final static int LIB_VERSION = 38;
     private final static String LIB_NAME = "tmessages." + LIB_VERSION;
 	private static byte[] secretPBytes = new byte[]{ 
 		-57, 28, -82, -71, -58, -79, -55, 4, -114, 108, 82, 47, 112, -15, 63, 115, -104, 13, 64, 35, -114, 62, 33, -63, 73, 52, -48, 55, 86, 61, -109, 15, 72, 25, -118, 10,
