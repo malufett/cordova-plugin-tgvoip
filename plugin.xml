@@ -22,74 +22,74 @@
 
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="TGVoipPlugin">
-        <param name="android-package" value="org.parler.TGVoipPlugin"/>
+        <param name="android-package" value="org.telegram.TGVoipPlugin"/>
       </feature>
     </config-file>
 
     <!-- Java plugin API -->
 
-    <!-- org.parler.messenger.time -->
-    <source-file src="src/android/parler/messenger/time/DateParser.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
-    <source-file src="src/android/parler/messenger/time/DatePrinter.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
-    <source-file src="src/android/parler/messenger/time/FastDateFormat.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
-    <source-file src="src/android/parler/messenger/time/FastDateParser.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
-    <source-file src="src/android/parler/messenger/time/FastDatePrinter.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
-    <source-file src="src/android/parler/messenger/time/FormatCache.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
-    <source-file src="src/android/parler/messenger/time/SunDate.java" target-dir="app/src/main/java/org/parler/messenger/time/"/>
+    <!-- org.telegram.messenger.time -->
+    <source-file src="src/android/telegram/messenger/time/DateParser.java" target-dir="app/src/main/java/org/telegram/messenger/time/"/>
+    <source-file src="src/android/telegram/messenger/time/DatePrinter.java" target-dir="app/src/main/java/org/telegram/messenger/time/"/>
+    <source-file src="src/android/telegram/messenger/time/FastDateFormat.java" target-dir="app/src/main/java/org/telegram/messenger/time/"/>
+    <source-file src="src/android/telegram/messenger/time/FastDateParser.java" target-dir="app/src/main/java/org/telegram/messenger/time/"/>
+    <source-file src="src/android/telegram/messenger/time/FastDatePrinter.java" target-dir="app/src/main/java/org/telegram/messenger/time/"/>
+    <source-file src="src/android/telegram/messenger/time/FormatCache.java" target-dir="app/src/main/java/org/telegram/messenger/time/"/>
+    <source-file src="src/android/telegram/messenger/time/SunDate.java" target-dir="app/src/main/java/org/telegram/messenger/time/"/>
 
-    <!-- org.parler.messenger.voip -->
-    <source-file src="src/android/parler/messenger/voip/AudioRecordJNI.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
-    <source-file src="src/android/parler/messenger/voip/AudioTrackJNI.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
-    <source-file src="src/android/parler/messenger/voip/Instance.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
-    <source-file src="src/android/parler/messenger/voip/JNIUtilities.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
-    <source-file src="src/android/parler/messenger/voip/NativeInstance.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
-    <source-file src="src/android/parler/messenger/voip/Resampler.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
-    <source-file src="src/android/parler/messenger/voip/VideoCameraCapturer.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
-    <source-file src="src/android/parler/messenger/voip/VLog.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
-    <source-file src="src/android/parler/messenger/voip/VoIPController.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
-    <source-file src="src/android/parler/messenger/voip/VoIPServerConfig.java" target-dir="app/src/main/java/org/parler/messenger/voip/"/>
+    <!-- org.telegram.messenger.voip -->
+    <source-file src="src/android/telegram/messenger/voip/AudioRecordJNI.java" target-dir="app/src/main/java/org/telegram/messenger/voip/"/>
+    <source-file src="src/android/telegram/messenger/voip/AudioTrackJNI.java" target-dir="app/src/main/java/org/telegram/messenger/voip/"/>
+    <source-file src="src/android/telegram/messenger/voip/Instance.java" target-dir="app/src/main/java/org/telegram/messenger/voip/"/>
+    <source-file src="src/android/telegram/messenger/voip/JNIUtilities.java" target-dir="app/src/main/java/org/telegram/messenger/voip/"/>
+    <source-file src="src/android/telegram/messenger/voip/NativeInstance.java" target-dir="app/src/main/java/org/telegram/messenger/voip/"/>
+    <source-file src="src/android/telegram/messenger/voip/Resampler.java" target-dir="app/src/main/java/org/telegram/messenger/voip/"/>
+    <source-file src="src/android/telegram/messenger/voip/VideoCameraCapturer.java" target-dir="app/src/main/java/org/telegram/messenger/voip/"/>
+    <source-file src="src/android/telegram/messenger/voip/VLog.java" target-dir="app/src/main/java/org/telegram/messenger/voip/"/>
+    <source-file src="src/android/telegram/messenger/voip/VoIPController.java" target-dir="app/src/main/java/org/telegram/messenger/voip/"/>
+    <source-file src="src/android/telegram/messenger/voip/VoIPServerConfig.java" target-dir="app/src/main/java/org/telegram/messenger/voip/"/>
 
-    <!-- org.parler.messenger -->
-    <source-file src="src/android/parler/messenger/AccountInstance.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/AnimatedFileDrawableStream.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/ApplicationLoader.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/BaseController.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/BuildVars.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/ChatObject.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/DispatchQueue.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/DocumentObject.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/FileLoader.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/FileLoadOperation.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/FileRefController.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/FileUploadOperation.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/FileLoadOperationStream.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/FileLog.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/ImageLocation.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/NativeLoader.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/NotificationCenter.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/SharedConfig.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/SecureDocument.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/SecureDocumentKey.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/SvgHelper.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/Utilities.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/UserConfig.java" target-dir="app/src/main/java/org/parler/messenger/"/>
-    <source-file src="src/android/parler/messenger/WebFile.java" target-dir="app/src/main/java/org/parler/messenger/"/>
+    <!-- org.telegram.messenger -->
+    <source-file src="src/android/telegram/messenger/AccountInstance.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/AnimatedFileDrawableStream.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/ApplicationLoader.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/BaseController.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/BuildVars.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/ChatObject.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/DispatchQueue.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/DocumentObject.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/FileLoader.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/FileLoadOperation.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/FileRefController.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/FileUploadOperation.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/FileLoadOperationStream.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/FileLog.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/ImageLocation.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/NativeLoader.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/NotificationCenter.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/SharedConfig.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/SecureDocument.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/SecureDocumentKey.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/SvgHelper.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/Utilities.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/UserConfig.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
+    <source-file src="src/android/telegram/messenger/WebFile.java" target-dir="app/src/main/java/org/telegram/messenger/"/>
 
-    <!-- org.parler.tgnet -->
-    <source-file src="src/android/parler/tgnet/AbstractSerializedData.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
-    <source-file src="src/android/parler/tgnet/ConnectionsManager.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
-    <source-file src="src/android/parler/tgnet/NativeByteBuffer.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
-    <source-file src="src/android/parler/tgnet/QuickAckDelegate.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
-    <source-file src="src/android/parler/tgnet/RequestDelegate.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
-    <source-file src="src/android/parler/tgnet/RequestDelegateInternal.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
-    <source-file src="src/android/parler/tgnet/RequestTimeDelegate.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
-    <source-file src="src/android/parler/tgnet/SerializedData.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
-    <source-file src="src/android/parler/tgnet/TLObject.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
-    <source-file src="src/android/parler/tgnet/TLRPC.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
-    <source-file src="src/android/parler/tgnet/WriteToSocketDelegate.java" target-dir="app/src/main/java/org/parler/tgnet/"/>
+    <!-- org.telegram.tgnet -->
+    <source-file src="src/android/telegram/tgnet/AbstractSerializedData.java" target-dir="app/src/main/java/org/telegram/tgnet/"/>
+    <source-file src="src/android/telegram/tgnet/ConnectionsManager.java" target-dir="app/src/main/java/org/telegram/tgnet/"/>
+    <source-file src="src/android/telegram/tgnet/NativeByteBuffer.java" target-dir="app/src/main/java/org/telegram/tgnet/"/>
+    <source-file src="src/android/telegram/tgnet/QuickAckDelegate.java" target-dir="app/src/main/java/org/telegram/tgnet/"/>
+    <source-file src="src/android/telegram/tgnet/RequestDelegate.java" target-dir="app/src/main/java/org/telegram/tgnet/"/>
+    <source-file src="src/android/telegram/tgnet/RequestDelegateInternal.java" target-dir="app/src/main/java/org/telegram/tgnet/"/>
+    <source-file src="src/android/telegram/tgnet/RequestTimeDelegate.java" target-dir="app/src/main/java/org/telegram/tgnet/"/>
+    <source-file src="src/android/telegram/tgnet/SerializedData.java" target-dir="app/src/main/java/org/telegram/tgnet/"/>
+    <source-file src="src/android/telegram/tgnet/TLObject.java" target-dir="app/src/main/java/org/telegram/tgnet/"/>
+    <source-file src="src/android/telegram/tgnet/TLRPC.java" target-dir="app/src/main/java/org/telegram/tgnet/"/>
+    <source-file src="src/android/telegram/tgnet/WriteToSocketDelegate.java" target-dir="app/src/main/java/org/telegram/tgnet/"/>
 
     <!-- org.parger.ui.Components-->
-    <source-file src="src/android/parler/ui/Components/AnimatedFileDrawable.java" target-dir="app/src/main/java/org/parler/ui/Components/"/>
+    <source-file src="src/android/telegram/ui/Components/AnimatedFileDrawable.java" target-dir="app/src/main/java/org/telegram/ui/Components/"/>
 
     <!-- org.webrtc.voiceengine -->
     <source-file src="src/android/webrtc/voiceengine/BuildInfo.java" target-dir="app/src/main/java/org/webrtc/voiceengine/"/>
@@ -150,9 +150,9 @@
     <source-file src="src/android/webrtc/YuvConverter.java" target-dir="app/src/main/java/org/webrtc/"/>
     <source-file src="src/android/webrtc/YuvHelper.java" target-dir="app/src/main/java/org/webrtc/"/>
 
-    <!-- org.parler-->
-    <source-file src="src/android/TGVoipPlugin.java" target-dir="app/src/main/java/org/parler/"/>
-    <source-file src="src/android/TGVoipJni.java" target-dir="app/src/main/java/org/parler/"/>
+    <!-- org.telegram-->
+    <source-file src="src/android/TGVoipPlugin.java" target-dir="app/src/main/java/org/telegram/"/>
+    <source-file src="src/android/TGVoipJni.java" target-dir="app/src/main/java/org/telegram/"/>
 
     <!-- PRODUCTION - comment out source files below for debugging -->
 

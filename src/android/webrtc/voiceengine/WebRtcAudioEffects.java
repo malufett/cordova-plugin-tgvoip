@@ -19,7 +19,7 @@ import android.os.Build;
 import java.util.List;
 import java.util.UUID;
 
-import org.parler.messenger.SharedConfig;
+import org.telegram.messenger.SharedConfig;
 // import org.webrtc.// Logging;
 
 // This class wraps control of three different platform effects. Supported

@@ -1,13 +1,13 @@
-package org.parler;
+package org.telegram;
 
-import org.parler.messenger.ApplicationLoader;
-import org.parler.messenger.voip.Instance;
+import org.telegram.messenger.ApplicationLoader;
+import org.telegram.messenger.voip.Instance;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
-import org.parler.messenger.Utilities;
+import org.telegram.messenger.Utilities;
 import org.json.JSONException;
-import org.parler.tgnet.TLRPC;
+import org.telegram.tgnet.TLRPC;
 import java.util.ArrayList;
 import org.json.JSONObject;
 import org.json.JSONArray;

@@ -1,4 +1,4 @@
-package org.parler;
+package org.telegram;
 
 import org.apache.cordova.*;
 import org.json.JSONArray;
@@ -11,17 +11,17 @@ import android.telephony.TelephonyManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.content.Context;
-import org.parler.messenger.voip.Instance;
-import org.parler.messenger.voip.NativeInstance;
-import org.parler.messenger.ApplicationLoader;
-import org.parler.tgnet.TLRPC;
+import org.telegram.messenger.voip.Instance;
+import org.telegram.messenger.voip.NativeInstance;
+import org.telegram.messenger.ApplicationLoader;
+import org.telegram.tgnet.TLRPC;
 import org.webrtc.VideoSink;
 import org.webrtc.VideoFrame;
 import java.io.File;
 import java.math.*;
 import java.util.*;
-import org.parler.messenger.NativeLoader;
-import org.parler.messenger.Utilities;
+import org.telegram.messenger.NativeLoader;
+import org.telegram.messenger.Utilities;
 
 
 public class TGVoipJni {	
